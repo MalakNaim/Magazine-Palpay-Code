@@ -22,6 +22,6 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             //private IViewRenderService _viewRenderService;
 
             //protected IViewRenderService ViewRender => _viewRenderService ??= HttpContext.RequestServices.GetService<IViewRenderService>();
-        }
+      
     }
 }

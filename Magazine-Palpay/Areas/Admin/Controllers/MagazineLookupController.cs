@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class MagazineLookupController : BaseController
     {
         public IActionResult Index()
