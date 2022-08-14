@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Magazine_Palpay.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Gallery\Commands\" />
+    <Folder Include="Features\Gallery\Queries\" />
+    <Folder Include="Features\MagazineSetting\Commands\" />
+    <Folder Include="Features\MagazineSetting\Queries\" />
+    <Folder Include="Features\Menu\Commands\" />
+    <Folder Include="Features\Menu\Queries\" />
+    <Folder Include="Features\Employee\Commands\" />
+    <Folder Include="Features\Employee\Queries\" />
+    <Folder Include="Features\Ads\Commands\" />
+    <Folder Include="Features\Ads\Queries\" />
+    <Folder Include="Features\PostPhoto\Commands\" />
+    <Folder Include="Features\PostPhoto\Queries\" />
+    <Folder Include="Features\Post\Commands\" />
+    <Folder Include="Features\Post\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Magazine-Palpay.Data\Magazine-Palpay.Data.csproj" />
+  </ItemGroup>
+
+</Project>
