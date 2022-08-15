@@ -1,0 +1,69 @@
+﻿.details-table thead {
+    background-color: #89298c;
+}
+#merchantsTable_length {
+    display: none;
+}
+
+td.details-control {
+    cursor: pointer;
+}
+
+tr.shown td {
+    background-color: #f3f3f3;
+    color: #040404 !important;
+    border: none;
+    border-right: 1px solid #cfcfcf;
+}
+
+tr.shown td:last-child {
+        border-right: none;
+    }
+tr.details-row .details-table tr td {
+    color: #080808;
+    background: #feffff;
+    border: none;
+}
+
+tr.details-row .details-table > td {
+    padding: 0;
+}
+
+tr.details-row .details-table .fchild td:first-child {
+    cursor: pointer;
+}
+tr.details-row .details-table .fchild td:first-child:hover {
+        background: #fff;
+    }
+
+.form-group.agdb-dt-lst {
+    padding: 2px;
+    height: 23px;
+    margin-bottom: 0;
+}
+.form-group.agdb-dt-lst .form-control {
+        height: 23px;
+        padding: 2px;
+    }
+
+.adb-dtb-gchild {
+    padding-left: 2px;
+}
+
+.adb-dtb-gchild td {
+        background: #f5fafc;
+        padding-left: 15px;
+    }
+
+.adb-dtb-gchild td:first-child {
+            cursor: default;
+        }
+
+.sorting_disabled {
+    color: white !important;
+}
+.fchild ~ .adb-dtb-gchild {
+    /*       display: none; */
+}
+
+ 

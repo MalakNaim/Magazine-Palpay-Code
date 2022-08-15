@@ -6,9 +6,13 @@ namespace Magazine_Palpay.Data.Models
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string Head { get; set; }
 
-        public string Desription { get; set; }
+        public string Body { get; set; }
+
+        public string Owner { get; set; }
+
+        public string Link { get; set; }
 
         public string Image { get; set; }
 

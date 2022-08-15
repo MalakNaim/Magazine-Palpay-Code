@@ -1,0 +1,366 @@
+/* .u-section-1 .u-sheet-1 {
+  min-height: 480px;
+} */
+
+.u-section-1 .u-btn-1 {
+  border-style: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: Almarai-Bold;
+  background-image: none;
+  margin: 32px auto 0;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.u-section-1 .u-btn-2 {
+  border-style: solid;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: Almarai-Bold;
+  margin: 34px auto 0 113px;
+  padding: 6px 92px 7px 91px;
+}
+
+.u-section-1 .u-btn-3 {
+  border-style: solid;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: Almarai-Bold;
+  margin: -37px 179px 0 auto;
+  padding: 6px 141px 7px 140px;
+}
+
+.u-section-1 .u-text-1 {
+  font-family: Almarai-Bold;
+  margin: -33px 43px 0 982px;
+}
+
+.u-section-1 .u-text-2 {
+  font-family: Almarai-Bold;
+  margin: -21px auto 0 498px;
+}
+
+.u-section-1 .u-btn-4 {
+  border-style: solid;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: Almarai-Bold;
+  margin: 31px auto 0 113px;
+  padding: 6px 144px 6px 142px;
+}
+
+.u-section-1 .u-btn-5 {
+  border-style: solid;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: Almarai-Bold;
+  margin: -36px 179px 0 auto;
+  padding: 6px 90px 7px 89px;
+}
+
+.u-section-1 .u-text-3 {
+  font-family: Almarai-Bold;
+  margin: -33px auto 0 454px;
+}
+
+.u-section-1 .u-text-4 {
+  font-family: Almarai-Bold;
+  margin: -21px 43px 60px 982px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-btn-2 {
+    margin-top: 21px;
+    margin-left: 0;
+  }
+
+  .u-section-1 .u-btn-3 {
+    margin-right: 0;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 20px;
+    margin-left: 825px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 410px;
+  }
+
+  .u-section-1 .u-btn-4 {
+    margin-top: -3px;
+    margin-left: 0;
+  }
+
+  .u-section-1 .u-btn-5 {
+    margin-right: 0;
+  }
+
+  .u-section-1 .u-text-3 {
+    margin-top: -53px;
+    margin-left: 374px;
+  }
+
+  .u-section-1 .u-text-4 {
+    margin-left: 825px;
+  }
+}
+.u-input-1{
+  border-radius: 10px;
+}
+.border-style-l{
+  border-left: none;
+}
+.border-style-r{
+  border-right: none;
+}
+.u-header{
+  padding: 20px;
+}  
+@media (max-width: 991px) {
+  .u-section-1 .u-btn-2 {
+    margin-top: 20px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 32px;
+    margin-left: 605px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 314px;
+  }
+
+  .u-section-1 .u-btn-4 {
+    margin-top: 20px;
+  }
+
+  .u-section-1 .u-text-3 {
+    margin-left: 286px;
+  }
+
+  .u-section-1 .u-text-4 {
+    margin-left: 605px;
+  }
+}
+.u-body {
+    background-image: url('../images/RatingBG.png');
+    background-size: cover;
+}
+@media (max-width: 767px) {
+  .u-section-1 .u-btn-3 {
+    margin-top: 20px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 425px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 236px;
+  }
+
+  .u-section-1 .u-text-3 {
+    margin-left: 215px;
+  }
+
+  .u-section-1 .u-text-4 {
+    margin-left: 425px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-btn-2 {
+    margin-top: 7px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 20px;
+    margin-left: 225px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 149px;
+  }
+
+  .u-section-1 .u-text-3 {
+    margin-left: 135px;
+  }
+
+  .u-section-1 .u-text-4 {
+    margin-left: 225px;
+  }
+}
+/* .u-section-2 .u-sheet-1 {
+  min-height: 100vh;
+} */
+
+.u-section-2 .u-table-1 {
+  width: 1141px;
+  margin: -212px 0 0;
+}
+
+.u-block-d60a-46 {
+  background-image: none;
+}
+
+/* .u-section-2 .u-table-entity-1 {
+  min-height: 100px;
+} */
+
+.u-section-2 .u-table-header-1 {
+  font-weight: 700;
+  background-image: none;
+}
+
+.u-section-2 .u-table-cell-2 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-4 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-5 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-6 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-7 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-8 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-9 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-10 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-11 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-12 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-13 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-14 {
+  font-family: Almarai-Bold;
+}
+
+.u-section-2 .u-table-cell-15 {
+  font-family: Almarai-Bold;
+}
+
+.u-block-d60a-35 {
+  background-image: none;
+}
+
+.u-section-2 .u-text-1 {
+  font-family: Almarai-Bold;
+  margin: 45px 252px 0 auto;
+}
+
+/* .u-section-2 .u-form-1 {
+  height: 199px;
+  width: 1078px;
+  margin: 67px auto 0;
+} */
+ 
+.u-section-2 .u-input-1 {
+  background-image: none;
+}
+.color-star{
+  color:gold;
+  font-size: 35px;
+}
+.color-star-gray{
+  color:rgb(209, 209, 205);
+  font-size: 35px;
+}
+.color-star:hover{
+  color:rgb(209, 209, 205);
+  font-size: 35px;
+}
+.rating{
+  background-color: black;
+  padding: 5px;
+  max-width: 250px;
+  border-radius: 10px;
+  margin-left: 400px;
+  margin-top: -40px;
+  margin-bottom:20px;
+} 
+.mg-textarea{
+  margin-bottom: 100px;
+}
+@media (max-width: 1199px) {
+  .u-section-2 .u-table-1 {
+    width: 940px;
+  }
+
+  .u-section-2 .u-form-1 {
+    width: 940px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-2 .u-table-1 {
+    width: 720px;
+  }
+
+  .u-section-2 .u-text-1 {
+    margin-right: 193px;
+  }
+
+  .u-section-2 .u-form-1 {
+    width: 720px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-2 .u-table-1 {
+    width: 540px;
+  }
+
+  .u-section-2 .u-text-1 {
+    margin-right: 145px;
+  }
+
+  .u-section-2 .u-form-1 {
+    width: 540px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-2 .u-table-1 {
+    width: 340px;
+  }
+
+  .u-section-2 .u-text-1 {
+    margin-right: 91px;
+  }
+
+  .u-section-2 .u-form-1 {
+    width: 340px;
+  }
+}@font-face {
+  font-family: 'Almarai-Bold';
+  font-style: normal;
+  font-weight: 400;
+  src: url(fonts/Almarai-Bold.ttf);
+}

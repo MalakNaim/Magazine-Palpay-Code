@@ -6,20 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Gallery\Commands\" />
+    <Folder Include="Features\GalleryPhoto\Queries\" />
     <Folder Include="Features\Gallery\Queries\" />
-    <Folder Include="Features\MagazineSetting\Commands\" />
     <Folder Include="Features\MagazineSetting\Queries\" />
-    <Folder Include="Features\Menu\Commands\" />
     <Folder Include="Features\Menu\Queries\" />
-    <Folder Include="Features\Employee\Commands\" />
     <Folder Include="Features\Employee\Queries\" />
-    <Folder Include="Features\Ads\Commands\" />
     <Folder Include="Features\Ads\Queries\" />
-    <Folder Include="Features\PostPhoto\Commands\" />
     <Folder Include="Features\PostPhoto\Queries\" />
-    <Folder Include="Features\Post\Commands\" />
     <Folder Include="Features\Post\Queries\" />
+    <Folder Include="Mappings\" />
   </ItemGroup>
 
   <ItemGroup>

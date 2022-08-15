@@ -1,0 +1,17 @@
+﻿@using System.Globalization
+<div class="toolbar" id="kt_toolbar">
+    <div id="kt_toolbar_container" class="tools container-fluid d-flex flex-stack"
+         data-kt-drawer="true" data-kt-drawer-name="tools"
+         data-kt-drawer-activate="{default: true, lg: false}"
+         data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '200px'}"
+         data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_subMenu_mobile_toggle">
+        <div class="d-flex align-items-stretch py-1">
+            <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
+                 id="#subNanBar" data-kt-menu="true"> 
+            </div>
+        </div>
+        <div class="d-flex align-items-stretch py-1 d-none d-lg-block d-md-none">
+            <h6 class="text-white">@DateTime.Now.ToString("dddd, dd MMMM yyyy", new CultureInfo("ar-AE")) </h6>
+        </div>
+    </div>
+</div>
