@@ -1,4 +1,6 @@
-﻿namespace Magazine_Palpay.Application.Features.Ads.Commands
+﻿using System;
+
+namespace Magazine_Palpay.Application.Features.Ads.Commands
 {
     public class UpdateAdsCommand
     {

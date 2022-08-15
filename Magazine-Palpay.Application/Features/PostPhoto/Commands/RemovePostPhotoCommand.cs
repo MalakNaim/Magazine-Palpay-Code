@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Magazine_Palpay.Application.Features.PostPhoto.Commands
 {
-    public class RegisterPostPhotoCommand
+    public class RemovePostPhotoCommand
     {
+
     }
 }
