@@ -1,4 +1,4 @@
-﻿namespace Magazine_Palpay.Data.Models
+﻿namespace Magazine_Palpay.Web.Models
 {
     public class MenuViewModel
     {

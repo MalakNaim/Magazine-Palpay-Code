@@ -1,0 +1,14 @@
+﻿@model Magazine_Palpay.Web.ViewModels.PostViewModel
+@{ 
+    ViewData["Title"] = "المنشورات";
+    ViewData["Caption"] = "إضافة منشور جديد";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
+}
+
+ 
+<h2 class="py-3">@ViewData["Caption"]</h2>
+<hr />
+<form role="form" class="form py-5 " action="/Admin/Home/OnPostCreateOrUpdate?id=0" method="post" onsubmit="return jQueryModalPost(this);">
+    <partial name="_CreateOrEdit" model="Model" />
+</form>
+ 

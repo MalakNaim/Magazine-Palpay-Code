@@ -1,27 +1,23 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     public abstract class BaseController : Controller
-    { 
-            private IMediator _mediatorInstance;
+    {
+            //private IMapper _mapperInstance;
 
-            protected IMediator Mediator => _mediatorInstance ??= HttpContext.RequestServices.GetService<IMediator>();
+            //protected IMapper Mapper => _mapperInstance ??= HttpContext.RequestServices.GetService<IMapper>();
 
-            private IMapper _mapperInstance;
+            private INotyfService _notifyInstance;
 
-            protected IMapper Mapper => _mapperInstance ??= HttpContext.RequestServices.GetService<IMapper>();
+            protected INotyfService Notify => _notifyInstance ??= HttpContext.RequestServices.GetService<INotyfService>();
 
-            //private INotyfService _notifyInstance;
+        //private IViewRenderService _viewRenderService;
 
-            //protected INotyfService Notify => _notifyInstance ??= HttpContext.RequestServices.GetService<INotyfService>();
+        //protected IViewRenderService ViewRender => _viewRenderService ??= HttpContext.RequestServices.GetService<IViewRenderService>();
 
-            //private IViewRenderService _viewRenderService;
-
-            //protected IViewRenderService ViewRender => _viewRenderService ??= HttpContext.RequestServices.GetService<IViewRenderService>();
-      
     }
 }

@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using Magazine_Palpay.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,12 @@ namespace Magazine_Palpay
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+            services.AddNotyf(config =>
+            {
+                config.DurationInSeconds = 30;
+                config.IsDismissable = true;
+                config.Position = NotyfPosition.BottomLeft;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,10 +67,13 @@ namespace Magazine_Palpay
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                 // name: "areas",
+                  name: "default",
+                  pattern: "{controller=Home}/{action=Index}");
+                  //pattern: "{area:Admin}/{controller=Home}/{action=Index}/{id?}"
+               // );
             });
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Magazine_Palpay.Application.ViewModels
+﻿namespace Magazine_Palpay.Web.ViewModels
 {
     public class VideoViewModel
     {

@@ -1,0 +1,37 @@
+﻿@model Magazine_Palpay.Data.Models.PostType
+
+@{
+    ViewData["Title"] = "تعديل النوع";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
+} 
+
+<h4 class="mb-6 mt-3"> @ViewData["Title"] </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+             <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">نوع المنشور </label>
+                <input asp-for="Name" class="form-control" />
+               <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row mb-6">
+               <label class="fs-5 fw-bold mb-2">تابع لنوع </label>
+                 <select asp-for="ParentId" asp-items="@ViewBag.ParentId" data-control="select2" data-placeholder="اختر تابع لنوع ..." class="form-select form-select-solid">
+                    <option value="0" selected>رئيسي </option>
+                </select>
+                <span asp-validation-for="ParentId" class="text-danger"></span>
+            </div> 
+           <div style="float:left;">
+            <input type="submit" class="btn btn-purble" value="حفظ" />
+            <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
+           </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

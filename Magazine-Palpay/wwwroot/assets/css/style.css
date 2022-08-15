@@ -252,72 +252,84 @@ svg {
 .sorting_disabled, .sorting {
     color: white !important;
 }
-@media (max-width: 992px) {
-    .card {
-        margin-bottom: 10px;
-        border: 1px solid rgb(228, 227, 227);
-        box-shadow: 1px 2px 2px 1px #e0e0e0;
-        max-width: 140px;
-        max-height: 120px;
-        cursor: pointer !important;
-    }
-
-    .data-table td, th {
-        padding: 5px 20px !important;
-    }
-
-    .image-upload {
-        position: relative;
-        bottom: 70px;
-        width: 30px;
-    }
-
-    .symbol.symbol-md-150px > img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .nav-line-tabs .nav-item .nav-link.active, .nav-line-tabs .nav-item.show .nav-link, .nav-line-tabs .nav-item .nav-link:hover:not(.disabled) {
-      /*  background-color: #f0eded;*/
-      /*  padding: 10px 10px !important;
-        border: 0;*/
-        border-bottom: 3px solid #B14297;
-        transition: color 0.2s ease, background-color 0.2s ease;
-    }
+.table > thead {
+     font-size: 14px;
+    font-weight: bold;
 }
-@media (min-width: 992px) {
-    .modal-lg, .modal-xl {
-        max-width: 900px;
-    }
-    .modal-center {
-        margin-right: 38%;
-    }
-    .card {
-        margin: 0.75rem !important;
-    }
-}
-@media (min-width: 768px) { 
-    .search-input{
-        width: 200px !important;
+
+    @media (max-width: 992px) {
+        .card {
+            margin-bottom: 10px;
+            border: 1px solid rgb(228, 227, 227);
+            box-shadow: 1px 2px 2px 1px #e0e0e0;
+            max-width: 140px;
+            max-height: 120px;
+            cursor: pointer !important;
         }
+
+        .data-table td, th {
+            padding: 5px 20px !important;
+        }
+
+        .image-upload {
+            position: relative;
+            bottom: 70px;
+            width: 30px;
+        }
+
+        .symbol.symbol-md-150px > img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .nav-line-tabs .nav-item .nav-link.active, .nav-line-tabs .nav-item.show .nav-link, .nav-line-tabs .nav-item .nav-link:hover:not(.disabled) {
+            /*  background-color: #f0eded;*/
+            /*  padding: 10px 10px !important;
+        border: 0;*/
+            border-bottom: 3px solid #B14297;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 900px;
+        }
+
+        .modal-center {
+            margin-right: 38%;
+        }
+
+        .card {
+            margin: 0.75rem !important;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .search-input {
+            width: 200px !important;
+        }
+
         .symbol.symbol-md-150px > img {
             width: 150px;
-            height: 150px; 
+            height: 150px;
         }
-        .symbol.symbol-md-150px {
-        margin-right: 20% !important;
-    }
-    .image-upload {
-        position: relative;
-        bottom: 75px;
-        right: 80px;
-    }
- }
 
-@media (min-width: 992px){
-.header-fixed.toolbar-fixed .toolbar {
-    padding: 0;
-    top: 65px;
-    border-top: none !important; 
-} 
-}
+        .symbol.symbol-md-150px {
+            margin-right: 20% !important;
+        }
+
+        .image-upload {
+            position: relative;
+            bottom: 75px;
+            right: 80px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .header-fixed.toolbar-fixed .toolbar {
+            padding: 0;
+            top: 65px;
+            border-top: none !important;
+        }
+    }
