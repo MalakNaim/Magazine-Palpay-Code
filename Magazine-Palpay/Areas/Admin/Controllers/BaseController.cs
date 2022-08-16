@@ -7,13 +7,13 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     public abstract class BaseController : Controller
     {
-            //private IMapper _mapperInstance;
+        private IMapper _mapperInstance;
 
-            //protected IMapper Mapper => _mapperInstance ??= HttpContext.RequestServices.GetService<IMapper>();
+        protected IMapper Mapper => _mapperInstance ??= HttpContext.RequestServices.GetService<IMapper>();
 
-            private INotyfService _notifyInstance;
+        private INotyfService _notifyInstance;
 
-            protected INotyfService Notify => _notifyInstance ??= HttpContext.RequestServices.GetService<INotyfService>();
+        protected INotyfService Notify => _notifyInstance ??= HttpContext.RequestServices.GetService<INotyfService>();
 
         //private IViewRenderService _viewRenderService;
 

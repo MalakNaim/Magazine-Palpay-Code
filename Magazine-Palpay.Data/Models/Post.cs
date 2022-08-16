@@ -10,6 +10,8 @@ namespace Magazine_Palpay.Data.Models
         public int PostTypeId { get; set; }
         public int? PostSubType { get; set; }
         public string MainImage { get; set; }
+        public bool IsPublished { get; set; }
+        public int Order { get; set; }
         public PostType PostType { get; set; }
         public ICollection<PostPhoto> PostPhoto { get; set; }
     }

@@ -1,14 +1,14 @@
 ﻿@model Magazine_Palpay.Data.Models.Post
 @{ 
     ViewData["Title"] = "المنشورات";
-    ViewData["Caption"] = "إضافة منشور جديد";
+    ViewData["Caption"] = "تعديل المنشور ";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
 }
 
  
 <h2 class="py-3">@ViewData["Caption"]</h2>
 <hr />
-<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=0" method="post">
+<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=@Model.Id" method="post">
     <partial name="_CreateOrEdit" model="Model" />
 </form>
  

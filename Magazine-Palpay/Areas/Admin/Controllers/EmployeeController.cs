@@ -10,45 +10,44 @@ using System;
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class DepartmentController : BaseController
+    public class EmployeeController : BaseController
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        public DepartmentController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public EmployeeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        [HttpGet("Admin/Department/Index")]
+       [HttpGet("Admin/Employee/Index")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Department.ToListAsync());
+            return View(await _context.Employee.ToListAsync());
         }
 
-        [HttpGet("Admin/Department/Create")]
+        [HttpGet("Admin/Employee/Create")]
         public IActionResult Create()
         {
             return View();
         }
-
       
-        [HttpPost("Admin/Department/Create")]
-        public async Task<IActionResult> Create(Department department)
+        [HttpPost("Admin/Employee/Create")]
+        public async Task<IActionResult> Create(Employee employee)
         {
             if (ModelState.IsValid)
             {
-                department.CreatedBy = _userManager.GetUserId(User);
-                department.CreatedAt = DateTime.Now;
-                department.IsDelete = false;
-                _context.Add(department);
+                employee.CreatedBy = _userManager.GetUserId(User);
+                employee.CreatedAt = DateTime.Now;
+                employee.IsDelete = false;
+                _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(department);
+            return View(employee);
         }
 
-        [HttpGet("Admin/Department/Edit")]
+        [HttpGet("Admin/Employee/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -56,19 +55,19 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Department.FindAsync(id);
-            if (department == null)
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            return View(department);
+            return View(employee);
         }
 
-     
-        [HttpPost("Admin/Department/Edit")] 
-        public async Task<IActionResult> Edit(int id, Department department)
+       
+        [HttpPost("Admin/Employee/Edit")]
+        public async Task<IActionResult> Edit(int id, Employee employee)
         {
-            if (id != department.Id)
+            if (id != employee.Id)
             {
                 return NotFound();
             }
@@ -77,15 +76,15 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 try
                 {
-                    department.UpdatedBy = _userManager.GetUserId(User);
-                    department.UpdatedAt = DateTime.Now;
-                    department.IsDelete = false;
-                    _context.Update(department);
+                    employee.UpdatedBy = _userManager.GetUserId(User);
+                    employee.UpdatedAt = DateTime.Now;
+                    employee.IsDelete = false;
+                    _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DepartmentExists(department.Id))
+                    if (!EmployeeExists(employee.Id))
                     {
                         return NotFound();
                     }
@@ -96,23 +95,22 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(department);
+            return View(employee);
         }
 
-     
-        [HttpPost("Admin/Department/Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost("Admin/Employee/Delete")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var department = await _context.Department.FindAsync(id);
-            department.IsDelete = true;
-            _context.Department.Update(department);
+            var employee = await _context.Employee.FindAsync(id);
+            employee.IsDelete = true;
+            _context.Employee.Update(employee);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DepartmentExists(int id)
+        private bool EmployeeExists(int id)
         {
-            return _context.Department.Any(e => e.Id == id);
+            return _context.Employee.Any(e => e.Id == id);
         }
     }
 }

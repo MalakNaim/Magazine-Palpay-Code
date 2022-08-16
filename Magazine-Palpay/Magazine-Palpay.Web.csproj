@@ -37,8 +37,4 @@
     <ProjectReference Include="..\Magazine-Palpay.Data\Magazine-Palpay.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 </Project>

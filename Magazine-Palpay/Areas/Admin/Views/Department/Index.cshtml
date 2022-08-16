@@ -1,24 +1,33 @@
 ﻿@model IEnumerable<Magazine_Palpay.Data.Models.Department>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "إدراة الأقسام الوظيفية";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row mb-6 mt-3">
+    <div class="col-md-8">
+      <h4> @ViewData["Title"] </h4>
+    </div> 
+    <div class="col-md-4">
+     <a asp-action="Create" class="btn button-add mr-2">
+        <span class="navi-icon">
+            <i class="las la-plus-square" style="font-size: 15px;">
+            </i>
+            إضافة جديد
+        </span>
+     </a> 
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<hr />
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+             <h5>القسم</h5> 
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
+            <th><h5>تاريخ الإضافة</h5> </th>
             <th></th>
         </tr>
     </thead>
@@ -35,7 +44,6 @@
                <td>
                  <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light-warning">تعديل</a>  
                  <a @*onclick="deleteFun(@item.Id)"*@ class="btn btn-light-danger">حذف</a>
-            </td>
             </td>
         </tr>
 }
