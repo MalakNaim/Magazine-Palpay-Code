@@ -6,10 +6,12 @@ using Magazine_Palpay.Data;
 using Magazine_Palpay.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class DepartmentController : BaseController
     {
         private readonly ApplicationDbContext _context;

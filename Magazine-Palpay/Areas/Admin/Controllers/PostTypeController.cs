@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Magazine_Palpay.Web.ViewModels;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class PostTypeController : BaseController
     {
         private readonly ApplicationDbContext _context;

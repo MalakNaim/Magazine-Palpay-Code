@@ -2,7 +2,7 @@
 <html lang="en" dir="rtl">
 <head>
     <base href="">
-    <title>لوحة التحكم</title>
+    <title>المجلة الالكترونية</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="~/assets/media/logos/faviconPalPay.ico" />
@@ -10,40 +10,194 @@
     <partial name="_Scripts" />
     @RenderSection("css", required: false)
 </head>
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
-    <div class="d-flex flex-column flex-root">
-        <div class="page d-flex flex-row flex-column-fluid">
-            <div id="kt_aside" class="aside aside-light aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-               @Html.Partial("_LoginPartial")
-            </div>
-            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                  
-                    <div class="post d-flex flex-column-fluid" id="kt_post">
-                        <div id="kt_content_container" class="container-xxl">
-                            <div class="row gy-5 g-xl-8">
-                                <div class="badge-white py-4">
-                                    @RenderBody()
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-             </div>
-        </div>
-    </div>
-    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-        <span class="svg-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
-                <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
-            </svg>
-        </span>
-    </div> 
 
+<body class="skin-orange">
+		<header class="primary">
+			<div class="firstbar">
+				<div class="container">
+					<div class="row"> 
+					</div>
+				</div>
+			</div>
+
+			<!-- Start nav -->
+			<nav class="menu">
+				<div class="container">
+					<div class="brand">
+						<a href="#">
+							<img src="~/ui/images/logo.png" alt="Palpay Logo">
+						</a>
+					</div>
+					<div class="mobile-toggle">
+						<a href="#" data-toggle="menu" data-target="#menu-list"><i class="ion-navicon-round"></i></a>
+					</div>
+					<div class="mobile-toggle">
+						<a href="#" data-toggle="sidebar" data-target="#sidebar"><i class="ion-ios-arrow-left"></i></a>
+					</div>
+					<div id="menu-list">
+						<ul class="nav-list">
+							<li class="for-tablet nav-title"><a>Menu</a></li>
+							<li class="for-tablet"><a href="login.html">Login</a></li>
+							<li class="for-tablet"><a href="register.html">Register</a></li>
+							<li><a href="category.html">الاتفاقيات</a></li>
+							<li class="dropdown magz-dropdown">
+								<a href="category.html">حملات الشهر <i class="ion-ios-arrow-right"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="index.html">حملة 1</a></li>
+									<li><a href="index.html">حملة 2</a></li>
+									<li><a href="index.html">حملة 3</a></li>
+								</ul>
+							</li>
+							<li><a href="category.html">التحول الرقمي</a></li>
+							<li><a href="category.html">التكنولوجيا المالية</a></li>
+ 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">آخر الأخبار<i class="ion-ios-arrow-right"></i> <div class="badge">تصفح</div></a>
+								<div class="dropdown-menu megamenu">
+									<div class="megamenu-inner">
+										<div class="row">
+											<div class="col-md-3">
+												<!-- <div class="row">
+													 <div class="col-md-12">
+														<h2 class="megamenu-title">آخر الأخبار</h2>
+													</div>
+												</div> -->
+												<ul class="vertical-menu">
+													<li><a href="#"><i class="ion-ios-circle-outline"></i>  الصحية</a></li>
+													<li><a href="#"><i class="ion-ios-circle-outline"></i> الثقافية</a></li>
+													<li><a href="#"><i class="ion-ios-circle-outline"></i>الدينية</a></li>
+													<li><a href="#"><i class="ion-ios-circle-outline"></i> أسلوب حياة</a></li> 
+													<li><a href="#"><i class="ion-ios-circle-outline"></i>إدارة العمل و التعامل مع الزملاء </a></li>
+
+												</ul>
+											</div>
+											<div class="col-md-9">
+												<div class="row">
+													<div class="col-md-12">
+														<h2 class="megamenu-title">أهم المواضيع</h2>
+													</div>
+												</div>
+												<div class="row">
+													<article class="article col-md-4 mini">
+														<div class="inner">
+															<figure>
+																<a href="single.html">
+																	<img src="~/ui/images/news/img10.jpg" alt="Sample Article">
+																</a>
+															</figure>
+															<div class="padding">
+																<div class="detail">
+																	<div class="time">أغسطس 10, 2022</div>
+																	<div class="category"><a href="category.html">صحية</a></div>
+																</div>
+																<h2><a href="single.html">هنا نص تجريبي سيتم استبداله بنص حقيقي</a></h2>
+															</div>
+														</div>
+													</article>
+													<article class="article col-md-4 mini">
+														<div class="inner">
+															<figure>
+																<a href="single.html">
+																	<img src="~/ui/images/news/img11.jpg" alt="Sample Article">
+																</a>
+															</figure>
+															<div class="padding">
+																<div class="detail">
+																	<div class="time">أغسطس 13, 2022</div>
+																	<div class="category"><a href="category.html">أسلوب حياة</a></div>
+																</div>
+																<h2><a href="single.html">هنا نص تجريبي سيتم استبداله بنص حقيقي</a></h2>
+															</div>
+														</div>
+													</article>
+													<article class="article col-md-4 mini">
+														<div class="inner">
+															<figure>
+																<a href="single.html">
+																	<img src="~/ui/images/news/img14.jpg" alt="Sample Article">
+																</a>
+															</figure>
+															<div class="padding">
+																<div class="detail">
+																	<div class="time">أغسطس 14, 2022</div>
+																	<div class="category"><a href="category.html">ثقافية</a></div>
+																</div>
+																<h2><a href="single.html">هنا نص تجريبي سيتم استبداله بنص حقيقي</a></h2>
+															</div>
+														</div>
+													</article>
+												</div>
+											</div>
+										</div>								
+									</div>
+								</div>
+							</li>
+							<li class="dropdown magz-dropdown">
+								<a href="category.html">مجموعة بنك فلسطين <i class="ion-ios-arrow-right"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="index.html">الأخبار</a></li>
+									<li><a href="index.html">الإنجازات</a></li>
+									<li><a href="index.html">الجوائز</a></li>
+								</ul>
+							</li>
+							<li class="dropdown magz-dropdown"><a href="#">الموظفين <i class="ion-ios-arrow-right"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><i class="icon ion-person"></i>أعياد الميلاد</a></li>
+									<li><a href="#"><i class="icon ion-heart"></i> الاستقالات</a></li>
+									<li><a href="#"><i class="icon ion-chatbox"></i> الموظفين الجدد</a></li>
+									<li><a href="#"><i class="icon ion-key"></i> أخرى</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<!-- End nav -->
+			<div class="container">
+				<div class="row">
+					<div id="ticker">
+					  <div class="title">آخر الأخبار</div>
+					  <ul> 
+					  @{
+						  foreach(var item in ViewBag.News){
+						  <li>@item.Title</li>
+					    }
+					  }
+					  </ul> 
+					</div>
+				</div>
+			</div>
+			
+		</header>
+
+	    @RenderBody()
  
-    @*@await Component.InvokeAsync("Notyf")*@
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+		<!-- Start footer -->
+		<footer class="footer">
+			<div class="container">
+			<div class="row"> 
+				<div class="col-md-4"></div>
+				<div class="col-md-8">
+ 					<div class="block">
+						<h1 class="block-title"> عن الشركة</h1>
+						<div class="block-body">
+							<figure class="foot-logo">
+								<img src="~/ui/images/logo.png" class="img-responsive" alt="Logo">
+							</figure>
+							<p class="brand-description">
+								نحن في شركة Palpay الشركة الرائدة في مجال الدفع الالكتروني محلياً اقليمياً ودولياً، هدفنا تطوير وابتكار آليات دفع الكترونية جديدة تسهل على المواطن تسديد التزاماته المالية وتوفر عليه الجهد والوقت.
+							</p>
+ 						</div>
+					</div>
+				</div>
+				</div>
+ 				<div class="row">
+					<div class="col-md-12">
+						<div class="copyright">
+						&copy; @DateTime.Today.Year	جميع الحقوق محفوظة لدى Palpay 
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>  
+		    @RenderSection("scripts", required: false)
+	</body>
 </html>

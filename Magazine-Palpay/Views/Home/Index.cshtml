@@ -1,1 +1,447 @@
-﻿<h1>malak</h1>
+﻿@model List<Magazine_Palpay.Data.Models.Post>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home">
+	<div class="container">
+		<div class="row">
+
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-md-4 sidebar" id="sidebar">
+				<div class="sidebar-title for-tablet">Sidebar</div>
+			    <aside>
+					<div class="aside-body">
+						<figure class="ads">
+							<img src="~/ui/images/ads.jpeg">
+							<figcaption>Advertisement</figcaption>
+						</figure>
+					</div>
+				</aside>
+			    <aside>
+					<h1 class="aside-title">Videos
+						<div class="carousel-nav" id="video-list-nav">
+							<div class="prev"><i class="ion-ios-arrow-left"></i></div>
+							<div class="next"><i class="ion-ios-arrow-right"></i></div>
+						</div>
+					</h1>
+					<div class="aside-body">
+						<ul class="video-list" data-youtube='"carousel":true, "nav": "#video-list-nav"'>
+							<li><a data-youtube-id="SBjQ9tuuTJQ" data-action="magnific"></a></li>
+							<li><a data-youtube-id="9cVJr3eQfXc" data-action="magnific"></a></li>
+							<li><a data-youtube-id="DnGdoEa1tPg" data-action="magnific"></a></li>
+						</ul>
+					</div>
+				</aside>
+				<aside>
+					<h1 class="aside-title">آخر الأخبار <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
+					<div class="aside-body">
+						<article class="article-mini">
+							<div class="inner">
+								<figure>
+									<a href="single.html">
+										<img src="~/ui/images/news/img07.jpg" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="padding">
+									<h1><a href="single.html">Fusce ullamcorper elit at felis cursus suscipit</a></h1>
+								</div>
+							</div>
+						</article>
+						<article class="article-mini">
+							<div class="inner">
+								<figure>
+									<a href="single.html">
+										<img src="~/ui/images/news/img14.jpg" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="padding">
+									<h1><a href="single.html">Duis aute irure dolor in reprehenderit in voluptate velit</a></h1>
+								</div>
+							</div>
+						</article>
+						<article class="article-mini">
+							<div class="inner">
+								<figure>
+									<a href="single.html">
+										<img src="~/ui/images/news/img09.jpg" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="padding">
+									<h1><a href="single.html">Aliquam et metus convallis tincidunt velit ut rhoncus dolor</a></h1>
+								</div>
+							</div>
+						</article>
+						<article class="article-mini">
+							<div class="inner">
+								<figure>
+									<a href="single.html">
+										<img src="~/ui/images/news/img11.jpg" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="padding">
+									<h1><a href="single.html">dui augue facilisis lacus fringilla pulvinar massa felis quis velit</a></h1>
+								</div>
+							</div>
+						</article>
+						<article class="article-mini">
+							<div class="inner">
+								<figure>
+									<a href="single.html">
+										<img src="~/ui/images/news/img06.jpg" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="padding">
+									<h1><a href="single.html">neque est semper nulla, ac elementum risus quam a enim</a></h1>
+								</div>
+							</div>
+						</article>
+						<article class="article-mini">
+							<div class="inner">
+								<figure>
+									<a href="single.html">
+										<img src="~/ui/images/news/img03.jpg" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="padding">
+									<h1><a href="single.html">Morbi vitae nisl ac mi luctus aliquet a vitae libero</a></h1>
+								</div>
+							</div>
+						</article>
+					</div>
+				</aside>
+				<aside>
+					<div class="aside-body">
+						<form class="newsletter">
+							<div class="icon">
+								<i class="ion-ios-email-outline"></i>
+								<h1>Newsletter</h1>
+							</div>
+							<div class="input-group">
+								<input type="email" class="form-control email" placeholder="Your mail">
+								<div class="input-group-btn">
+									<button class="btn btn-primary"><i class="ion-paper-airplane"></i></button>
+								</div>
+							</div>
+							<p>By subscribing you will receive new articles in your email.</p>
+						</form>
+					</div>
+				</aside>
+			
+				<aside id="sponsored" style="display:none;">
+					<h1 class="aside-title">Sponsored</h1>
+					<div class="aside-body">
+						<ul class="sponsored">
+							<li>
+								<a href="#">
+									<img src="~/ui/images/sponsored.png" alt="Sponsored">
+								</a>
+							</li> 
+							<li>
+								<a href="#">
+									<img src="~/ui/images/sponsored.png" alt="Sponsored">
+								</a>
+							</li> 
+							<li>
+								<a href="#">
+									<img src="~/ui/images/sponsored.png" alt="Sponsored">
+								</a>
+							</li> 
+							<li>
+								<a href="#">
+									<img src="~/ui/images/sponsored.png" alt="Sponsored">
+								</a>
+							</li> 
+						</ul>
+					</div>
+				</aside>
+			</div>
+			<div class="col-md-8 col-sm-12 col-xs-12">
+				  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+					  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					  @*<li data-target="#carousel-example-generic" data-slide-to="3"></li>*@
+					  @*<li data-target="#carousel-example-generic" data-slide-to="4"></li>*@
+					</ol>
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+						<article class="featured">
+							<div class="overlay"></div>
+							<figure>
+								<img src="~/ui/images/news/img04.jpg" alt="Sample Article">
+							</figure>
+							<div class="details">
+								<div class="category"><a href="category.html">Computer</a></div>
+								<h1><a href="single.html">Phasellus iaculis quam sed est elementum vel ornare ligula venenatis</a></h1>
+								<div class="time">December 26, 2016</div>
+							</div>
+						</article>
+					  </div>
+						@foreach(var item in Model)
+						{
+							<div class="item">
+								<article class="featured">
+									<div class="overlay"></div>
+									<figure>
+										<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+									</figure>
+									<div class="details">
+										<div class="category"><a href="category.html">@item.PostType.Name</a></div>
+										<h1><a href="single.html">@item.Head</a></h1>
+										<div class="time">@item.CreatedAt</div>
+									</div>
+								</article>
+							</div>
+						}
+						
+					</div>
+
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					  <span class="ion-ios-arrow-left" aria-hidden="true" style="color:white;"></span>
+					  <span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					  <span class="ion-ios-arrow-right" aria-hidden="true" style="color:white;"></span>
+					  <span class="sr-only">Next</span>
+					</a>
+				  </div>
+				<div class="line">
+					<div>Latest News</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="row">
+							<article class="article col-md-12">
+								<div class="inner">
+									<figure>
+										<a href="single.html">
+											<img src="~/ui/images/news/img10.jpg" alt="Sample Article">
+										</a>
+									</figure>
+									<div class="padding">
+										<div class="detail">
+											<div class="time">December 10, 2016</div>
+											<div class="category"><a href="category.html">Healthy</a></div>
+										</div>
+										<h2><a href="single.html">Duis aute irure dolor in reprehenderit in voluptate</a></h2>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+										<footer>
+											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>1263</div></a>
+											<a class="btn btn-primary more" href="single.html">
+												<div>More</div>
+												<div><i class="ion-ios-arrow-thin-right"></i></div>
+											</a>
+										</footer>
+									</div>
+								</div>
+							</article>
+							<article class="article col-md-12">
+								<div class="inner">
+									<figure>
+										<a href="single.html">
+											<img src="~/ui/images/news/img06.jpg" alt="Sample Article">
+										</a>
+									</figure>
+									<div class="padding">
+										<div class="detail">
+											<div class="time">December 22, 2016</div>
+											<div class="category"><a href="category.html">Healthy</a></div>
+										</div>
+										<h2><a href="single.html">Exercitation ullamco laboris nisi ut aliquip</a></h2>
+										<p>Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu iaculis placerat sollicitudin ut est. In fringilla dui dui.</p>
+										<footer>
+											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>327</div></a>
+											<a class="btn btn-primary more" href="single.html">
+												<div>More</div>
+												<div><i class="ion-ios-arrow-thin-right"></i></div>
+											</a>
+										</footer>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="row">
+							<article class="article col-md-12">
+								<div class="inner">
+									<figure>                                
+										<a href="single.html">
+											<img src="~/ui/images/news/img05.jpg" alt="Sample Article">
+										</a>
+									</figure>
+									<div class="padding">
+										<div class="detail">
+											<div class="time">December 09, 2016</div>
+											<div class="category"><a href="category.html">Lifestyle</a></div>
+										</div>
+										<h2><a href="single.html">Mauris elementum libero at pharetra auctor</a></h2>
+										<p>Vivamus in efficitur mi. Nullam semper justo ut elit lacinia lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
+										<footer>
+											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>1083</div></a>
+											<a class="btn btn-primary more" href="single.html">
+												<div>More</div>
+												<div><i class="ion-ios-arrow-thin-right"></i></div>
+											</a>
+										</footer>
+									</div>
+								</div>
+							</article>
+							<article class="article col-md-12">
+								<div class="inner">
+									<figure>
+										<a href="single.html">
+											<img src="~/ui/images/news/img07.jpg" alt="Sample Article">
+										</a>
+									</figure>
+									<div class="padding">
+										<div class="detail">
+											<div class="time">December 21, 2016</div>
+											<div class="category"><a href="category.html">Sport</a></div>
+										</div>
+										<h2><a href="single.html">Sed do eiusmod tempor incididunt ut labore</a></h2>
+										<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris elementum libero at pharetra auctor.</p>
+										<footer>
+											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>980</div></a>
+											<a class="btn btn-primary more" href="single.html">
+												<div>More</div>
+												<div><i class="ion-ios-arrow-thin-right"></i></div>
+											</a>
+										</footer>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+				<div class="line top">
+					<div>Just Another News</div>
+				</div>
+				<div class="row">
+					<article class="col-md-12 article-list">
+						<div class="inner">
+							<figure>
+								<a href="single.html">
+									<img src="~/ui/images/news/img11.jpg" alt="Sample Article">
+								</a>
+							</figure>
+							<div class="details">
+								<div class="detail">
+									<div class="category">
+										<a href="#">Film</a>
+									</div>
+									<div class="time">December 19, 2016</div>
+								</div>
+								<h1><a href="single.html">Donec consequat arcu at ultrices sodales quam erat aliquet diam</a></h1>
+								<p>
+								Donec consequat, arcu at ultrices sodales, quam erat aliquet diam, sit amet interdum libero nunc accumsan nisi.
+								</p>
+								<footer>
+									<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
+									<a class="btn btn-primary more" href="single.html">
+										<div>More</div>
+										<div><i class="ion-ios-arrow-thin-right"></i></div>
+									</a>
+								</footer>
+							</div>
+						</div>
+					</article>
+					<article class="col-md-12 article-list">
+						<div class="inner">
+							<div class="badge">
+								Sponsored
+							</div>
+							<figure>
+								<a href="single.html">
+									<img src="~/ui/images/news/img02.jpg" alt="Sample Article">
+								</a>
+							</figure>
+							<div class="details">
+								<div class="detail">
+									<div class="category">
+										<a href="#">Travel</a>
+									</div>
+									<div class="time">December 18, 2016</div>
+								</div>
+								<h1><a href="single.html">Maecenas accumsan tortor ut velit pharetra mollis</a></h1>
+								<p>
+									Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu iaculis placerat sollicitudin ut est. In fringilla dui.
+								</p>
+								<footer>
+									<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>4209</div></a>
+									<a class="btn btn-primary more" href="single.html">
+										<div>More</div>
+										<div><i class="ion-ios-arrow-thin-right"></i></div>
+									</a>
+								</footer>
+							</div>
+						</div>
+					</article>
+					<article class="col-md-12 article-list">
+						<div class="inner">
+							<figure>
+								<a href="single.html">
+									<img src="~/ui/images/news/img03.jpg" alt="Sample Article">
+								</a>
+							</figure>
+							<div class="details">
+								<div class="detail">
+									<div class="category">
+									<a href="#">Travel</a>
+									</div>
+									<div class="time">December 16, 2016</div>
+								</div>
+								<h1><a href="single.html">Nulla facilisis odio quis gravida vestibulum Proin venenatis pellentesque arcu</a></h1>
+								<p>
+									Nulla facilisis odio quis gravida vestibulum. Proin venenatis pellentesque arcu, ut mattis nulla placerat et.
+								</p>
+								<footer>
+									<a href="#" class="love active"><i class="ion-android-favorite"></i> <div>302</div></a>
+									<a class="btn btn-primary more" href="single.html">
+										<div>More</div>
+										<div><i class="ion-ios-arrow-thin-right"></i></div>
+									</a>
+								</footer>
+							</div>
+						</div>
+					</article>
+					<article class="col-md-12 article-list">
+						<div class="inner">
+							<figure>
+								<a href="single.html">
+									<img src="~/ui/images/news/img09.jpg" alt="Sample Article">
+								</a>
+							</figure>
+							<div class="details">
+								<div class="detail">
+									<div class="category">
+										<a href="#">Healthy</a>
+									</div>
+									<div class="time">December 16, 2016</div>
+								</div>
+								<h1><a href="single.html">Maecenas blandit ultricies lorem id tempor enim pulvinar at</a></h1>
+								<p>
+									Maecenas blandit ultricies lorem, id tempor enim pulvinar at. Curabitur sit amet tortor eu ipsum lacinia malesuada.
+								</p>
+								<footer>
+									<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>783</div></a>
+									<a class="btn btn-primary more" href="single.html">
+										<div>More</div>
+										<div><i class="ion-ios-arrow-thin-right"></i></div>
+									</a>
+								</footer>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div> 
+		</div>
+	</div>
+</section> 

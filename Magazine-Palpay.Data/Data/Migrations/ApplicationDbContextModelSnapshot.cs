@@ -219,6 +219,37 @@ namespace Magazine_Palpay.Data.Migrations
                     b.ToTable("GalleryPhotos");
                 });
 
+            modelBuilder.Entity("Magazine_Palpay.Data.Models.LastNews", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LastNews");
+                });
+
             modelBuilder.Entity("Magazine_Palpay.Data.Models.MagazineSetting", b =>
                 {
                     b.Property<int>("Id")
@@ -332,6 +363,7 @@ namespace Magazine_Palpay.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Body")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -341,6 +373,7 @@ namespace Magazine_Palpay.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Head")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDelete")

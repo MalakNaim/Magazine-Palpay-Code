@@ -9,10 +9,12 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Magazine_Palpay.Web.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class EmployeeController : BaseController
     {
         private readonly ApplicationDbContext _context;

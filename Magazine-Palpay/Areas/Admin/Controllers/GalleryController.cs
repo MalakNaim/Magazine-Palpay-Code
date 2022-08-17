@@ -9,10 +9,12 @@ using Magazine_Palpay.Web.Extensions;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class GalleryController : BaseController
     {
         private readonly ApplicationDbContext _context;

@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using Magazine_Palpay.Web.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AdsController : BaseController
     {
         private readonly ApplicationDbContext _context;

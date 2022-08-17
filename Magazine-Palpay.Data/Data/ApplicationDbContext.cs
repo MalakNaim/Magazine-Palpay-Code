@@ -22,5 +22,6 @@ namespace Magazine_Palpay.Data
         public DbSet<PostType> PostType { get; set; }
         public DbSet<Video> Video { get; set; }
         public DbSet<Department> Department { get; set; }
+        public DbSet<LastNews> LastNews { get; set; }
     }
 }

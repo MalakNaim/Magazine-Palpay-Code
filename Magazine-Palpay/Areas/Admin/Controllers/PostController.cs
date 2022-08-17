@@ -1,6 +1,7 @@
 ﻿using Magazine_Palpay.Data;
 using Magazine_Palpay.Data.Models;
 using Magazine_Palpay.Web.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class PostController : BaseController
     {
         private readonly ApplicationDbContext _context;

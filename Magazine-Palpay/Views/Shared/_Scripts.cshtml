@@ -1,24 +1,22 @@
-﻿
-<script src="~/assets/plugins/global/plugins.bundle.js"></script>
-<script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-<script src="~/assets/js/scripts.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
-<script src="~/assets/js/site.js?v=1.7"></script>
-<script src="https://malsup.github.io/jquery.blockUI.js"></script>
-
-  @*   <script>
-      $(document).ready(function () { 
-            $(document).ajaxStart(function () {
-                $.blockUI({ 
-                    message: "يرجى الانتظار ...",
-                    css: { padding: '20px 5px', borderColor: '#B24398' }
-                 });
-            }).ajaxStop(function () {
-               $.unblockUI();
-            });
-       });
-    </script>*@
-<script type="text/javascript">
-
+﻿<script src="~/ui/js/jquery.js"></script>
+<script src="~/ui/js/jquery.migrate.js"></script>
+<script src="~/ui/scripts/bootstrap/bootstrap.min.js"></script>
+<script>var $target_end=$(".best-of-the-week");</script>
+<script src="~/ui/scripts/jquery-number/jquery.number.min.js"></script>
+<script src="~/ui/scripts/owlcarousel/dist/owl.carousel.min.js"></script>
+<script src="~/ui/scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+<script src="~/ui/scripts/easescroll/jquery.easeScroll.js"></script>
+<script src="~/ui/scripts/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/ui/scripts/toast/jquery.toast.min.js"></script>
+<script src="~/ui/js/demo.js"></script>
+<script src="~/ui/js/e-magz.js"></script>
+<script src="~/ui/js/custom.js"></script>
+<script> 
+$(".carousel").swipe({
+    swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
+        if (direction == 'left') $(this).carousel('next');
+        if (direction == 'right') $(this).carousel('prev');
+    },
+    allowPageScroll: "vertical"
+});
 </script>
