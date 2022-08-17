@@ -1,0 +1,34 @@
+﻿@model Magazine_Palpay.Data.Models.Gallery
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+ 
+<h4 class="mb-6 mt-3">تعديل المعرض</h4>
+<hr />
+<div class="row">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">اسم المعرض </label>
+                <input asp-for="Title" class="form-control form-control-solid" />
+               <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="row mb-6">
+               <label class="fs-5 fw-bold mb-2">الوصف </label>
+                 <textarea asp-for="Description" rows="5" class="form-control form-control-solid"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div> 
+           <div style="float:left;">
+            <input type="submit" class="btn btn-purble" value="حفظ" />
+            <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
+           </div>
+        </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

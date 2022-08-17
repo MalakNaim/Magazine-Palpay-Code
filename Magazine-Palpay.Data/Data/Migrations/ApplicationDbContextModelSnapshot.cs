@@ -346,13 +346,10 @@ namespace Magazine_Palpay.Data.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsPublished")
-                        .HasColumnType("bit");
-
                     b.Property<string>("MainImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Order")
+                    b.Property<int>("OrderPlace")
                         .HasColumnType("int");
 
                     b.Property<int?>("PostSubType")
@@ -360,6 +357,9 @@ namespace Magazine_Palpay.Data.Migrations
 
                     b.Property<int>("PostTypeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("PublishedPost")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");

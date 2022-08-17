@@ -115,14 +115,19 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         }
  
         [HttpPost("Admin/PostType/Delete")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<JsonResult> OnPostDelete(int? id)
         {
             var postType = await _context.PostType.FindAsync(id);
             postType.IsDelete = true;
             _context.PostType.Update(postType);
             await _context.SaveChangesAsync();
-            Notify.Success("تمت عملية الحذف بنجاح"); 
-            return Json(string.Empty);
+            Notify.Success("تمت عملية الحذف بنجاح");
+            return new JsonResult(new
+            {
+                isValid = true,
+                actionType = "redirect",
+                redirectUrl = string.Empty
+            });
         }
 
         private bool PostTypeExists(int id)

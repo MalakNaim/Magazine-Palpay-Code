@@ -10,8 +10,8 @@ namespace Magazine_Palpay.Web.ViewModels
         public int PostTypeId { get; set; }
         public int? PostSubType { get; set; }
         public string MainImage { get; set; }
-        public bool IsPublished { get; set; } = false;
-        public int Order { get; set; }
+        public bool PublishedPost { get; set; }
+        public int OrderPlace { get; set; }
         public PostTypeViewModel PostType { get; set; }
         public List<PostPhotoViewModel> PostPhotos { get; set; }
     }

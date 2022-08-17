@@ -50,17 +50,16 @@
             </td>
             <td>
                  <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light-warning">تعديل</a>  
-                 <a @*onclick="deleteFun(@item.Id)"*@ class="btn btn-light-danger">حذف</a>
+                 <a onclick="deleteFun(@item.Id)" class="btn btn-light-danger">حذف</a>
             </td>
         </tr>
 }
     </tbody>
 </table> 
-@*@section scripts{
+@section scripts{
     <script>
         function deleteFun(item){
            var del = 'jQueryModalConfirm("/Admin/PostType/Delete?id=' + item + '","هل أنت متأكد من حذف هذا العنصر؟")';
         }
     </script>
 }
-*@

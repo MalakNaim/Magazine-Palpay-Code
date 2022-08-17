@@ -7,7 +7,7 @@
             maxFileSize: 400000000,
             maxNumberOfFiles: 10,
             minNumberOfFiles: 1,
-            allowedFileTypes: ["image/*", "application/pdf", ".doc", ".docx"]
+            allowedFileTypes: ["image/*"]
         }
     }
 )
@@ -43,7 +43,7 @@
         quality: 0.8
     })
      .use(Uppy.XHRUpload, {
-        endpoint: '/Attachments/Attachments/UploadFiles?fileId=' + $("#FileId").val()
+        endpoint: '/Admin/Post/UploadFiles'
     });
      uppy.on('upload-error', function (file, error, response) {
         console.log(file.id);

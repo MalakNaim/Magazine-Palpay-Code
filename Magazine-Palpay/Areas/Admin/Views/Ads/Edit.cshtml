@@ -1,0 +1,70 @@
+﻿@model Magazine_Palpay.Data.Models.Ads
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="mb-6 mt-3">تعديل الإعلانات</h4>
+<hr /> 
+<div class="row"> 
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">العنوان  </label>
+                <input asp-for="Head" class="form-control form-control-solid" />
+                <span asp-validation-for="Head" class="text-danger"></span>
+            </div>
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">النص  </label>
+                <textarea asp-for="Body" rows="4" class="form-control form-control-solid"></textarea>
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div> 
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">المالك</label>
+                <input asp-for="Owner" class="form-control form-control-solid" />
+                <span asp-validation-for="Owner" class="text-danger"></span>
+            </div>
+
+             <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">الرابط</label>
+                <input asp-for="Link" class="form-control form-control-solid" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div> 
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">الصورة</label>
+                <input name="image" type="file" class="form-control" required/>
+                <a href="~/assets/UploadImages/@Model.Image" class="btn btn-light-warning" target="_blank">عرض صورة الإعلان</a>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div> 
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">تاريخ البداية</label>
+                <input asp-for="StatDate" type="date" class="form-control form-control-solid" />
+                <span asp-validation-for="StatDate" class="text-danger"></span>
+            </div> 
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">تاريخ النهاية</label>
+                <input asp-for="EndDate" type="date" class="form-control form-control-solid" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+          <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">مكان الظهور في الصفحة</label>
+                <select asp-for="Order" data-control="select2" data-placeholder="اختر  الترتيب ..." class="form-select form-select-solid">
+                    <option value="">اختر الترتيب </option>
+                    <option value="1">أعلى</option>
+                    <option value="2">أسفل</option>
+                    <option value="3">الجانب</option>
+                </select>   
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div style="float:left;">
+             <input type="submit" class="btn btn-purble" value="حفظ" />
+             <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
+           </div>
+        </form> 
+</div> 
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

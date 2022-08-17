@@ -5,85 +5,62 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Employee</h4>
+<h4 class="mb-6 mt-3">تعديل موظف</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" class="form-control" />
-                <span asp-validation-for="Photo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Department" class="control-label"></label>
-                <input asp-for="Department" class="form-control" />
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">الاسم </label>
+                <input asp-for="Name" class="form-control form-control-solid" />
+               <span asp-validation-for="Name" class="text-danger"></span>
+            </div> 
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">القسم </label>
+              <select asp-for="Department" asp-items="@ViewBag.Department" data-control="select2" data-placeholder="اختر  القسم ..." class="form-select form-select-solid">
+                    <option  value="">اختر القسم </option>
+              </select>   
                 <span asp-validation-for="Department" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="JobTitle" class="control-label"></label>
-                <input asp-for="JobTitle" class="form-control" />
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">المسمى الوظيفي </label>
+                <input asp-for="JobTitle" class="form-control form-control-solid" />
                 <span asp-validation-for="JobTitle" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Mobile" class="control-label"></label>
-                <input asp-for="Mobile" class="form-control" />
+            <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">الصورة الشخصية  </label>
+                <input name="photo" type="file" class="form-control " />
+                @if(Model.Photo != null){
+                <a href="~/assets/UploadImages/@Model.Photo" class="btn btn-light-warning" target="_blank">عرض الصورة</a>
+                }
+            </div>
+           
+             <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">رقم الجوال </label>
+                <input asp-for="Mobile" class="form-control form-control-solid" />
                 <span asp-validation-for="Mobile" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+             <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">البريد الالكتروني </label>
+                <input asp-for="Email" class="form-control form-control-solid" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DOB" class="control-label"></label>
-                <input asp-for="DOB" class="form-control" />
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">تاريخ الميلاد </label>
+                <input asp-for="DOB" type="date" class="form-control form-control-solid" />
                 <span asp-validation-for="DOB" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="JoinDate" class="control-label"></label>
-                <input asp-for="JoinDate" class="form-control" />
+             <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">تاريخ الانضمام </label>
+                <input asp-for="JoinDate" type="date" class="form-control form-control-solid" />
                 <span asp-validation-for="JoinDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedAt" class="control-label"></label>
-                <input asp-for="UpdatedAt" class="form-control" />
-                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedBy" class="control-label"></label>
-                <input asp-for="UpdatedBy" class="form-control" />
-                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDelete" /> @Html.DisplayNameFor(model => model.IsDelete)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+          <div style="float:left;">
+                <input type="submit" class="btn btn-purble" value="حفظ" />
+                <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
+           </div> 
+        </form> 
 </div>
 
 <div>

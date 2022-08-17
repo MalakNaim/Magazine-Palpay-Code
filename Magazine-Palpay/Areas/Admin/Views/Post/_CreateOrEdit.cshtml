@@ -17,7 +17,7 @@
     <span asp-validation-for="PostTypeId" class="text-danger"></span> 
 </div>
 <div class="row mb-6">
-    <label class="required fs-5 fw-bold mb-2">متفرع النوع</label> 
+    <label class="fs-5 fw-bold mb-2">متفرع النوع</label> 
     <select asp-for="PostSubType" asp-items="@ViewBag.PostSubType" data-control="select2" data-placeholder="اختر  متفرع النوع ..." class="form-select form-select-solid">
         <option  value="">اختر المتفرع </option>
     </select>    
@@ -25,27 +25,37 @@
 </div>
 <div class="row mb-6">
     <label class="required fs-5 fw-bold mb-2">الصورة الرئيسية</label> 
-    <input name="imgPost" type="file" class="form-control form-control-solid"/>
+    <input name="imgPost" type="file" class="form-control"/>
+    @if(Model != null){
+        if(Model.MainImage != null)
+        {
+           <a href="/assets/UploadImages/@Model.MainImage" target="_blank" class="btn btn-light-warning">عرض الصورة</a>
+        }
+    }
     <span asp-validation-for="MainImage" class="text-danger"></span> 
 </div>
 <div class="row mb-6">
     <div class="form-check">
-		<input asp-for="IsPublished" class="form-check-input" type="checkbox" value="true">
-		<label class="form-check-label" for="IsPublished">نشر المنشور </label>
+		<input asp-for="PublishedPost" class="form-check-input" type="checkbox" value="true">
+		<label class="fs-5 fw-bold mb-2" for="PublishedPost">نشر المنشور </label>
 	</div>
 </div>
 <div class="row mb-6">
     <label class="required fs-5 fw-bold mb-2">ترتيب ظهور المنشور </label> 
-    <select asp-for="Order" data-control="select2" data-placeholder="اختر  الترتيب ..." class="form-select form-select-solid">
+    <select asp-for="OrderPlace" data-control="select2" data-placeholder="اختر  الترتيب ..." class="form-select form-select-solid">
         <option value="">اختر الترتيب </option>
         <option value="1">في القائمة</option>
         <option value="2">في الصفحة</option>
     </select>   
-    <span asp-validation-for="Order" class="text-danger"></span> 
+    <span asp-validation-for="OrderPlace" class="text-danger"></span> 
+</div>
+<hr /> 
+<div class="row mb-6">
+    <label class="fs-5 fw-bold mb-2">إضافة صور للمنشور</label> 
+    <input name="postPhotos" type="file" multiple class="form-control"/> 
 </div>
 <div style="float:left;">
     <input type="submit" class="btn btn-purble" value="حفظ" />
     <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
 </div>
-@*<hr/>
-<h5 class="mb-6 mt-3">إضافة صور إضافية للمنشور:-</h5> *@
+ 
