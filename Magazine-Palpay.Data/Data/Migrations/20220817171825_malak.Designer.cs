@@ -4,14 +4,16 @@ using Magazine_Palpay.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Magazine_Palpay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220817171825_malak")]
+    partial class malak
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,7 +387,7 @@ namespace Magazine_Palpay.Data.Migrations
                     b.Property<int>("OrderPlace")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PostSubTypeId")
+                    b.Property<int?>("PostSubType")
                         .HasColumnType("int");
 
                     b.Property<int>("PostTypeId")
@@ -401,8 +403,6 @@ namespace Magazine_Palpay.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostSubTypeId");
 
                     b.HasIndex("PostTypeId");
 
@@ -731,17 +731,11 @@ namespace Magazine_Palpay.Data.Migrations
 
             modelBuilder.Entity("Magazine_Palpay.Data.Models.Post", b =>
                 {
-                    b.HasOne("Magazine_Palpay.Data.Models.PostType", "PostSubType")
-                        .WithMany()
-                        .HasForeignKey("PostSubTypeId");
-
                     b.HasOne("Magazine_Palpay.Data.Models.PostType", "PostType")
                         .WithMany()
                         .HasForeignKey("PostTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("PostSubType");
 
                     b.Navigation("PostType");
                 });

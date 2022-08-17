@@ -150,21 +150,26 @@
 					</div>
 				</div>
 			</nav>
-			<!-- End nav -->
-			<div class="container">
+	<!-- End nav -->
+		@{
+			if(ViewBag.News != null)
+			{
+				<div class="container">
 				<div class="row">
 					<div id="ticker">
 					  <div class="title">آخر الأخبار</div>
-					  <ul> 
-					  @{
-						  foreach(var item in ViewBag.News){
+					  <ul>  
+						@foreach(var item in ViewBag.News){
 						  <li>@item.Title</li>
 					    }
-					  }
+					  
 					  </ul> 
 					</div>
 				</div>
 			</div>
+			}
+		
+			}
 			
 		</header>
 

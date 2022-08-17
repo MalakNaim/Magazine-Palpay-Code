@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
+using Magazine_Palpay.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,9 +16,9 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
 
         protected INotyfService Notify => _notifyInstance ??= HttpContext.RequestServices.GetService<INotyfService>();
 
-        //private IViewRenderService _viewRenderService;
+        private IViewRenderService _viewRenderService;
 
-        //protected IViewRenderService ViewRender => _viewRenderService ??= HttpContext.RequestServices.GetService<IViewRenderService>();
+        protected IViewRenderService ViewRender => _viewRenderService ??= HttpContext.RequestServices.GetService<IViewRenderService>();
 
     }
 }

@@ -14,7 +14,6 @@ using Magazine_Palpay.Web.Extensions;
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
     public class LastNewsController : BaseController
     {
         private readonly ApplicationDbContext _context;

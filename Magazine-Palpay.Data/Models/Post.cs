@@ -12,7 +12,7 @@ namespace Magazine_Palpay.Data.Models
         public string Body { get; set; }
         [Required(ErrorMessage = "أدخل نوع المنشور")]
         public int PostTypeId { get; set; }
-        public int? PostSubType { get; set; }
+        public int? PostSubTypeId { get; set; }
         public string MainImage { get; set; }
         public bool PublishedPost { get; set; }
         [Required(ErrorMessage = "أدخل ترتيب المنشور")]

@@ -18,10 +18,10 @@
 </div>
 <div class="row mb-6">
     <label class="fs-5 fw-bold mb-2">متفرع النوع</label> 
-    <select asp-for="PostSubType" asp-items="@ViewBag.PostSubType" data-control="select2" data-placeholder="اختر  متفرع النوع ..." class="form-select form-select-solid">
+    <select asp-for="PostSubTypeId" asp-items="@ViewBag.PostSubType" data-control="select2" data-placeholder="اختر  متفرع النوع ..." class="form-select form-select-solid">
         <option  value="">اختر المتفرع </option>
     </select>    
-    <span asp-validation-for="PostSubType" class="text-danger"></span> 
+    <span asp-validation-for="PostSubTypeId" class="text-danger"></span> 
 </div>
 <div class="row mb-6">
     <label class="required fs-5 fw-bold mb-2">الصورة الرئيسية</label> 
@@ -32,6 +32,7 @@
            <a href="/assets/UploadImages/@Model.MainImage" target="_blank" class="btn btn-light-warning">عرض الصورة</a>
         }
     }
+    <input type="hidden" asp-for="MainImage"/>
     <span asp-validation-for="MainImage" class="text-danger"></span> 
 </div>
 <div class="row mb-6">

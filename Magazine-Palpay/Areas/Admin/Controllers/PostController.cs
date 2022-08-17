@@ -74,7 +74,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             
             if(postSubType > 0)
             {
-                queryable = queryable.Where(x => x.PostSubType.Equals(postSubType));
+                queryable = queryable.Where(x => x.PostSubTypeId.Equals(postSubType));
             }
 
             if (dateFrom != (DateTime)default)
@@ -95,7 +95,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     CreatedAt = x.CreatedAt,
                     Published = x.PublishedPost == false ? "غير منشور" : "تم النشر",
                     PostType = GetPostType(x.PostTypeId),
-                    PostSubType = x.PostSubType == 0 || x.PostSubType == null?"رئيسي" :GetPostType((int)x.PostSubType),
+                    PostSubType = x.PostSubTypeId == 0 || x.PostSubTypeId == null?"رئيسي" :GetPostType((int)x.PostSubTypeId),
                     Order = x.OrderPlace == 1 ? "في القائمة" : "في الصفحة"
                 }).ToList();
                
@@ -155,7 +155,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             var postType = _context.PostType.Where(x => !x.IsDelete && x.ParentId == 0).ToList();
             ViewBag.PostType = new SelectList(postType, "Id", "Name",post.PostTypeId);
             var postSubType = _context.PostType.Where(x => !x.IsDelete && x.ParentId != 0).ToList(); 
-            ViewBag.PostSubType = new SelectList(postSubType, "Id", "Name",post.PostSubType);
+            ViewBag.PostSubType = new SelectList(postSubType, "Id", "Name",post.PostSubTypeId);
             return View(post);
         }
 

@@ -1,0 +1,31 @@
+﻿@foreach(var item in @ViewBag.MainPost)
+{
+<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="row">
+		            	<article class="article col-md-12">
+								<div class="inner">
+									<figure>
+										<a href="single.html">
+											<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+										</a>
+									</figure>
+									<div class="padding">
+										<div class="detail">
+											<div class="time">@item.CreatedAt</div>
+											<div class="category"><a href="category.html">@item.PostType.Name</a></div>
+										</div>
+										<h2><a href="single.html">@item.Head</a></h2>
+										<p>@Html.Raw(item.Body)</p>
+										<footer>
+ 											<a class="btn btn-primary more" href="single.html">
+												<div>عرض المزيد</div>
+												<div><i class="ion-ios-arrow-thin-right"></i></div>
+											</a>
+										</footer>
+									</div>
+								</div>
+							</article>  
+						</div>
+					</div>
+	}
+				
