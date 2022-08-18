@@ -24,7 +24,7 @@ namespace Magazine_Palpay.Controllers
             var today = DateTime.Now.Date;
             var news = _context.LastNews.Where(x => !x.IsDelete && x.CreatedAt.Date.Equals(today)).ToList();
             ViewBag.News = news;
-            var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost && !x.PostSubTypeId.HasValue)
+            var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost)
                  .Include(x=>x.PostType).OrderByDescending(x=>x.CreatedAt)
                  .ToList();
             List<Post> mainPosts = new List<Post>();

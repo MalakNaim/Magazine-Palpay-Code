@@ -1,4 +1,7 @@
 ﻿ @model List<Magazine_Palpay.Data.Models.Post> 
+@{
+	var lst = Model.Where(x => !x.PostSubTypeId.HasValue).Take(3).ToList();
+}
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			 	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -7,10 +10,10 @@
 		</ol>
 
 		<div class="carousel-inner" role="listbox">  
-		@foreach(var item in Model.Take(3))
+		@foreach(var item in lst)
 		{
 			var active = "";
-			if(Model.First() == item){
+			if(lst.First() == item){
 				 active = "active";
 			}
 				<div class="item @active">

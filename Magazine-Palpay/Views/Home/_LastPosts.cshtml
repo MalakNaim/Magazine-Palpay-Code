@@ -1,0 +1,23 @@
+﻿ @model List<Magazine_Palpay.Data.Models.Post> 
+@{
+	var lst = Model.Where(x => x.PostSubTypeId.HasValue).Take(6).ToList();
+}
+   <div class="aside-body">
+	@foreach(var item in lst)
+	{
+		    <article class="article-mini">
+					<div class="inner">
+						<figure>
+							<a href="single.html">
+								<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+							</a>
+						</figure>
+						<div class="padding">
+							<h1><a href="single.html">@item.Head</a></h1>
+							<p>@Html.Raw(@item.Body)</p>
+						</div>
+					</div>
+				</article> 
+		
+	}
+		</div>
