@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Magazine_Palpay.Enums
+@{
+	var deals = (int)PostTypeEnum.Deals;
+	var campaines = (int)PostTypeEnum.Campaines;
+	var it = (int)PostTypeEnum.IT;
+	var fintech = (int)PostTypeEnum.Fintech;
+}
+<!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
     <base href="">
@@ -39,17 +46,19 @@
 							<li class="for-tablet nav-title"><a>Menu</a></li>
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
-							<li><a href="category.html">الاتفاقيات</a></li>
-							<li class="dropdown magz-dropdown">
+							<li><a href="/">الرئيسية</a></li>
+							<li><a href="/PostDetails/ByType?type=@deals">الاتفاقيات</a></li>
+							<li><a href="/PostDetails/ByType?type=@campaines">حملات الشهر</a></li>
+							@*<li class="dropdown magz-dropdown">
 								<a href="category.html">حملات الشهر <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="index.html">حملة 1</a></li>
 									<li><a href="index.html">حملة 2</a></li>
 									<li><a href="index.html">حملة 3</a></li>
 								</ul>
-							</li>
-							<li><a href="category.html">التحول الرقمي</a></li>
-							<li><a href="category.html">التكنولوجيا المالية</a></li>
+							</li>*@
+							<li><a href="/PostDetails/ByType?type=@it">التحول الرقمي</a></li>
+							<li><a href="/PostDetails/ByType?type=@fintech">التكنولوجيا المالية</a></li>
  							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">آخر الأخبار<i class="ion-ios-arrow-right"></i> <div class="badge">تصفح</div></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
@@ -136,8 +145,10 @@
 									<li><a href="index.html">الأخبار</a></li>
 									<li><a href="index.html">الإنجازات</a></li>
 									<li><a href="index.html">الجوائز</a></li>
+									<li><a href="index.html">مجموعة الشركات</a></li>
 								</ul>
 							</li>
+							<li><a href="#">اجتماعيات</a></li>
 							<li class="dropdown magz-dropdown"><a href="#">الموظفين <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="#"><i class="icon ion-person"></i>أعياد الميلاد</a></li>

@@ -1,0 +1,21 @@
+﻿	@foreach(var item in ViewBag.MainPosts)
+	{
+		<div class="col-md-6 col-sm-6 col-xs-12">
+		<article class="article related">
+			<div class="inner">
+				<figure>
+					<a href="/PostDetails/Details?id=@item.Id">
+						<img src="~/assets/UploadImages/@item.MainImage">
+					</a>
+				</figure>
+				<div class="padding">
+					<h2><a href="#">@item.Head</a></h2>
+					<div class="detail">
+						<div class="category"><a href="#">@item.PostType.Name</a></div>
+						<div class="time">@item.CreatedAt</div>
+					</div>
+				</div>
+			</div>
+		</article>
+		</div>
+	}

@@ -3,8 +3,10 @@
     public enum PostTypeEnum
     {
         Deals = 1,
-        Campaines = 5,
-        IT = 6,
-        Fintech = 7,
+        OtherNews = 2,
+        Campaines = 4,
+        IT = 5,
+        Fintech = 7
+     
     }
 }

@@ -1,20 +1,15 @@
-﻿@model List<Magazine_Palpay.Data.Models.Post>
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Magazine_Palpay.Data.Models.Post
 
-<section class="home">
-	<div class="container">
-		<div class="row">
 
-		</div>
-		<div class="row">
-			<div class="col-xs-6 col-md-4 sidebar" id="sidebar">
-				<div class="sidebar-title for-tablet">Sidebar</div>
-			    <aside>
+
+		<section class="single">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 sidebar" id="sidebar">
+						   <aside>
 					<div class="aside-body">
 						<figure class="ads">
-							@{	 
+							@{
 								if(!string.IsNullOrEmpty(ViewBag.Ads)){
 									<img src="~/assets/UploadImages/@ViewBag.Ads">
 								}
@@ -63,50 +58,14 @@
 						</form>
 					</div>
 				</aside>
-			
-				<aside id="sponsored" style="display:none;">
-					<h1 class="aside-title">Sponsored</h1>
-					<div class="aside-body">
-						<ul class="sponsored">
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-						</ul>
 					</div>
-				</aside>
+					<div class="col-md-8">
+					@Html.Partial("_PostDetails")
+						<div class="line"><div>تصفح أيضاً</div></div>
+						<div class="row">
+							 @Html.Partial("_ReadMoreMainPost")
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-8 col-sm-12 col-xs-12">
-				@Html.Partial("_CarousalPost")
-				<div class="line">
-					<div>الأخبار الرئيسية</div>
-				</div>
-				<div class="row">
-					@Html.Partial("_MainPosts")
-				</div>
-				<div class="line top">
-					<div>تصفح أخبار أخرى</div>
-				</div>
-				<div class="row">
-					@Html.Partial("_OtherPosts")
-				</div>
-			</div> 
-		</div>
-	</div>
-</section> 
+		</section>

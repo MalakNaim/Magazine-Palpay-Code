@@ -22,30 +22,22 @@ namespace Magazine_Palpay.Controllers
         public IActionResult Index()
         {
             var today = DateTime.Now.Date;
-            var news = _context.LastNews.Where(x => !x.IsDelete && x.CreatedAt.Date.Equals(today)).ToList();
+            var news = _context.LastNews.Where(x => !x.IsDelete).OrderByDescending(x=>x.CreatedAt).ToList();
             ViewBag.News = news;
             var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost)
                  .Include(x=>x.PostType).OrderByDescending(x=>x.CreatedAt)
                  .ToList();
             List<Post> mainPosts = new List<Post>();
-            var Deals = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Deals)).FirstOrDefault();
-            var LastCampain = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Campaines)).FirstOrDefault();
-            if(LastCampain != null)
+            var Ads = _context.Ads.Where(x => !x.IsDelete
+            && x.EndDate >= today).FirstOrDefault();
+            if(Ads != null)
             {
-                ViewBag.Ads = LastCampain.MainImage;
+                ViewBag.Ads = Ads.Image;
             }
-            else
-            {
-                ViewBag.Ads = "~/ui/images/ads.jpeg";
-            }
-            var IT = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.IT)).FirstOrDefault();
-            var Fintech = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Fintech)).FirstOrDefault();
-            if(Deals != null) mainPosts.Add(Deals);
-            if(LastCampain != null) mainPosts.Add(LastCampain);
-            if (IT != null) mainPosts.Add(IT);
-            if(Fintech != null) mainPosts.Add(Fintech); 
-
-            ViewBag.MainPost = mainPosts;
+            ViewBag.Deals = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Deals)).FirstOrDefault();
+            ViewBag.Campain = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Campaines)).FirstOrDefault();
+            ViewBag.IT = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.IT)).FirstOrDefault();
+            ViewBag.Fintech = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Fintech)).FirstOrDefault();
             return View(post);
         }
     }

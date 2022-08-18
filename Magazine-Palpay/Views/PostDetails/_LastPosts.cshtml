@@ -1,10 +1,5 @@
-﻿ @model List<Magazine_Palpay.Data.Models.Post> 
- @using Magazine_Palpay.Enums
-@{
-	var lst = Model.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)).Take(6).ToList();
-}
-   <div class="aside-body">
-	@foreach(var item in lst)
+﻿    <div class="aside-body">
+	@foreach(var item in ViewBag.Posts)
 	{
 		    <article class="article-mini">
 					<div class="inner">

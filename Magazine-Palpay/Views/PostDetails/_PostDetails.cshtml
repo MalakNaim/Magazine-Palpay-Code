@@ -1,0 +1,20 @@
+﻿@model Magazine_Palpay.Data.Models.Post
+
+<article class="article main-article">
+			<header>
+				<h2>@Model.Head</h2>
+				<ul class="details">
+					<li>تم النشر بتاريخ @Model.CreatedAt</li>
+					<li>@Model.PostType.Name | @ViewBag.PostSubType</li>
+ 				</ul>
+			</header>
+			<div class="main">
+ 				<div class="featured">
+					<figure>
+						<img src="~/assets/UploadImages/@Model.MainImage">
+@*										<figcaption>Image by pexels.com</figcaption>
+*@					</figure>
+		</div>
+		@Html.Raw(Model.Body)
+			</div> 
+</article>
