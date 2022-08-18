@@ -1,5 +1,5 @@
 ﻿@model List<Magazine_Palpay.Data.Models.Post>
-<section class="single">
+<section class="single" style="padding:15px !important;">
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 sidebar" id="sidebar">
@@ -24,7 +24,7 @@
 								</div>
 								<div class="time">@item.CreatedAt</div>
 							</div>
-							<h1><a href="single.html">@item.Head</a></h1>
+							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
 							<p>
 							@if(item.Body.Length > 200){
 								<p>@Html.Raw(item.Body.Substring(0,200)+"..........")</p>

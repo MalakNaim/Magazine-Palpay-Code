@@ -16,6 +16,25 @@
     <partial name="_Styles" />
     <partial name="_Scripts" />
     @RenderSection("css", required: false)
+	<style>
+	header.primary {
+    position: unset !important;
+    z-index: 1999;
+    top: 0;
+    right: 0;
+    width: 100%;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+   }
+   section{
+    padding-top: 15px !important;
+    padding-right: 15px !important;
+    padding-bottom: 15px !important;
+    padding-left: 15px !important;
+   }
+</style>
 </head>
 
 <body class="skin-orange">
