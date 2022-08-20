@@ -20,7 +20,6 @@ namespace Magazine_Palpay.Data
         public DbSet<Post> Post { get; set; }
         public DbSet<PostPhoto> PostPhoto { get; set; }
         public DbSet<PostType> PostType { get; set; }
-        public DbSet<Video> Video { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<LastNews> LastNews { get; set; }
     }

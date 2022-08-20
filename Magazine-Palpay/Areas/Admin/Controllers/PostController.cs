@@ -172,6 +172,10 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 } 
                 if (id == 0)
                 {
+                    if (!string.IsNullOrEmpty(post.VideoLink))
+                    {
+                        post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);
+                    }
                     post.MainImage = fileName;
                     post.CreatedAt = DateTime.Now; 
                     post.CreatedBy = _userManager.GetUserId(User);
@@ -215,6 +219,10 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                             await _context.SaveChangesAsync();
                         }
                     }
+                    if (!string.IsNullOrEmpty(post.VideoLink))
+                    {
+                        post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);
+                    }
                     post.UpdatedAt = DateTime.Now;
                     post.UpdatedBy = _userManager.GetUserId(User);
                     _context.Post.Update(post);
@@ -238,6 +246,23 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     actionType = "redirect",
                     redirectUrl = string.Empty
                 });
+        }
+
+        public string GetEmbedVideoLink(string Video)
+        {
+            if (Video.Substring(8, 3).Contains("www"))
+            {
+               var removeSub = Video.Substring(24, 8);
+               Video = Video.Replace(removeSub, "embed/");
+               return Video;
+            }
+            else
+            {
+                var remove = Video.Substring(8, 8);
+                Video = Video.Replace(remove, "www.youtube.com/embed");
+                return Video;
+            }
+            return string.Empty;
         }
     }
 }
