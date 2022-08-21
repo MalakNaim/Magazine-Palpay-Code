@@ -2,6 +2,7 @@
 @using Magazine_Palpay.Enums
 @{
 	var lst = Model.Where(x => x.PostTypeId != ((int)PostTypeEnum.OtherNews)
+	&& x.MediaType.Equals(1)
 	&& x.PostTypeId != (int)PostTypeEnum.Deals
 	&& x.PostTypeId != (int)PostTypeEnum.IT
 	&& x.PostTypeId != (int)PostTypeEnum.Campaines
@@ -27,7 +28,7 @@
 				<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
 				<p>
 				@if(item.Body.Length > 200){
-					<p>@Html.Raw(item.Body.Substring(0,200)+"..........")</p>
+					<p>@Html.Raw(item.Body)</p>
 				}
 				else
 				{

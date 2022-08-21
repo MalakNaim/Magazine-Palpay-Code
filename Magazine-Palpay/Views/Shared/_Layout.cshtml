@@ -3,8 +3,8 @@
 	var deals = (int)PostTypeEnum.Deals;
 	var campaines = (int)PostTypeEnum.Campaines;
 	var it = (int)PostTypeEnum.IT;
-	var fintech = (int)PostTypeEnum.Fintech;
-}
+	var fintech = (int)PostTypeEnum.Fintech; 
+	}
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
@@ -12,7 +12,7 @@
     <title>المجلة الالكترونية</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="~/assets/media/logos/faviconPalPay.ico" />
+    <link rel="shortcut icon" href="~/assets/media/logos/favicon.png" />
     <partial name="_Styles" />
     <partial name="_Scripts" />
     @RenderSection("css", required: false)
@@ -78,7 +78,7 @@
 							</li>*@
 							<li><a href="/PostDetails/ByType?type=@it">التحول الرقمي</a></li>
 							<li><a href="/PostDetails/ByType?type=@fintech">التكنولوجيا المالية</a></li>
- 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">آخر الأخبار<i class="ion-ios-arrow-right"></i> <div class="badge">تصفح</div></a>
+ 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">منوعات<i class="ion-ios-arrow-right"></i> <div class="badge">تصفح</div></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
 										<div class="row">
@@ -89,12 +89,10 @@
 													</div>
 												</div> -->
 												<ul class="vertical-menu">
-													<li><a href="#"><i class="ion-ios-circle-outline"></i>  الصحية</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> الثقافية</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i>الدينية</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> أسلوب حياة</a></li> 
-													<li><a href="#"><i class="ion-ios-circle-outline"></i>إدارة العمل و التعامل مع الزملاء </a></li>
-
+												@foreach(var item in ViewBag.MultiNews)
+												{
+													<li><a href="/PostDetails/BySubType?subType=@item.Id"><i class="ion-ios-circle-outline"></i>@item.Name</a></li>
+												}  
 												</ul>
 											</div>
 											<div class="col-md-9">
@@ -104,54 +102,25 @@
 													</div>
 												</div>
 												<div class="row">
+												@foreach(var item in ViewBag.ListNews)
+												{
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="~/ui/images/news/img10.jpg" alt="Sample Article">
+																<a href="/PostDetails/Details?id=@item.Id">
+																	<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
-																	<div class="time">أغسطس 10, 2022</div>
-																	<div class="category"><a href="category.html">صحية</a></div>
+																	<div class="time">@item.CreatedAt</div>
+																	<div class="category"><a href="#">@item.PostType.Name</a></div>
 																</div>
-																<h2><a href="single.html">هنا نص تجريبي سيتم استبداله بنص حقيقي</a></h2>
+																<h2><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h2>
 															</div>
 														</div>
 													</article>
-													<article class="article col-md-4 mini">
-														<div class="inner">
-															<figure>
-																<a href="single.html">
-																	<img src="~/ui/images/news/img11.jpg" alt="Sample Article">
-																</a>
-															</figure>
-															<div class="padding">
-																<div class="detail">
-																	<div class="time">أغسطس 13, 2022</div>
-																	<div class="category"><a href="category.html">أسلوب حياة</a></div>
-																</div>
-																<h2><a href="single.html">هنا نص تجريبي سيتم استبداله بنص حقيقي</a></h2>
-															</div>
-														</div>
-													</article>
-													<article class="article col-md-4 mini">
-														<div class="inner">
-															<figure>
-																<a href="single.html">
-																	<img src="~/ui/images/news/img14.jpg" alt="Sample Article">
-																</a>
-															</figure>
-															<div class="padding">
-																<div class="detail">
-																	<div class="time">أغسطس 14, 2022</div>
-																	<div class="category"><a href="category.html">ثقافية</a></div>
-																</div>
-																<h2><a href="single.html">هنا نص تجريبي سيتم استبداله بنص حقيقي</a></h2>
-															</div>
-														</div>
-													</article>
+												} 
 												</div>
 											</div>
 										</div>								
@@ -191,8 +160,7 @@
 					  <ul>  
 						@foreach(var item in ViewBag.News){
 						  <li>@item.Title</li>
-					    }
-					  
+					    } 
 					  </ul> 
 					</div>
 				</div>

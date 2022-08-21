@@ -81,7 +81,18 @@
  
 <script>
 $(document).ready(function(){
+      var type = $("#MediaType").val();
+      if(type == 1){
+            $(".photo").removeClass("hide");
+        }
+        if(type == 2){
+            $(".video").removeClass("hide");
+        }
     $("#MediaType").change(function(){
+        mediaType();
+    });
+
+    function mediaType(){
         var type = $("#MediaType").val();
         if(type == 1){
             $(".photo").removeClass("hide");
@@ -93,6 +104,6 @@ $(document).ready(function(){
         }else{
            $(".video").addClass("hide");
         }
-    });
+    }
 });
 </script>

@@ -253,14 +253,16 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             if (Video.Substring(8, 3).Contains("www"))
             {
                var removeSub = Video.Substring(24, 8);
-               Video = Video.Replace(removeSub, "embed/");
-               return Video;
+               var url = Video.Replace(removeSub, "embed/");
+               string finalUrl = url.Remove(30);
+                return finalUrl;
             }
             else
             {
                 var remove = Video.Substring(8, 8);
-                Video = Video.Replace(remove, "www.youtube.com/embed");
-                return Video;
+                var url = Video.Replace(remove, "www.youtube.com/embed");
+                string finalUrl = url.Remove(30);
+                return finalUrl;
             }
             return string.Empty;
         }

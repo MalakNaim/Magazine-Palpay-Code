@@ -1,6 +1,6 @@
 ﻿ @model List<Magazine_Palpay.Data.Models.Post> 
 @{
-	var lst = Model.Where(x => !x.PostSubTypeId.HasValue).Take(3).ToList();
+	var lst = Model.Where(x => !x.PostSubTypeId.HasValue && x.MediaType.Equals(1)).Take(3).ToList();
 }
 <style>
 .skin-orange .featured .details h1 a {

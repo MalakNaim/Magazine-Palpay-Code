@@ -1,4 +1,4 @@
-﻿@model List<Magazine_Palpay.Data.Models.Post> 
+﻿@model List<Magazine_Palpay.Data.Models.Post>
 <section class="single" style="padding:15px !important;">
 <div class="container">
 	<div class="row">
@@ -6,7 +6,7 @@
 			</div>
 		<div class="col-md-8">
 			<header>
-				<h4 style="padding:40px;">@ViewBag.PostTypeName</h4> 
+				<h4 style="padding:40px;">@ViewBag.PostSubTypeName</h4> 
 			</header>
 		@foreach(var item in Model)
 		{
@@ -19,22 +19,22 @@
 						</figure>
 						<div class="details">
 							<div class="detail">
-								<div class="category">
+								@*<div class="category">
 									<a href="#">@item.PostType.Name</a>
-								</div>
+								</div>*@
 								<div class="time">@item.CreatedAt</div>
 							</div>
 							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
 							<p>
-							@if(item.Body.Length > 100){
-									<p>@Html.Raw(item.Body)</p>
+							@if(item.Body.Length > 200){
+								<p>@Html.Raw(item.Body.Substring(0,200)+"..........")</p>
 							}
 							else
 							{
 								<p>@Html.Raw(item.Body)</p>
 							}
 							</p>
-								<footer>
+							<footer>
  								<a class="btn btn-primary more" href="/PostDetails/Details?id=@item.Id">
 									<div>التفاصيل</div>
 									<div><i class="ion-ios-arrow-thin-right"></i></div>
@@ -42,17 +42,10 @@
 							</footer>
 						</div>
 					</div>
-				
 			</article>
 	     }
 	  </div>
   </div>
 </div>
 </section>
-@section scripts{
-	<script>
-		$(document).ready(function(){
-				$(".n3t5jt4f").removeAttr("style"); 
-		});
-	</script>
-}
+	
