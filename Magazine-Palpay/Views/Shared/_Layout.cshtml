@@ -4,6 +4,7 @@
 	var campaines = (int)PostTypeEnum.Campaines;
 	var it = (int)PostTypeEnum.IT;
 	var fintech = (int)PostTypeEnum.Fintech; 
+
 	}
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -136,7 +137,15 @@
 									<li><a href="index.html">مجموعة الشركات</a></li>
 								</ul>
 							</li>
-							<li><a href="#">اجتماعيات</a></li>
+							<li class="dropdown magz-dropdown">
+								<a href="category.html">اجتماعيات <i class="ion-ios-arrow-right"></i></a>
+								<ul class="dropdown-menu">
+								@foreach(var item in ViewBag.Social)
+								{
+									<li><a href="/PostDetails/BySubType?subType=@item.Id">@item.Name</a></li>
+								} 
+								</ul>
+							</li>
 							<li class="dropdown magz-dropdown"><a href="#">الموظفين <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="#"><i class="icon ion-person"></i>أعياد الميلاد</a></li>

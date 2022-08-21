@@ -65,7 +65,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 Mobile = x.Mobile,
                 JobTitle = x.JobTitle,
                 Department = x.Department != null || x.Department == 0? _context.Department.Find(x.Department).Name : "-",
-                DOB = x.DOB.ToShortDateString()
+                DOB = x.DOB.Value.ToShortDateString()
             }).ToList();
 
             var jsonData = new { data = data, recordsFiltered = productList.TotalCount, recordsTotal = productList.TotalCount };

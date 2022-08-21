@@ -31,9 +31,10 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-              ViewBag.MultiNews = Context.PostType.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)
-              && !x.IsDelete).ToList(); 
-              ViewBag.ListNews = Context.Post
+            var postTypes = Context.PostType.Where(x => !x.IsDelete).ToList();
+            ViewBag.MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
+            ViewBag.Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
+            ViewBag.ListNews = Context.Post
                 .Include(x => x.PostType)
                 .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
               && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).Take(3)

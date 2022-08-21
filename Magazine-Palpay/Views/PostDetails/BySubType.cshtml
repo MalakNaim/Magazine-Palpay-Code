@@ -25,7 +25,8 @@
 								<div class="time">@item.CreatedAt</div>
 							</div>
 							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
-							<p>
+							<p>انقر هنا لمعرفة مزيد تفاصيل الخبر</p> 
+							@*<p>
 							@if(item.Body.Length > 200){
 								<p>@Html.Raw(item.Body.Substring(0,200)+"..........")</p>
 							}
@@ -33,7 +34,7 @@
 							{
 								<p>@Html.Raw(item.Body)</p>
 							}
-							</p>
+							</p>*@
 							<footer>
  								<a class="btn btn-primary more" href="/PostDetails/Details?id=@item.Id">
 									<div>التفاصيل</div>

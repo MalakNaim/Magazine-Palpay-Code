@@ -18,8 +18,9 @@ namespace Magazine_Palpay.Controllers
 		[HttpGet("PostDetails/Details")]
 		public IActionResult Details(int id)
 		{
-			ViewBag.MultiNews = _context.PostType.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)
-			 && !x.IsDelete).ToList(); 
+			var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();
+			ViewBag.MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList(); 
+			ViewBag.Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList(); 
 			var today = DateTime.Now.Date;
 			var details = _context.Post.Include(x=>x.PostType).Where(x=>x.Id.Equals(id))
 				.FirstOrDefault();
@@ -60,8 +61,9 @@ namespace Magazine_Palpay.Controllers
 				.OrderByDescending(x=>x.CreatedAt).ToList();
 			ViewBag.ListNews = postDetails.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) &&
 		    x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).OrderByDescending(x=>x.Id).ToList();
-			ViewBag.MultiNews = _context.PostType.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)
-			 && !x.IsDelete).ToList();
+			var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();
+			ViewBag.MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
+			ViewBag.Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
 			return View(postDetails); 
 		}
 
@@ -75,8 +77,9 @@ namespace Magazine_Palpay.Controllers
 				.OrderByDescending(x => x.CreatedAt).ToList();
 			ViewBag.ListNews = postDetails.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) &&
 			x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).OrderByDescending(x => x.Id).ToList();
-			ViewBag.MultiNews = _context.PostType.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)
-			 && !x.IsDelete).ToList();
+			var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();
+			ViewBag.MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
+			ViewBag.Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
 			var model = postDetails.Where(x => x.PostSubTypeId.Equals(subType)).ToList();
 			return View(model);
 
