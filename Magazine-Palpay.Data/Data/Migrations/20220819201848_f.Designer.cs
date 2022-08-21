@@ -4,14 +4,16 @@ using Magazine_Palpay.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Magazine_Palpay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220819201848_f")]
+    partial class f
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,9 +374,6 @@ namespace Magazine_Palpay.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmbedVideoLink")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Head")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -384,9 +383,6 @@ namespace Magazine_Palpay.Data.Migrations
 
                     b.Property<string>("MainImage")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MediaType")
-                        .HasColumnType("int");
 
                     b.Property<int>("OrderPlace")
                         .HasColumnType("int");
@@ -404,9 +400,6 @@ namespace Magazine_Palpay.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -482,6 +475,50 @@ namespace Magazine_Palpay.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PostType");
+                });
+
+            modelBuilder.Entity("Magazine_Palpay.Data.Models.Video", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmbedLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Video");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -710,6 +747,17 @@ namespace Magazine_Palpay.Data.Migrations
                 {
                     b.HasOne("Magazine_Palpay.Data.Models.Post", "Post")
                         .WithMany("PostPhoto")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Magazine_Palpay.Data.Models.Video", b =>
+                {
+                    b.HasOne("Magazine_Palpay.Data.Models.Post", "Post")
+                        .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -4,14 +4,16 @@ using Magazine_Palpay.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Magazine_Palpay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220819233014_newdata1")]
+    partial class newdata1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -384,9 +386,6 @@ namespace Magazine_Palpay.Data.Migrations
 
                     b.Property<string>("MainImage")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MediaType")
-                        .HasColumnType("int");
 
                     b.Property<int>("OrderPlace")
                         .HasColumnType("int");

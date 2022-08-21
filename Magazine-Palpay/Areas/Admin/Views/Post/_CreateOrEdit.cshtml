@@ -1,4 +1,9 @@
 ﻿@model Magazine_Palpay.Data.Models.Post 
+<style>
+.hide{
+    display:none;
+}
+</style>
  <div class="row mb-6">
        <label class="required fs-5 fw-bold mb-2">عنوان المنشور </label>
        <input asp-for="Head"  type="text" class="form-control form-control-solid"/>
@@ -24,6 +29,20 @@
     <span asp-validation-for="PostSubTypeId" class="text-danger"></span> 
 </div>
 <div class="row mb-6">
+    <label class="fs-5 fw-bold mb-2">نوع الميديا للمنشور</label> 
+    <select asp-for="MediaType" data-control="select2" data-placeholder="اختر  اختر  النوع ...الميديا ..." class="form-select form-select-solid">
+        <option value="">اختر نوع الميديا </option>
+        <option value="1">صورة </option>
+        <option value="2">فيديو</option>
+    </select>    
+    <span asp-validation-for="PostSubTypeId" class="text-danger"></span> 
+</div>
+<div class="row mb-6 video hide">
+       <label class="required fs-5 fw-bold mb-2"> رابط الفيديو </label>
+       <input asp-for="VideoLink" type="text" class="form-control form-control-solid"/>
+       <span asp-validation-for="VideoLink" class="text-danger"></span>
+ </div>
+<div class="row mb-6 photo hide">
     <label class="required fs-5 fw-bold mb-2">الصورة الرئيسية</label> 
     <input name="imgPost" type="file" class="form-control"/>
     @if(Model != null){
@@ -60,3 +79,31 @@
     <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
 </div>
  
+<script>
+$(document).ready(function(){
+      var type = $("#MediaType").val();
+      if(type == 1){
+            $(".photo").removeClass("hide");
+        }
+        if(type == 2){
+            $(".video").removeClass("hide");
+        }
+    $("#MediaType").change(function(){
+        mediaType();
+    });
+
+    function mediaType(){
+        var type = $("#MediaType").val();
+        if(type == 1){
+            $(".photo").removeClass("hide");
+        }else{
+             $(".photo").addClass("hide");
+        }
+        if(type == 2){
+            $(".video").removeClass("hide");
+        }else{
+           $(".video").addClass("hide");
+        }
+    }
+});
+</script>

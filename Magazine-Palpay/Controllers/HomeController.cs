@@ -33,11 +33,16 @@ namespace Magazine_Palpay.Controllers
             {
                 ViewBag.Ads = Ads.Image;
             }
-            ViewBag.Deals = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Deals)).FirstOrDefault();
-            ViewBag.Campain = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Campaines)).FirstOrDefault();
-            ViewBag.IT = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.IT)).FirstOrDefault();
-            ViewBag.Fintech = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Fintech)).FirstOrDefault();
+            ViewBag.Deals = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Deals) && x.MediaType.Equals(1)).FirstOrDefault();
+            ViewBag.Campain = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Campaines) && x.MediaType.Equals(1)).FirstOrDefault();
+            ViewBag.IT = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.IT) && x.MediaType.Equals(1)).FirstOrDefault();
+            ViewBag.Fintech = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Fintech) && x.MediaType.Equals(1)).FirstOrDefault();
             return View(post);
         }
+
+        public IActionResult Books()
+		{
+            return View();
+		}
     }
 }

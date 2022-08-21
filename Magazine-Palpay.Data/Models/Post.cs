@@ -12,8 +12,12 @@ namespace Magazine_Palpay.Data.Models
         public string Body { get; set; }
         [Required(ErrorMessage = "أدخل نوع المنشور")]
         public int PostTypeId { get; set; }
+        [Required(ErrorMessage = "أدخل نوع الميديا المستخدمة")]
+        public int MediaType { get; set; }
         public int? PostSubTypeId { get; set; }
         public string MainImage { get; set; }
+        public string VideoLink { get; set; }
+        public string EmbedVideoLink { get; set; }
         public bool PublishedPost { get; set; }
         [Required(ErrorMessage = "أدخل ترتيب المنشور")]
         public int OrderPlace { get; set; }
