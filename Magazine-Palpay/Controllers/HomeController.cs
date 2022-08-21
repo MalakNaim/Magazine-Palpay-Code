@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
- 
 namespace Magazine_Palpay.Controllers
 {
     public class HomeController : BaseController
