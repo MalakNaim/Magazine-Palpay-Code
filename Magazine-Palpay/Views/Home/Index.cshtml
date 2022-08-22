@@ -13,18 +13,7 @@
 				<div class="sidebar-title for-tablet">Sidebar</div>
 			    <aside>
 					<div class="aside-body">
-						<figure class="ads">
-							@{	 
-								if(!string.IsNullOrEmpty(ViewBag.Ads)){
-									<img src="~/assets/UploadImages/@ViewBag.Ads">
-								}
-								else{
-										<img src="~/ui/images/ad.png">
-								}
-							}
-							
-							@*<figcaption>Advertisement</figcaption>*@
-						</figure>
+						@Html.Partial("_Ads")
 					</div>
 				</aside>
 			    <aside>

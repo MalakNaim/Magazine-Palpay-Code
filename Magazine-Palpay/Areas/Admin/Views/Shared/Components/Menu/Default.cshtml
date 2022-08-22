@@ -1,4 +1,5 @@
-﻿<div class="aside-logo flex-column-auto mt-4" id="kt_aside_logo">
+﻿@{string url = Context.Request.Path.Value.ToString();}
+      <div class="aside-logo flex-column-auto mt-4" id="kt_aside_logo">
     <a href="#">
         <img alt="Logo" src="~/assets/media/logos/logo.png" class="logo img-fluid px-3" />
     </a>
@@ -18,7 +19,7 @@
 <div class="aside-menu flex-column-fluid">
    
      <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
-                    <div class="menu-item menu-side">
+                    <div class="menu-item menu-side @(url.Equals("/") ?"active":"")">
                         <a class="menu-link" href="/Admin/Home/Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
@@ -31,17 +32,51 @@
                         </a>
                     </div>
                      <div class="menu-item menu-side">
-                        <a class="menu-link" href="/Admin/Post/index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                        <a class="menu-link" href="/Admin/LastNews/index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                     <i class="las la-address-card" style="font-size: 25px; color: #b34498;"></i>
+                                <span class="svg-icon svg-icon-2"> 
+                                       <i class="las la-newspaper" style="font-size: 25px; color: #b34498;"></i>
                                 </span>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-title">إدارة المنشوارت</span>
+                            <span class="menu-title">شريط الأخبار</span>
                         </a>
-                   </div>  
+                   </div>
+              <div data-kt-menu-trigger="click" class="menu-item menu-side menu-accordion @(url.Contains("Post")?"active":"")">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2 my-2">
+                                <i class="las la-layer-group" style="font-size: 28px; color: #b34498;"></i>
+                            </span>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">المنشورات</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="234" style="display: none; overflow: hidden;">
+                    <div class="menu-item menu-sub-item @(url.Equals("/Admin/Post/index")?"active":"")">
+                        <a class="menu-link" href="/Admin/Post/index">
+                             <span class="menu-bullet">
+                                <i class="las la-caret-left"></i>
+                            </span>
+                            <span class="menu-title">الكل</span>
+                        </a>
+                    </div>
+                    <div class="menu-item menu-sub-item @(url.Equals("/Admin/PostType/Index")?"active":"")">
+                        <a class="menu-link" href="/Admin/PostType/Index">
+                             <span class="menu-bullet">
+                                <i class="las la-caret-left"></i>
+                            </span>
+                            <span class="menu-title">أنواع المنشورات</span>
+                        </a>
+                    </div> 
+                </div>
+            </div> 
+                    
                    <div class="menu-item menu-side">
                         <a class="menu-link" href="/Admin/Ads/index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                             <span class="menu-icon">
@@ -66,54 +101,73 @@
                             <span class="menu-title">إدارة المعارض</span>
                         </a>
                    </div> 
-                   <div class="menu-item menu-side">
-                        <a class="menu-link" href="/Admin/LastNews/index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                            <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                <span class="svg-icon svg-icon-2"> 
-                                       <i class="las la-newspaper" style="font-size: 25px; color: #b34498;"></i>
-                                </span>
-                                <!--end::Svg Icon-->
+                  
+                    <div data-kt-menu-trigger="click" class="menu-item menu-side menu-accordion @(url.Contains("Employee") || url.Contains("Department")?"active":"")">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2 my-2">
+                                 <i class="las la-user-circle" style="font-size: 28px; color: #b34498;"></i>
                             </span>
-                            <span class="menu-title">إدارة الأخبار</span>
-                        </a>
-                   </div>
-                   <div class="menu-item menu-side">
-                        <a class="menu-link" href="/Admin/Employee/index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                            <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                <span class="svg-icon svg-icon-2"> 
-                                      <i class="las la-user-circle" style="font-size: 25px; color: #b34498;"></i>
-                                </span>
-                                <!--end::Svg Icon-->
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">الموظفين</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="234" style="display: none; overflow: hidden;">
+                    <div class="menu-item menu-sub-item @(url.Equals("/Admin/Employee/index")?"active":"")">
+                        <a class="menu-link" href="/Admin/Employee/index">
+                             <span class="menu-bullet">
+                                <i class="las la-caret-left"></i>
                             </span>
-                            <span class="menu-title">إدارة الموظفين</span>
+                            <span class="menu-title">الكل</span>
                         </a>
-                   </div>
-                   <div class="menu-item menu-side">
-                        <a class="menu-link" href="/Admin/PostType/Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                            <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                     <i class="las la-copy" style="font-size: 25px; color: #b34498;"></i>
-                                </span>
-                                <!--end::Svg Icon-->
+                    </div>
+                    <div class="menu-item menu-sub-item @(url.Equals("/Admin/Department/Index")?"active":"")">
+                        <a class="menu-link" href="/Admin/Department/Index">
+                             <span class="menu-bullet">
+                                <i class="las la-caret-left"></i>
                             </span>
-                            <span class="menu-title">إدارة أنواع المنشوارت</span>
+                            <span class="menu-title">الأقسام الوظيفية</span>
                         </a>
-                   </div> 
-                   <div class="menu-item menu-side">
-                        <a class="menu-link" href="/Admin/Department/Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                            <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                     <i class="las la-door-open" style="font-size: 25px; color: #b34498;"></i>
-                                </span>
-                                <!--end::Svg Icon-->
+                    </div> 
+                </div>
+            </div> 
+                   
+             <div data-kt-menu-trigger="click" class="menu-item menu-side menu-accordion @(url.Contains("Book")?"active":"")">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2 my-2">
+                                 <i class="las la-book" style="font-size: 28px; color: #b34498;"></i>
                             </span>
-                            <span class="menu-title">إدارة الأقسام الوظيفية</span>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">الكتب</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="234" style="display: none; overflow: hidden;">
+                    <div class="menu-item menu-sub-item @(url.Equals("#")?"active":"")">
+                        <a class="menu-link" href="/Admin/Book/Index">
+                             <span class="menu-bullet">
+                                <i class="las la-caret-left"></i>
+                            </span>
+                            <span class="menu-title">الكل</span>
                         </a>
-                   </div>
-            </div>
-
+                    </div>
+                    <div class="menu-item menu-sub-item @(url.Equals("/Admin/BookCategory/Index")?"active":"")">
+                        <a class="menu-link" href="/Admin/BookCategory/Index">
+                             <span class="menu-bullet">
+                                <i class="las la-caret-left"></i>
+                            </span>
+                            <span class="menu-title">أنواع الكتب</span>
+                        </a>
+                    </div> 
+                </div>
+            </div>   
+       </div> 
 </div>

@@ -28,10 +28,12 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
        [HttpGet("Admin/Employee/Index")]
         public async Task<IActionResult> Index()
         {
+            var department = _context.Department.Where(x => !x.IsDelete).ToList(); 
+            ViewBag.Department = new SelectList(department, "Id", "Name"); 
             return View();
         }
         [HttpPost("Admin/Employee/LoadAll")]
-        public async Task<JsonResult> LoadPostsAsync(IFormCollection form)
+        public async Task<JsonResult> LoadEmployeeAsync(IFormCollection form)
         {
             string draw = Request.Form["draw"].FirstOrDefault();
             string start = Request.Form["start"].FirstOrDefault();
@@ -54,7 +56,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
           
             if (department > 0)
             {
-                queryable = queryable.Where(x => x.Department.Equals(department));
+                queryable = queryable.Where(x => x.DepartmentId.Equals(department));
             }
 
             var productList = await queryable.ToPaginatedListAsync(page_start, page_length);
@@ -62,10 +64,8 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 Id = x.Id,
                 Name = x.Name,
-                Mobile = x.Mobile,
                 JobTitle = x.JobTitle,
-                Department = x.Department != null || x.Department == 0? _context.Department.Find(x.Department).Name : "-",
-                DOB = x.DOB.Value.ToShortDateString()
+                Department = x.DepartmentId != null || x.DepartmentId == 0? _context.Department.Find(x.DepartmentId).Name : "-",
             }).ToList();
 
             var jsonData = new { data = data, recordsFiltered = productList.TotalCount, recordsTotal = productList.TotalCount };
@@ -83,10 +83,17 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         }
       
         [HttpPost("Admin/Employee/Create")]
-        public async Task<IActionResult> Create(Employee employee)
+        public async Task<IActionResult> Create(Employee employee, IFormFile empPhoto)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (empPhoto != null && empPhoto.Length > 0)
+                {
+                    var file = await FormFileExtensions.SaveAsync(empPhoto, "UploadImages");
+                    fileName = file;
+                }
+                employee.Photo = fileName;
                 employee.CreatedBy = _userManager.GetUserId(User);
                 employee.CreatedAt = DateTime.Now;
                 employee.IsDelete = false;
@@ -117,7 +124,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
 
        
         [HttpPost("Admin/Employee/Edit")]
-        public async Task<IActionResult> Edit(int id, Employee employee)
+        public async Task<IActionResult> Edit(int id, Employee employee, IFormFile empPhoto)
         {
             if (id != employee.Id)
             {
@@ -128,6 +135,16 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 try
                 {
+                    string fileName = "";
+                    if (empPhoto != null && empPhoto.Length > 0)
+                    {
+                        var file = await FormFileExtensions.SaveAsync(empPhoto, "UploadImages");
+                        fileName = file;
+                    }
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        employee.Photo = fileName; 
+                    }
                     employee.UpdatedBy = _userManager.GetUserId(User);
                     employee.UpdatedAt = DateTime.Now;
                     employee.IsDelete = false;
@@ -151,16 +168,6 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         }
 
         [HttpPost("Admin/Employee/Delete")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var employee = await _context.Employee.FindAsync(id);
-            employee.IsDelete = true;
-            _context.Employee.Update(employee);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost("Admin/Employee/Delete")]
         public async Task<JsonResult> OnPostDelete(int? id)
         {
             var employee = await _context.Employee.FindAsync(id);
@@ -172,7 +179,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 isValid = true,
                 actionType = "redirect",
-                redirectUrl = string.Empty
+                redirectUrl = "/Admin/Employee/Index"
             });
         }
         private bool EmployeeExists(int id)

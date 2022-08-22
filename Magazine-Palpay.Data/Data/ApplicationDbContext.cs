@@ -12,6 +12,8 @@ namespace Magazine_Palpay.Data
         }
 
         public DbSet<Ads> Ads { get; set; }
+        public DbSet<BookCategory> BookCategory { get; set; }
+        public DbSet<Book> Book { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Gallery> Gallery { get; set; }
         public DbSet<GalleryPhoto> GalleryPhotos { get; set; }

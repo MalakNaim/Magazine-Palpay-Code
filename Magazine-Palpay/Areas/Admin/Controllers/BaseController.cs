@@ -28,18 +28,6 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         private IViewRenderService _viewRenderService;
 
         protected IViewRenderService ViewRender => _viewRenderService ??= HttpContext.RequestServices.GetService<IViewRenderService>();
-
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            var postTypes = Context.PostType.Where(x => !x.IsDelete).ToList();
-            ViewBag.MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
-            ViewBag.Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
-            ViewBag.ListNews = Context.Post
-                .Include(x => x.PostType)
-                .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
-              && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).Take(3)
-              .OrderByDescending(x => x.CreatedAt).ToList(); 
-        }
-
+ 
     }
 }

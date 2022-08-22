@@ -8,7 +8,6 @@ namespace Magazine_Palpay.Data.Models
         public int Id { get; set; }
         [Required(ErrorMessage ="أدخل عنوان المنشور")]
         public string Head { get; set; }
-        [Required(ErrorMessage = "أدخل نص المنشور")]
         public string Body { get; set; }
         [Required(ErrorMessage = "أدخل نوع المنشور")]
         public int PostTypeId { get; set; }

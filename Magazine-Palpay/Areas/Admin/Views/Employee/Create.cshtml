@@ -8,7 +8,7 @@
 <h4 class="mb-6 mt-3">إضافة الموظفين</h4>
 <hr />
 <div class="row"> 
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row mb-6">
                <label class="fs-5 fw-bold mb-2">الاسم </label>
@@ -17,10 +17,10 @@
             </div> 
             <div class="row mb-6">
                <label class="fs-5 fw-bold mb-2">القسم </label>
-              <select asp-for="Department" asp-items="@ViewBag.Department" data-control="select2" data-placeholder="اختر  القسم ..." class="form-select form-select-solid">
+              <select asp-for="DepartmentId" asp-items="@ViewBag.Department" data-control="select2" data-placeholder="اختر  القسم ..." class="form-select form-select-solid">
                     <option  value="">اختر القسم </option>
               </select>   
-                <span asp-validation-for="Department" class="text-danger"></span>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
             <div class="row mb-6">
                <label class="fs-5 fw-bold mb-2">المسمى الوظيفي </label>
@@ -29,7 +29,7 @@
             </div>
             <div class="row mb-6">
                 <label class="fs-5 fw-bold mb-2">الصورة الشخصية  </label>
-                <input name="photo" type="file" class="form-control" />
+                <input name="empPhoto" type="file" class="form-control" />
             </div>
            
              <div class="row mb-6">

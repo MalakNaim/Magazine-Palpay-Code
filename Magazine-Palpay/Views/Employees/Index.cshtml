@@ -1,0 +1,59 @@
+﻿@model List<Magazine_Palpay.Data.Models.Employee>
+
+    <section class="search">
+			<div class="container">
+				<div class="row">
+	              <header>
+			     	<h4 style="padding:40px;">الإدارة التنفيذية</h4> 
+			     </header>
+			@foreach(var employee in Model)
+					{
+
+						<article class="article col-md-3">
+							<div class="inner">
+								<figure>
+									<a href="#">
+										<img src="~/assets/UploadImages/@employee.Photo">
+									</a>
+								</figure>
+								<div class="padding"> 
+									<h2>@employee.Name</h2> 
+									<P>@employee.JobTitle</P> 
+									<div class="detail"> 
+ 										<div class="category">
+												<a href="#">@employee.Department.Name</a>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</article>   
+					}
+		          
+			   <div class="col-md-12 text-center">
+		            <ul class="pagination">
+						  @{
+								int prev = ViewBag.page;
+								prev--;
+							}
+		              <li class="prev"><a href="~/Employees/Index?page=@prev"><i class="ion-ios-arrow-left"></i></a></li>
+					   @for (int i = 1; i <= ViewBag.NumberOfPages; i++)
+						{ 
+								if(ViewBag.page == i)
+								{
+									<li class="active"><a href="~/Books/Index?page=@i">@i</a></li> 
+								}
+								else
+								{
+									<li><a href="~/Employees/Index?page=@i">@i</a></li> 
+								} 
+ 						}
+						@{
+							int next = ViewBag.page;
+							next++;
+						} 
+		              <li class="next"><a href="~/Employees/Index?page=@next"><i class="ion-ios-arrow-right"></i></a></li>
+		          </ul> 
+		      </div> 
+ 				</div>
+			</div> 
+		</section>

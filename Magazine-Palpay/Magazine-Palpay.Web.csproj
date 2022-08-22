@@ -142,6 +142,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\assets\UploadFiles\" />
     <Folder Include="wwwroot\assets\UploadImages\" />
   </ItemGroup>
 

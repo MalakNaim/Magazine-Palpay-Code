@@ -91,7 +91,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 {
                     if (photo != null || photo.Length > 0)
                     {
-                        var file = await FormFileExtensions.SaveAsync(photo);
+                        var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
                         GalleryPhoto galleryPhoto = new GalleryPhoto();
                         galleryPhoto.Photo = file;
                         galleryPhoto.CreatedAt = DateTime.Now;
@@ -140,7 +140,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     {
                         if (photo != null || photo.Length > 0)
                         {
-                            var file = await FormFileExtensions.SaveAsync(photo);
+                            var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
                             GalleryPhoto galleryPhoto = new GalleryPhoto();
                             galleryPhoto.Photo = file;
                             galleryPhoto.GalleryId = id;
@@ -185,7 +185,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 isValid = true,
                 actionType = "redirect",
-                redirectUrl = string.Empty
+                redirectUrl = "/Admin/Gallery/Index"
             });
         }
 

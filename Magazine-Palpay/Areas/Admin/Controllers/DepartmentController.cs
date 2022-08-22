@@ -7,6 +7,8 @@ using Magazine_Palpay.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Magazine_Palpay.Web.Extensions;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
@@ -25,7 +27,39 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         [HttpGet("Admin/Department/Index")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Department.ToListAsync());
+            return View();
+        }
+
+        [HttpPost("Admin/Department/LoadAll")]
+        public async Task<JsonResult> LoadDepartmentAsync(IFormCollection form)
+        {
+            string draw = Request.Form["draw"].FirstOrDefault();
+            string start = Request.Form["start"].FirstOrDefault();
+            string length = Request.Form["length"].FirstOrDefault();
+            string sortColumn = Request.Form["columns[" + Request.Form["form[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            string sortColumnDirection = Request.Form["form[0][dir]"].FirstOrDefault();
+            string name = form["Name"].ToString();
+            int page_start = int.Parse(start);
+            int page_length = int.Parse(length);
+            page_start = page_start / page_length;
+            page_start = page_start + 1;
+            var queryable = _context.Department.Where(x => !x.IsDelete)
+                .OrderByDescending(x => x.Id)
+                .AsQueryable();
+            if (!string.IsNullOrEmpty(name))
+            {
+                queryable = queryable.Where(x => x.Name.Contains(name));
+            }
+
+            var productList = await queryable.ToPaginatedListAsync(page_start, page_length);
+            var data = productList.Data.Select(x => new
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CreatedAt = x.CreatedAt
+            }).ToList();
+            var jsonData = new { data = data, recordsFiltered = productList.TotalCount, recordsTotal = productList.TotalCount };
+            return new JsonResult(jsonData);
         }
 
         [HttpGet("Admin/Department/Create")]
@@ -101,16 +135,22 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             return View(department);
         }
 
-     
         [HttpPost("Admin/Department/Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<JsonResult> OnPostDelete(int? id)
         {
             var department = await _context.Department.FindAsync(id);
             department.IsDelete = true;
             _context.Department.Update(department);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            Notify.Success("تمت عملية الحذف بنجاح");
+            return new JsonResult(new
+            {
+                isValid = true,
+                actionType = "redirect",
+                redirectUrl = "/Admin/Department/Index"
+            });
         }
+
 
         private bool DepartmentExists(int id)
         {

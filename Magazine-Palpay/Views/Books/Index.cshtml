@@ -1,0 +1,107 @@
+﻿  @model List<Magazine_Palpay.Data.Models.Book>
+	<section class="search">
+			<div class="container">
+				<div class="row">
+					<form action="~/Books/Index" method="get">
+				<div class="col-md-9"> 
+						<div class="row">
+					@foreach(var book in Model.Where(x=>!x.IsDelete))
+					{
+
+						<article class="article col-md-4">
+							<div class="inner">
+								<figure>
+									<a href="~/assets/UploadFiles/@book.Link">
+										<img src="~/assets/UploadImages/@book.Image">
+									</a>
+								</figure>
+								<div class="padding">
+									<div class="detail">
+										<div class="time">@book.Author</div>
+ 										<div class="category">
+												<a href="#">@book.BookCategory.Name</a>
+									    </div>
+									</div>
+									<h2>@book.Name</h2> 
+									<footer>
+ 										<a class="btn btn-primary more" href="~/assets/UploadFiles/@book.Link">
+											<div>تحميل</div>
+											<div><i class="ion-ios-arrow-thin-right"></i></div>
+										</a>
+									</footer>
+								</div>
+							</div>
+						</article>   
+					}
+					
+
+		          <div class="col-md-12 text-center">
+		            <ul class="pagination">
+						  @{
+								int prev = ViewBag.page;
+								prev--;
+							}
+		              <li class="prev"><a href="~/Books/Index?page=@prev"><i class="ion-ios-arrow-left"></i></a></li>
+					   @for (int i = 1; i <= ViewBag.NumberOfPages; i++)
+						{ 
+								if(ViewBag.page == i)
+								{
+									<li class="active"><a href="~/Books/Index?page=@i">@i</a></li> 
+								}
+								else
+								{
+									<li><a href="~/Books/Index?page=@i">@i</a></li> 
+								} 
+ 						}
+						@{
+							int next = ViewBag.page;
+							next++;
+						} 
+		              <li class="next"><a href="~/Books/Index?page=@next"><i class="ion-ios-arrow-right"></i></a></li>
+		            </ul> 
+		          </div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<aside>
+							<h2 class="aside-title">البحث</h2>
+							<div class="aside-body">
+ 								<div>
+									<div class="form-group">
+										<div class="input-group">
+											<input type="text" name="searchKey" class="form-control" placeholder="بحث بالاسم ...">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" type="submit">
+													<i class="ion-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</aside>
+						<aside>
+							<h2 class="aside-title">البحث</h2>
+							<div class="aside-body">
+								<div class="checkbox-group"> 
+									<div class="group-title">بحث حسب النوع</div>
+									<div class="form-group">
+										<label><input type="checkbox" name="category" value=""> الكل</label>
+									</div>
+									@foreach(var item in ViewBag.CategoryId)
+									{
+										<div class="form-group">
+										    <label><input type="checkbox" name="category" value="@item.Id"> @item.Name</label>
+						    			</div>
+									} 
+									 
+								</div>
+							</div>
+						</aside>
+					</div> 
+					</form>
+				</div>
+			</div>
+		</section>
+
+		 

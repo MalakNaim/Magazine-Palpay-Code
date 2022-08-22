@@ -15,14 +15,14 @@ namespace Magazine_Palpay.Web.Extensions
 {
     public static class FormFileExtensions
     {
-        public static async System.Threading.Tasks.Task<string> SaveAsync(this IFormFile file/*, string folder*/)
+        public static async System.Threading.Tasks.Task<string> SaveAsync(this IFormFile file, string folder)
         {
             if(file.Length > 0)
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string fileExtension = Path.GetExtension(fileName);
                 string newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
-                string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/assets/UploadImages/", newFileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/assets/"+folder+"/", newFileName);
 
                 using (var stream = File.Create(path))
                 {

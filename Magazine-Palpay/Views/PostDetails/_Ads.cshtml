@@ -1,0 +1,23 @@
+﻿ <h1 class="aside-title" style="color:white;">الإعلانات
+    <div class="carousel-nav" id="ads-list-nav">
+		<div class="prev"><i class="ion-ios-arrow-left"></i></div>
+		<div class="next"><i class="ion-ios-arrow-right"></i></div>
+	</div>
+ </h1>
+ 
+	<div class="aside-body">
+		<ul class="video-list" data-youtube='"carousel":true, "nav": "#ads-list-nav"'> 
+					@foreach(var ad in ViewBag.Ads)
+					{
+						<li>
+							<figure class="ads"> 
+							<a href="@ad.Link">
+								<img src="~/assets/UploadImages/@ad.Image">
+							</a>
+						     <figcaption>@ad.Head</figcaption> 
+							</figure>
+							</li>
+					} 
+				
+		</ul>
+	</div>

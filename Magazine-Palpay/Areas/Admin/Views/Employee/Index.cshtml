@@ -13,23 +13,18 @@
 </div>
 <hr />
 <form class="FilterDataTable">
-    <div class="row mb-5">
+    <div class="row mb-5 justify-content-between">
         <div class="col-md-3 fv-row">
             <label class="fs-5 fw-bold mb-2">الاسم</label>
             <input id="ِName" name="Name" class="form-control form-control-solid" /> 
         </div> 
-        <div class="col-md-3 fv-row">
+        <div class="col-md-6 fv-row">
             <label class="fs-5 fw-bold mb-2">القسم</label>
             <select id="Department" name="Department" asp-items="@ViewBag.Department" data-control="select2" data-placeholder="اختر  القسم ..." class="form-select form-select-solid">
                     <option  value="">اختر القسم </option>
               </select>  
         </div> 
-    </div> 
-    <div class="row mb-5 justify-content-between">
-        <div class="col-md-9">
-          
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-4">
             <button type="reset" id="btnReset" class="btn btn-secondary mt-4" style="float:left;">
                 <span>
                     تفريغ الحقول
@@ -39,7 +34,7 @@
                 بحث
             </button>
         </div>
-    </div>
+    </div>  
 </form>
 <hr />
 <div class="row mb-5 justify-content-between">
@@ -62,8 +57,6 @@
             <th class="text-white">الاسم</th>
             <th class="text-white">القسم</th>
             <th class="text-white">المسمى الوظيفي</th>
-            <th class="text-white">رقم الجوال </th>
-            <th class="text-white">تاريخ الميلاد</th>
             <th class="text-center min-w-100px text-white" style="width: 150px;">العمليات</th>
         </tr>
     </thead>
@@ -107,8 +100,6 @@
                 { "data": "name", "name": "name" },
                 { "data": "department", "name": "department" },
                 { "data": "jobTitle", "name": "jobTitle" },
-                { "data": "mobile", "name": "mobile" },
-                { "data": "dob", "name": "dob" },
                 {
                     "name": 'buttons', "render": function (data, type, row) {
                         var jsdel = 'jQueryModalConfirm("/Admin/Employee/Delete?id=' + row.id + '","هل أنت متأكد من حذف هذا العنصر؟")';

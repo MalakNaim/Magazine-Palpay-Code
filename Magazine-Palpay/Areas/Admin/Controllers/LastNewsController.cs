@@ -168,7 +168,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 isValid = true,
                 actionType = "redirect",
-                redirectUrl = string.Empty
+                redirectUrl = "/Admin/LastNews/Index"
             });
         }
 

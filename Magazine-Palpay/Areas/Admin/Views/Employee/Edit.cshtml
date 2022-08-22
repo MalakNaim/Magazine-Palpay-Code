@@ -8,7 +8,7 @@
 <h4 class="mb-6 mt-3">تعديل موظف</h4>
 <hr />
 <div class="row">
-         <form asp-action="Edit">
+         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="row mb-6">
@@ -17,42 +17,42 @@
                <span asp-validation-for="Name" class="text-danger"></span>
             </div> 
             <div class="row mb-6">
-               <label class="required fs-5 fw-bold mb-2">القسم </label>
-              <select asp-for="Department" asp-items="@ViewBag.Department" data-control="select2" data-placeholder="اختر  القسم ..." class="form-select form-select-solid">
+               <label class="fs-5 fw-bold mb-2">القسم </label>
+              <select asp-for="DepartmentId" asp-items="@ViewBag.Department" data-control="select2" data-placeholder="اختر  القسم ..." class="form-select form-select-solid">
                     <option  value="">اختر القسم </option>
               </select>   
-                <span asp-validation-for="Department" class="text-danger"></span>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
             <div class="row mb-6">
-               <label class="required fs-5 fw-bold mb-2">المسمى الوظيفي </label>
+               <label class="fs-5 fw-bold mb-2">المسمى الوظيفي </label>
                 <input asp-for="JobTitle" class="form-control form-control-solid" />
                 <span asp-validation-for="JobTitle" class="text-danger"></span>
             </div>
             <div class="row mb-6">
-                <label class="required fs-5 fw-bold mb-2">الصورة الشخصية  </label>
-                <input name="photo" type="file" class="form-control " />
+                <label class="fs-5 fw-bold mb-2">الصورة الشخصية  </label>
+                <input name="empPhoto" type="file" class="form-control " />
                 @if(Model.Photo != null){
                 <a href="~/assets/UploadImages/@Model.Photo" class="btn btn-light-warning" target="_blank">عرض الصورة</a>
                 }
             </div>
            
              <div class="row mb-6">
-               <label class="required fs-5 fw-bold mb-2">رقم الجوال </label>
+               <label class="fs-5 fw-bold mb-2">رقم الجوال </label>
                 <input asp-for="Mobile" class="form-control form-control-solid" />
                 <span asp-validation-for="Mobile" class="text-danger"></span>
             </div>
              <div class="row mb-6">
-               <label class="required fs-5 fw-bold mb-2">البريد الالكتروني </label>
+               <label class="fs-5 fw-bold mb-2">البريد الالكتروني </label>
                 <input asp-for="Email" class="form-control form-control-solid" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="row mb-6">
-               <label class="required fs-5 fw-bold mb-2">تاريخ الميلاد </label>
+               <label class="fs-5 fw-bold mb-2">تاريخ الميلاد </label>
                 <input asp-for="DOB" type="date" class="form-control form-control-solid" />
                 <span asp-validation-for="DOB" class="text-danger"></span>
             </div>
              <div class="row mb-6">
-               <label class="required fs-5 fw-bold mb-2">تاريخ الانضمام </label>
+               <label class="fs-5 fw-bold mb-2">تاريخ الانضمام </label>
                 <input asp-for="JoinDate" type="date" class="form-control form-control-solid" />
                 <span asp-validation-for="JoinDate" class="text-danger"></span>
             </div>

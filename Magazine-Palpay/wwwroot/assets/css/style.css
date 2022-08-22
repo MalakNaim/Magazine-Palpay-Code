@@ -12,7 +12,7 @@ body{
 }  
 .menu-side{
     border-bottom: 1px solid rgb(231, 231, 231);
-    padding: 15px !important;
+    padding: 5px !important;
 }
 .menu-state-title-primary .menu-item .menu-link .menu-title {
     color: black !important;

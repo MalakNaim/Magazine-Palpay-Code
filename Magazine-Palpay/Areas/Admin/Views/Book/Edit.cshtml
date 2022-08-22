@@ -1,0 +1,55 @@
+﻿@model Magazine_Palpay.Data.Models.Book
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="mb-6 mt-3">تعديل كتاب</h4>
+<hr />
+<hr />
+<div class="row">
+         <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">الاسم</label>
+                <input asp-for="Name" class="form-control form-control-solid" />
+               <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+           
+           <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">النوع </label>
+                <select asp-for="BookCategoryId" class ="form-control form-control-solid" asp-items="ViewBag.BookCategoryId"></select>
+            </div>
+            <div class="row mb-6">
+               <label class="fs-5 fw-bold mb-2">اسم الناشر </label>
+                <input asp-for="Author" class="form-control form-control-solid" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="row mb-6">
+               <label class="required fs-5 fw-bold mb-2">ملف الكتاب </label>
+               <input name="linkFile" type="file" class="form-control form-control-solid" />
+               <input type="hidden" asp-for="Link"/> 
+               @if(Model.Link != null){
+                   <a href="/assets/UploadFiles/@Model.Link" target="_blank" class="btn btn-light-warning">عرض الكتاب</a>
+                }
+            </div>
+           <div class="row mb-6">
+                <label class="required fs-5 fw-bold mb-2">الصورة الرئيسية</label> 
+                <input name="imageBook" type="file" class="form-control form-control-solid"/>
+                <input type="hidden" asp-for="Image"/>  
+                @if(Model.Image != null){
+                   <a href="/assets/UploadImages/@Model.Image" target="_blank" class="btn btn-light-warning">عرض الصورة</a>
+                } 
+           </div> 
+            <div style="float:left;">
+                <input type="submit" class="btn btn-purble" value="حفظ" />
+                <a class="btn btn-light me-3" href='javascript:history.go(-1)'>رجوع</a>
+            </div> 
+        </form>
+ </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

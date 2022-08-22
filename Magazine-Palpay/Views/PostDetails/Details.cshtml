@@ -1,27 +1,14 @@
 ﻿@model Magazine_Palpay.Data.Models.Post
 
-
-
 		<section class="single" style="padding:15px !important;">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 sidebar" id="sidebar">
-						   <aside>
-					<div class="aside-body">
-						<figure class="ads">
-							@{
-								if(!string.IsNullOrEmpty(ViewBag.Ads)){
-									<img src="~/assets/UploadImages/@ViewBag.Ads">
-								}
-								else{
-										<img src="~/ui/images/ad.png">
-								}
-							}
-							
-							@*<figcaption>Advertisement</figcaption>*@
-						</figure>
-					</div>
-				</aside>
+					<aside>
+						<div class="aside-body">
+							@Html.Partial("_Ads")
+						</div>
+					</aside>
 			    <aside>
 					<h1 class="aside-title">الفيديوهات
 						<div class="carousel-nav" id="video-list-nav">

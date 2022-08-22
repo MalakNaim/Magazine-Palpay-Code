@@ -1,51 +1,116 @@
-﻿@model IEnumerable<Magazine_Palpay.Data.Models.Department>
-
-@{
-    ViewData["Title"] = "إدراة الأقسام الوظيفية";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+﻿ @{
+    ViewData["Title"] = "الأقسام";
+    ViewData["Caption"] = "إدارة الأقسام ";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
 }
-
-<div class="row mb-6 mt-3">
-    <div class="col-md-8">
-      <h4> @ViewData["Title"] </h4>
-    </div> 
-    <div class="col-md-4">
-     <a asp-action="Create" class="btn button-add mr-2">
-        <span class="navi-icon">
-            <i class="las la-plus-square" style="font-size: 15px;">
-            </i>
-            إضافة جديد
-        </span>
-     </a> 
+<link href="~/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css">
+ 
+<div class="row mb-5 justify-content-between">
+    <div class="col-md-10 col-sm-9">
+        <h2 class="py-2">بحث في الأقسام</h2>
     </div>
 </div>
-
 <hr />
-<table class="table">
+<form class="FilterDataTable">
+    <div class="row mb-5">
+        <div class="col-md-9 fv-row justify-content-between">
+            <label class="fs-5 fw-bold mb-2">القسم</label>
+            <input id="Name" name="Name" class="form-control form-control-solid" /> 
+        </div>  
+        <div class="col-md-3 mt-4">
+            <button type="reset" id="btnReset" class="btn btn-secondary mt-4" style="float:left;">
+                <span>
+                    تفريغ الحقول
+                </span>
+            </button>
+            <button type="button" id="btnSearch" class="btn btn-purble mt-4 mx-2" style="float:left;">
+                بحث
+            </button>
+        </div>
+    </div> 
+    
+</form>
+<hr />
+<div class="row mb-5 justify-content-between">
+    <div class="col-md-9 col-sm-8">
+        <h4 class="mt-4 mx-2"> عرض الأقسام</h4>
+    </div>
+    <div class="col-md-3 col-sm-4 fv-row">
+        <a href="/Admin/Department/Create" class="btn button-add mr-2" style="float:left;padding: 10px 18px;">
+            <span class="navi-icon">
+                <i class="las la-plus-square" style="font-size: 15px;">
+                </i>
+                إضافة قسم جديد
+            </span>
+        </a>
+    </div>
+</div>
+<table id="DepartmentTable" class="data-table table align-middle table-row-dashed fs-6 gy-5" cellspacing="0">
     <thead>
-        <tr>
-            <th>
-             <h5>القسم</h5> 
-            </th>
-            <th><h5>تاريخ الإضافة</h5> </th>
-            <th></th>
+        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+            <th class="text-white">القسم</th> 
+            <th class="text-white">تاريخ الإضافة</th>
+            <th class="text-center min-w-100px text-white" style="width: 150px;">العمليات</th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-               <td>
-                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light-warning">تعديل</a>  
-                 <a @*onclick="deleteFun(@item.Id)"*@ class="btn btn-light-danger">حذف</a>
-            </td>
-        </tr>
-}
-    </tbody>
+    <tbody class="text-gray-600 fw-bold"></tbody>
 </table>
+@section scripts{
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script> 
+        
+        var table = $('#DepartmentTable').DataTable({
+            "processing": "يرجى الانتظار .. جاري تحميل البيانات",
+            "lengthMenu": [[10, 25, 50, 10000], [10, 25, 50, "10000"]],
+            "processing": true,
+            "serverSide": true,
+            "filter": false,
+            "ordering": false,
+            "pageLength": 6,
+            "ajax": {
+                "url": '/Admin/Department/LoadAll',
+                "type": "POST",
+                "datatype": "json",
+                "data": function (data) {
+                    // Append to data
+                    data.Name = $('#Name').val();
+                 }
+            },
+            "columnDefs": [{
+                "visible": false,
+                "searchable": false,
+                "orderable": false
+            }],
+            "language": {
+                "aria": {
+                    "sortAscending": ": فعال لترتيب العمود تصاعديا", "sortDescending": ": فعال لترتيب العمود تنازليا"
+                }
+                , "emptyTable": "لا يوجد بيانات لعرضها", "info": "عرض _START_ الى _END_ من _TOTAL_ صف", "infoEmpty": "لا يوجد نتائج لعرضها", "infoFiltered": "( 1 من _MAX_ اجمالي صفوف)", "lengthMenu": "_MENU_", "search": "بحث", "zeroRecords": "لا يوجد نتائج لعرضها",
+                "paginate": { "sFirst": "الاول", "sLast": "الاخير", "sNext": "التالي", "sPrevious": "السابق" }
+            },
+            "columns": [
+                { "data": "name", "name": "name" },
+                { "data": "createdAt", "name": "createdAt" },
+                {
+                    "name": 'buttons', "render": function (data, type, row) {
+                        var jsdel = 'jQueryModalConfirm("/Admin/Department/Delete?id=' + row.id + '","هل أنت متأكد من حذف هذا العنصر؟")';
+                        return "<a href='/Admin/Department/Edit?id=" + row["id"] + "' class='btn btn-sm btn-light-dark btn-icon mr-2' title='تعديل مركبة'>" +
+                            "<span class='navi-icon'><i class='las la-pen'></i></span>" +
+                            "</a>" +
+                            "<a onclick='" + jsdel + "' class='btn btn-sm btn-light-danger btn-icon mr-2' title='حذف النوع'>" +
+                            "<span class='navi-icon'><i class='las la-trash'></i></span>" +
+                            "</a> "
+                    }
+                }
+            ]
+        });
+        $(document).on("click", "#btnSearch", function () {
+            table.draw();
+        });
+
+        $(document).on("click", "#btnReset", function () {
+            $("#DepartmentTable").DataTable().search("").draw();
+        });
+         
+    </script>
+}

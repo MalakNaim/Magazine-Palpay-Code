@@ -26,23 +26,14 @@ namespace Magazine_Palpay.Controllers
             var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost)
                  .Include(x=>x.PostType).OrderByDescending(x=>x.CreatedAt)
                  .ToList();
-            List<Post> mainPosts = new List<Post>();
             var Ads = _context.Ads.Where(x => !x.IsDelete
-            && x.EndDate >= today).FirstOrDefault();
-            if(Ads != null)
-            {
-                ViewBag.Ads = Ads.Image;
-            }
+            && x.EndDate >= today).ToList(); 
+            ViewBag.Ads = Ads; 
             ViewBag.Deals = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Deals) && x.MediaType.Equals(1)).FirstOrDefault();
             ViewBag.Campain = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Campaines) && x.MediaType.Equals(1)).FirstOrDefault();
             ViewBag.IT = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.IT) && x.MediaType.Equals(1)).FirstOrDefault();
             ViewBag.Fintech = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Fintech) && x.MediaType.Equals(1)).FirstOrDefault();
             return View(post);
         }
-
-        public IActionResult Books()
-		{
-            return View();
-		}
     }
 }

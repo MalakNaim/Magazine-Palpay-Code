@@ -1,10 +1,21 @@
 ﻿@using Magazine_Palpay.Enums
+@using Microsoft.EntityFrameworkCore
+ @inject ApplicationDbContext _context; 
 @{
 	var deals = (int)PostTypeEnum.Deals;
 	var campaines = (int)PostTypeEnum.Campaines;
 	var it = (int)PostTypeEnum.IT;
 	var fintech = (int)PostTypeEnum.Fintech; 
-
+	var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();
+    var MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
+    var Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
+    var BOP = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.BankOfPalestine)).ToList();
+    var Employees = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Employees)).ToList();
+    var ListNews = _context.Post
+        .Include(x => x.PostType)
+        .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
+        && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).Take(3)
+        .OrderByDescending(x => x.CreatedAt).ToList(); 
 	}
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -68,7 +79,7 @@
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="/">الرئيسية</a></li>
 							<li><a href="/PostDetails/ByType?type=@deals">الاتفاقيات</a></li>
-							<li><a href="/PostDetails/ByType?type=@campaines">حملات الشهر</a></li>
+							<li><a href="/PostDetails/ByType?type=@campaines">الحملات </a></li>
 							@*<li class="dropdown magz-dropdown">
 								<a href="category.html">حملات الشهر <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
@@ -90,10 +101,12 @@
 													</div>
 												</div> -->
 												<ul class="vertical-menu">
-												@foreach(var item in ViewBag.MultiNews)
-												{
-													<li><a href="/PostDetails/BySubType?subType=@item.Id"><i class="ion-ios-circle-outline"></i>@item.Name</a></li>
-												}  
+													@if(MultiNews != null){
+														@foreach(var item in MultiNews)
+														{
+															<li><a href="/PostDetails/BySubType?subType=@item.Id"><i class="ion-ios-circle-outline"></i>@item.Name</a></li>
+														} 
+													}
 												</ul>
 											</div>
 											<div class="col-md-9">
@@ -103,25 +116,27 @@
 													</div>
 												</div>
 												<div class="row">
-												@foreach(var item in ViewBag.ListNews)
-												{
-													<article class="article col-md-4 mini">
-														<div class="inner">
-															<figure>
-																<a href="/PostDetails/Details?id=@item.Id">
-																	<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
-																</a>
-															</figure>
-															<div class="padding">
-																<div class="detail">
-																	<div class="time">@item.CreatedAt</div>
-																	<div class="category"><a href="#">@item.PostType.Name</a></div>
+												@if(ListNews != null){
+													@foreach(var item in ListNews)
+													{
+														<article class="article col-md-4 mini">
+															<div class="inner">
+																<figure>
+																	<a href="/PostDetails/Details?id=@item.Id">
+																		<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+																	</a>
+																</figure>
+																<div class="padding">
+																	<div class="detail">
+																		<div class="time">@item.CreatedAt</div>
+																		<div class="category"><a href="#">@item.PostType.Name</a></div>
+																	</div>
+																	<h2><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h2>
 																</div>
-																<h2><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h2>
 															</div>
-														</div>
-													</article>
-												} 
+														</article>
+													} 
+												}
 												</div>
 											</div>
 										</div>								
@@ -131,27 +146,38 @@
 							<li class="dropdown magz-dropdown">
 								<a href="category.html">مجموعة بنك فلسطين <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="index.html">الأخبار</a></li>
-									<li><a href="index.html">الإنجازات</a></li>
-									<li><a href="index.html">الجوائز</a></li>
-									<li><a href="index.html">مجموعة الشركات</a></li>
+								@if (BOP != null)
+								{
+									@foreach (var item in BOP)
+									{
+										<li><a href="/PostDetails/BySubType?subType=@item.Id">@item.Name</a></li>
+									}
+
+								}
 								</ul>
 							</li>
 							<li class="dropdown magz-dropdown">
-								<a href="category.html">اجتماعيات <i class="ion-ios-arrow-right"></i></a>
+								<a href="#">اجتماعيات <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-								@foreach(var item in ViewBag.Social)
+								@foreach(var item in Social)
 								{
 									<li><a href="/PostDetails/BySubType?subType=@item.Id">@item.Name</a></li>
 								} 
 								</ul>
 							</li>
+							<li><a href="/Books/Index">معرض الكتب</a></li>
 							<li class="dropdown magz-dropdown"><a href="#">الموظفين <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="icon ion-person"></i>أعياد الميلاد</a></li>
-									<li><a href="#"><i class="icon ion-heart"></i> الاستقالات</a></li>
-									<li><a href="#"><i class="icon ion-chatbox"></i> الموظفين الجدد</a></li>
-									<li><a href="#"><i class="icon ion-key"></i> أخرى</a></li>
+								     <li><a href="/Employees/Index"> الإدارة التنفيذية</a></li>
+									@if (Employees != null)
+									{
+										@foreach (var item in Employees)
+										{
+											<li><a href="/PostDetails/BySubType?subType=@item.Id">@item.Name</a></li>
+										}
+
+									}
+								 
 								</ul>
 							</li>
 						</ul>
@@ -163,7 +189,7 @@
 			if(ViewBag.News != null)
 			{
 				<div class="container">
-				<div class="row">
+				<div class="row mt-6">
 					<div id="ticker">
 					  <div class="title">آخر الأخبار</div>
 					  <ul>  
@@ -201,6 +227,37 @@
 					</div>
 				</div>
 				</div>
+				<div class="block">
+							<h1 class="block-title"> تابعنا</h1>
+							<div class="block-body">
+								<ul class="social trp">
+									<li>
+										<a href="https://www.facebook.com/PalPayCompany" class="facebook">
+											<svg><rect width="0" height="0"></rect></svg>
+											<i class="ion-social-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="https://www.instagram.com/palpayco/" class="instagram">
+											<svg><rect width="0" height="0"></rect></svg>
+											<i class="ion-social-instagram-outline"></i>
+										</a>
+									</li>  
+									<li>
+										<a href="https://www.palpay.ps/" class="dribbble">
+											<svg><rect width="0" height="0"></rect></svg>
+											<i class="ion-social-dribbble"></i>
+										</a>
+									</li>
+									<li>
+										<a href="https://www.linkedin.com/company/palpay/mycompany/" class="linkedin">
+											<svg><rect width="0" height="0"></rect></svg>
+											<i class="ion-social-linkedin"></i>
+										</a>
+									</li> 
+								</ul>
+							</div>
+						</div>
  				<div class="row">
 					<div class="col-md-12">
 						<div class="copyright">

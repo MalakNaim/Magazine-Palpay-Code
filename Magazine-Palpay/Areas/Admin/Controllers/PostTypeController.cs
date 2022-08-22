@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Magazine_Palpay.Web.ViewModels;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Magazine_Palpay.Web.Extensions;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
@@ -41,11 +43,44 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 }).ToListAsync();
             return View(lst);
         }
-        
+
+        [HttpPost("Admin/PostType/LoadAll")]
+        public async Task<JsonResult> LoadPostTypeAsync(IFormCollection form)
+        {
+            string draw = Request.Form["draw"].FirstOrDefault();
+            string start = Request.Form["start"].FirstOrDefault();
+            string length = Request.Form["length"].FirstOrDefault();
+            string sortColumn = Request.Form["columns[" + Request.Form["form[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            string sortColumnDirection = Request.Form["form[0][dir]"].FirstOrDefault();
+            string name = form["Name"].ToString();
+            int page_start = int.Parse(start);
+            int page_length = int.Parse(length);
+            page_start = page_start / page_length;
+            page_start = page_start + 1;
+            var queryable = _context.PostType.Where(x => !x.IsDelete)
+                .OrderByDescending(x => x.Id)
+                .AsQueryable();
+            if (!string.IsNullOrEmpty(name))
+            {
+                queryable = queryable.Where(x => x.Name.Contains(name));
+            }
+
+            var productList = await queryable.ToPaginatedListAsync(page_start, page_length);
+            var data = productList.Data.Select(x => new
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Parent = x.ParentId == 0 ? "رئيسي" : _context.PostType.Where(m => m.Id == x.ParentId).FirstOrDefault().Name,
+                CreatedAt = x.CreatedAt
+            }).ToList();
+            var jsonData = new { data = data, recordsFiltered = productList.TotalCount, recordsTotal = productList.TotalCount };
+            return new JsonResult(jsonData);
+        }
+
         [HttpGet("Admin/PostType/Create")]
         public IActionResult Create()
         {
-            var types = _context.PostType.Where(x => x.ParentId == 0).ToList();
+            var types = _context.PostType.Where(x => x.ParentId == 0 && !x.IsDelete).ToList();
             ViewBag.ParentId = new SelectList(types, "Id", "Name");
             return View();
         }
@@ -77,7 +112,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var types = _context.PostType.Where(x => x.ParentId == 0).ToList();
+            var types = _context.PostType.Where(x => x.ParentId == 0 && !x.IsDelete).ToList();
             ViewBag.ParentId = new SelectList(types, "Id", "Name",postType.ParentId);
             return View(postType);
         }
@@ -128,9 +163,10 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 isValid = true,
                 actionType = "redirect",
-                redirectUrl = string.Empty
+                redirectUrl = "/Admin/PostType/Index"
             });
         }
+
 
         private bool PostTypeExists(int id)
         {

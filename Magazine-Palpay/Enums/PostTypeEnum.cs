@@ -7,7 +7,8 @@
         Social = 14,
         Campaines = 4,
         IT = 5,
-        Fintech = 7
-     
+        Fintech = 7,
+        BankOfPalestine = 9, 
+        Employees = 21
     }
 }

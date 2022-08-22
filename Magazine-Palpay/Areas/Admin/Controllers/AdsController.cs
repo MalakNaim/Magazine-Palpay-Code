@@ -115,7 +115,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 string fileName = "";
                 if (image != null && image.Length > 0)
                 {
-                    var file = await FormFileExtensions.SaveAsync(image);
+                    var file = await FormFileExtensions.SaveAsync(image, "UploadImages");
                     fileName = file;
                 }
                 ads.Image = fileName;
@@ -161,7 +161,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     string fileName = "";
                     if (image != null && image.Length > 0)
                     {
-                        var file = await FormFileExtensions.SaveAsync(image);
+                        var file = await FormFileExtensions.SaveAsync(image, "UploadImages");
                         fileName = file;
                     }
                     if(!string.IsNullOrEmpty(fileName))
@@ -199,7 +199,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 isValid = true,
                 actionType = "redirect",
-                redirectUrl = string.Empty
+                redirectUrl = "/Admin/Ads/Index"
             });
         }
         private bool AdsExists(int id)
