@@ -2,13 +2,13 @@
 	<section class="search">
 			<div class="container">
 				<div class="row">
-					<form action="~/Books/Index" method="get">
+					<form action="~/Books/Index?page=@ViewBag.page" method="get">
 				<div class="col-md-9"> 
 						<div class="row">
 					@foreach(var book in Model.Where(x=>!x.IsDelete))
 					{
 
-						<article class="article col-md-4">
+						<article class="article col-md-4 pull-right">
 							<div class="inner">
 								<figure>
 									<a href="~/assets/UploadFiles/@book.Link">
@@ -19,10 +19,17 @@
 									<div class="detail">
 										<div class="time">@book.Author</div>
  										<div class="category">
-												<a href="#">@book.BookCategory.Name</a>
+											<a href="#">@book.BookCategory.Name</a>
 									    </div>
 									</div>
-									<h2>@book.Name</h2> 
+									@if(book.Name.Length < 23){
+											<h2 style="padding-bottom: 30px;">@book.Name</h2>
+										}
+										else
+										{
+											<h2>@book.Name</h2>
+										}
+
 									<footer>
  										<a class="btn btn-primary more" href="~/assets/UploadFiles/@book.Link">
 											<div>تحميل</div>
@@ -97,6 +104,10 @@
 									 
 								</div>
 							</div>
+							<hr />
+							<button class="btn btn-primary" type="submit">
+								<i class="ion-search"></i>بحث
+							</button>
 						</aside>
 					</div> 
 					</form>

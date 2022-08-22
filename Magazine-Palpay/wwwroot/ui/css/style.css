@@ -1164,7 +1164,8 @@ article .detail {
 }
 
 .article .inner {
-  box-shadow: 0 1px 2px #ddd;
+    box-shadow: 0 1px 2px #ddd;
+    border-radius: 5px !important;
 }
 .article .padding {
   padding:15px;

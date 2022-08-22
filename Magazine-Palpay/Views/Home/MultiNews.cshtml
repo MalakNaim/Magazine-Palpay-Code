@@ -1,0 +1,68 @@
+﻿@model List<Magazine_Palpay.Data.Models.Post> 
+<section class="single" style="padding:15px !important;">
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 sidebar" id="sidebar">
+			</div>
+		<div class="col-md-8">
+			<header>
+				<h4 style="padding:40px;"> أخبار متنوعة و معلومات عامة</h4> 
+			</header>
+		@foreach(var item in Model)
+		{
+			<article class="col-md-12 article-list">
+					<div class="inner">
+						<figure>
+							<a href="/PostDetails/Details?id=@item.Id">
+								<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+							</a>
+						</figure>
+						<div class="details">
+							<div class="detail">
+								<div class="category">
+									<a href="#">@item.PostType.Name</a>
+								</div>
+								<div class="time">@item.CreatedAt</div>
+							</div>
+							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
+								<p>انقر هنا لمعرفة مزيد تفاصيل الخبر</p> 
+								<footer>
+ 								<a class="btn btn-primary more" href="/PostDetails/Details?id=@item.Id">
+									<div>التفاصيل</div>
+									<div><i class="ion-ios-arrow-thin-right"></i></div>
+								</a>
+							</footer>
+						</div>
+					</div>
+				
+			</article>
+	     }
+	  </div>
+  </div>
+    <div class="col-md-12 text-center">
+		<ul class="pagination">
+				@{
+					int prev = ViewBag.page;
+					prev--;
+				}
+			<li class="prev"><a href="~/Home/MultiNews?page=@prev"><i class="ion-ios-arrow-left"></i></a></li>
+			@for (int i = 1; i <= ViewBag.NumberOfPages; i++)
+			{ 
+					if(ViewBag.page == i)
+					{
+						<li class="active"><a href="~/Home/MultiNews?page=@i">@i</a></li> 
+					}
+					else
+					{
+						<li><a href="~/Home/MultiNews?page=@i">@i</a></li> 
+					} 
+ 			}
+			@{
+				int next = ViewBag.page;
+				next++;
+			} 
+			<li class="next"><a href="~/Home/MultiNews?page=@next"><i class="ion-ios-arrow-right"></i></a></li>
+		</ul> 
+	</div>
+</div>
+</section>

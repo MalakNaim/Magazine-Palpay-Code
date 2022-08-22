@@ -56,5 +56,26 @@ namespace Magazine_Palpay.Controllers
             ViewBag.LastVideo = postLst.FirstOrDefault();
             return View(postLst);
         }
+
+        [HttpGet("Home/MultiNews")]
+        public IActionResult MultiNews(int page = 0)
+        {
+            int countRow = _context.Post.Where(x => !x.IsDelete && x.MediaType.Equals(1) && 
+            x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)).Count();
+            double perPage = 6;
+            double NumberOfPages = Math.Ceiling(countRow / perPage);
+            if (page < 1 || page > NumberOfPages)
+            {
+                page = 1;
+            }
+            int skipValue = (page - 1) * (int)perPage;
+            ViewBag.NumberOfPages = NumberOfPages;
+            var news = _context.Post
+                .Where(x => !x.IsDelete && x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) && x.MediaType.Equals(1))
+                .Include(x => x.PostType).OrderByDescending(x => x.CreatedAt)
+                .Skip(skipValue).Take((int)perPage).ToList();
+            ViewBag.page = page;
+            return View(news);
+        }
     }
 }

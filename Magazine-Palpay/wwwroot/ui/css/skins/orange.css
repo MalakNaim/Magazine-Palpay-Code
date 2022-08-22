@@ -149,17 +149,20 @@ body { direction: rtl ; }
 .skin-orange .featured .details .category a:hover {
   opacity: .8;
 }
-.skin-orange .featured .details h1 {
-  margin-bottom: 5px;
-  text-transform: capitalize;
-  line-height: 1.4em;
-  font-size: 28px;
-  font-weight: 700;
-}
 .skin-orange .featured .details h1 a {
-  text-decoration: none;
-  color: #fff;
-}
+    text-decoration: none;
+    color: #272727;
+} 
+.skin-orange .featured .details h1 {
+    margin-bottom: 5px;
+    text-transform: capitalize;
+    line-height: 1.4em;
+    font-size: 28px;
+    font-weight: 700;
+    background-color: #fff;
+    opacity: 0.7;
+    padding: 0 10px;
+} 
 .skin-orange .topbar ul li a:hover {
   color: #FC624D;
 }
