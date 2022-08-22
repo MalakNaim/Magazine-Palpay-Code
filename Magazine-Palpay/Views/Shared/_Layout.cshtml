@@ -11,6 +11,7 @@
     var Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
     var BOP = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.BankOfPalestine)).ToList();
     var Employees = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Employees)).ToList();
+	var GalleryAlbum = _context.Gallery.Where(x=>!x.IsDelete).ToList();
     var ListNews = _context.Post
         .Include(x => x.PostType)
         .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
@@ -29,6 +30,9 @@
     <partial name="_Scripts" />
     @RenderSection("css", required: false)
 	<style>
+		.menu ul > li > a { 
+			padding: 10px 8px !important; 
+		}
 	header.primary {
     position: unset !important;
     z-index: 1999;
@@ -46,6 +50,58 @@
     padding-bottom: 15px !important;
     padding-left: 15px !important;
    }
+   .vwrap, .vitem {
+  height: 30px;
+  line-height: 30px;
+}
+
+/* (B) FIXED WRAPPER */
+.vwrap {
+     background-color: #F2F2F2;
+    overflow: auto;
+    height: 30px;
+    vertical-align: middle;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.vitem { text-align: center; }
+
+.vmove { position: relative; }
+@@keyframes tickerv {
+  0% { bottom: 0; } /* FIRST ITEM */
+  30% { bottom: 30px; } /* SECOND ITEM */
+  60% { bottom: 60px; } /* THIRD ITEM */
+  90% { bottom: 90px; } /* FORTH ITEM */
+  100% { bottom: 0; } /* BACK TO FIRST */
+}
+.vmove {
+  animation-name: tickerv;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(1, 0, .5, 0);
+}
+.vmove:hover { animation-play-state: paused; }
+.vwrap .title {
+    background-color: #FB634F;
+        color: #FFF;
+        position: absolute;
+        right: 0;
+        font-weight: bold;
+        border-right: 2px solid #FFF;
+        top: 0;
+        display: block;
+        height: 30px;
+        vertical-align: middle;
+        line-height: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        z-index: 10;
+        box-shadow: 0px 0px 20px rgba(0,0,0,.8);
+    }
 </style>
 </head>
 
@@ -79,15 +135,7 @@
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="/">الرئيسية</a></li>
 							<li><a href="/PostDetails/ByType?type=@deals">الاتفاقيات</a></li>
-							<li><a href="/PostDetails/ByType?type=@campaines">الحملات </a></li>
-							@*<li class="dropdown magz-dropdown">
-								<a href="category.html">حملات الشهر <i class="ion-ios-arrow-right"></i></a>
-								<ul class="dropdown-menu">
-									<li><a href="index.html">حملة 1</a></li>
-									<li><a href="index.html">حملة 2</a></li>
-									<li><a href="index.html">حملة 3</a></li>
-								</ul>
-							</li>*@
+							<li><a href="/PostDetails/ByType?type=@campaines">الحملات </a></li> 
 							<li><a href="/PostDetails/ByType?type=@it">التحول الرقمي</a></li>
 							<li><a href="/PostDetails/ByType?type=@fintech">التكنولوجيا المالية</a></li>
  							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">منوعات<i class="ion-ios-arrow-right"></i> <div class="badge">تصفح</div></a>
@@ -165,6 +213,15 @@
 								} 
 								</ul>
 							</li>
+						    <li class="dropdown magz-dropdown">
+								<a href="#">معرض الصور <i class="ion-ios-arrow-right"></i></a>
+								<ul class="dropdown-menu">
+								@foreach(var item in GalleryAlbum)
+								{
+									<li><a href="/GalleryAlbum/Index?id=@item.Id">@item.Title</a></li>
+								} 
+								</ul>
+							</li>
 							<li><a href="/Books/Index">معرض الكتب</a></li>
 							<li class="dropdown magz-dropdown"><a href="#">الموظفين <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
@@ -188,16 +245,16 @@
 		@{
 			if(ViewBag.News != null)
 			{
-				<div class="container">
+			<div class="container">
 				<div class="row mt-6">
-					<div id="ticker">
+					<div class="vwrap">
 					  <div class="title">آخر الأخبار</div>
-					  <ul>  
-						@foreach(var item in ViewBag.News){
-						  <li>@item.Title</li>
-					    } 
-					  </ul> 
+					 <div class="vmove">
+				 		@foreach(var item in ViewBag.News){
+						  <div class="vitem">@item.Title</div>
+						 } 
 					</div>
+					</div> 
 				</div>
 			</div>
 			}

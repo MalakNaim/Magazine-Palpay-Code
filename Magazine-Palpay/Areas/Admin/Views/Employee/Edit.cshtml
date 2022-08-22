@@ -31,11 +31,16 @@
             <div class="row mb-6">
                 <label class="fs-5 fw-bold mb-2">الصورة الشخصية  </label>
                 <input name="empPhoto" type="file" class="form-control " />
+                <input type="hidden" asp-for="Photo"/>
                 @if(Model.Photo != null){
                 <a href="~/assets/UploadImages/@Model.Photo" class="btn btn-light-warning" target="_blank">عرض الصورة</a>
                 }
             </div>
-           
+             <div class="row mb-6">
+               <label class="fs-5 fw-bold mb-2">المركز </label>
+                <input asp-for="Order" class="form-control form-control-solid" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>  
              <div class="row mb-6">
                <label class="fs-5 fw-bold mb-2">رقم الجوال </label>
                 <input asp-for="Mobile" class="form-control form-control-solid" />

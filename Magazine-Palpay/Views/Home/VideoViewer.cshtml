@@ -1,0 +1,87 @@
+﻿@model List<Magazine_Palpay.Data.Models.Post>
+@{
+   var lastVideo = ViewBag.LastVideo;
+}
+<style>
+article figure {
+    height: 120px !important;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: inline-block;
+}</style>
+
+<section class="search">
+			<div class="container">
+				<div class="row">
+					@if(lastVideo != null){
+					   <div class="col-md-9"> 
+							<div class="row">  
+									<iframe id="mainVideo" width="960" height="615" src="@lastVideo.EmbedVideoLink" 
+									title="@lastVideo.Head" frameborder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+									allowfullscreen></iframe>
+							</div>
+					   </div>
+					}
+					@foreach(var item in Model){
+						if(Model.First() != item)
+						{	
+							<div class="col-md-3">
+								<a href="#" url="@item.EmbedVideoLink" class="clickBtn">
+									<article class="article col-md-12">
+										<div class="inner">
+											<figure>
+												 <iframe width="260" height="215" src="@item.EmbedVideoLink" 
+												title="@item.Head" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+												allowfullscreen></iframe>
+											</figure>
+											<div class="padding">
+												<div class="detail">
+													<p class="category" style="font-weight:bold;font-size:12px;">@item.Head</p>
+												</div>
+											</div>
+										</div>
+									</article> 
+								</a> 
+							</div>   
+						} 
+					}
+				</div>
+				  <div class="col-md-12 text-center">
+		            <ul class="pagination">
+						  @{
+								int prev = ViewBag.page;
+								prev--;
+							}
+		              <li class="prev"><a href="~/Home/VideoViewer?page=@prev"><i class="ion-ios-arrow-left"></i></a></li>
+					   @for (int i = 1; i <= ViewBag.NumberOfPages; i++)
+						{ 
+								if(ViewBag.page == i)
+								{
+									<li class="active"><a href="~/Home/VideoViewer?page=@i">@i</a></li> 
+								}
+								else
+								{
+									<li><a href="~/Home/VideoViewer?page=@i">@i</a></li> 
+								} 
+ 						}
+						@{
+							int next = ViewBag.page;
+							next++;
+						} 
+		              <li class="next"><a href="~/Home/VideoViewer?page=@next"><i class="ion-ios-arrow-right"></i></a></li>
+		            </ul> 
+		          </div>
+			</div>
+	</section>
+
+<script>
+	$(document).ready(function(){
+		$(".clickBtn").click(function(){
+			var url = $(this).attr('url');
+ 			$("#mainVideo").attr('src',url);
+		});
+	});
+</script>

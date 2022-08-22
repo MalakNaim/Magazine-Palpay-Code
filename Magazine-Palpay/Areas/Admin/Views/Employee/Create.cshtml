@@ -33,6 +33,11 @@
             </div>
            
              <div class="row mb-6">
+               <label class="fs-5 fw-bold mb-2">المركز </label>
+                <input asp-for="Order" class="form-control form-control-solid" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>  
+            <div class="row mb-6">
                <label class="fs-5 fw-bold mb-2">رقم الجوال </label>
                 <input asp-for="Mobile" class="form-control form-control-solid" />
                 <span asp-validation-for="Mobile" class="text-danger"></span>

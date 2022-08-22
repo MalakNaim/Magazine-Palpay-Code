@@ -12,9 +12,21 @@
  				<div class="featured">
 					<figure>
 						<img src="~/assets/UploadImages/@Model.MainImage">
-@*										<figcaption>Image by pexels.com</figcaption>
-*@					</figure>
-		</div>
-		@Html.Raw(Model.Body)
+ 					</figure>
+					 @if(Model.PostPhoto.Count() > 0)
+					 {
+						<div class="block"> 
+							<div class="block-body">
+								<ul class="item-list-round" data-magnific="gallery">
+									@foreach(var item in Model.PostPhoto)
+									{
+										<li><a href="~/assets/UploadImages/@item.Photo" style="background-image: url('/assets/UploadImages/@item.Photo');"></a></li>
+									}
+								</ul>
+							</div>
+						</div>
+					 }
+		         </div>
+		          <p>@Html.Raw(Model.Body)</p>
 			</div> 
-</article>
+</article> 

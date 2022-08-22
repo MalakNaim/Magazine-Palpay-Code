@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Magazine_Palpay.Data.Models
 {
@@ -12,7 +13,9 @@ namespace Magazine_Palpay.Data.Models
         public string Mobile { get; set; }
         public string Email { get; set; }
         public DateTime? DOB { get; set; }
-        public DateTime? JoinDate { get; set; }
+        public DateTime? JoinDate { get; set; } 
+        [Required(ErrorMessage ="يرجى إدخال المركز")]
+        public int Order { get; set; }
         public Department Department { get; set; }
 
     }

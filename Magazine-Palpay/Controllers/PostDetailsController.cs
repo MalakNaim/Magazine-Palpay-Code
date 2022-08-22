@@ -19,7 +19,8 @@ namespace Magazine_Palpay.Controllers
 		public IActionResult Details(int id)
 		{
 			var today = DateTime.Now.Date;
-			var details = _context.Post.Include(x=>x.PostType).Where(x=>x.Id.Equals(id))
+			var details = _context.Post.Include(x=>x.PostType)
+				.Include(x=>x.PostPhoto.Where(x=>!x.IsDelete)).Where(x=>x.Id.Equals(id))
 				.FirstOrDefault();
 			var Ads = _context.Ads.Where(x => !x.IsDelete
 			&& x.EndDate >= today).ToList();

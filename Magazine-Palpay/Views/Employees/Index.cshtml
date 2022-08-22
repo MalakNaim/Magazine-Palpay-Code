@@ -1,29 +1,38 @@
 ﻿@model List<Magazine_Palpay.Data.Models.Employee>
-
     <section class="search">
 			<div class="container">
 				<div class="row">
 	              <header>
 			     	<h4 style="padding:40px;">الإدارة التنفيذية</h4> 
 			     </header>
-			@foreach(var employee in Model)
+			@foreach(var employee in Model.OrderBy(x=>x.Order))
 					{
-
-						<article class="article col-md-3">
+						<article class="article col-md-3 pull-right">
 							<div class="inner">
 								<figure>
 									<a href="#">
-										<img src="~/assets/UploadImages/@employee.Photo">
+										<img src="~/assets/UploadImages/@employee.Photo" style="width:250px; height:250px;">
 									</a>
 								</figure>
 								<div class="padding"> 
 									<h2>@employee.Name</h2> 
-									<P>@employee.JobTitle</P> 
-									<div class="detail"> 
- 										<div class="category">
+									@if(@employee.JobTitle.Length < 34){
+								        <P>@employee.JobTitle <span style="color:white;">
+											test test test test testtesttesttetesttesttes
+											ttesttesttesttesttesttestteststtesttesttesttesttest</span>
+										</P>
+								  
+									}
+									else
+									{
+										<P>@employee.JobTitle</P>  
+									}
+							       <div class="detail"> 
+ 										<div class="category" >
 												<a href="#">@employee.Department.Name</a>
 									    </div>
 									</div>
+									
 								</div>
 							</div>
 						</article>   

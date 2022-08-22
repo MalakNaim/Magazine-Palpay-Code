@@ -35,5 +35,26 @@ namespace Magazine_Palpay.Controllers
             ViewBag.Fintech = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Fintech) && x.MediaType.Equals(1)).FirstOrDefault();
             return View(post);
         }
+
+        [HttpGet("Home/VideoViewer")]
+        public IActionResult VideoViewer(int page = 0)
+        {
+            int countRow = _context.Post.Where(x => !x.IsDelete && x.MediaType.Equals(2)).Count();
+            double perPage = 8;
+            double NumberOfPages = Math.Ceiling(countRow / perPage);
+            if (page < 1 || page > NumberOfPages)
+            {
+                page = 1;
+            }
+            int skipValue = (page - 1) * (int)perPage;
+            ViewBag.NumberOfPages = NumberOfPages;
+            var postLst = _context.Post
+                .Where(x => !x.IsDelete && x.MediaType.Equals(2))
+                .Include(x => x.PostType).OrderByDescending(x => x.CreatedAt)
+                .Skip(skipValue).Take((int)perPage).ToList();
+            ViewBag.page = page; 
+            ViewBag.LastVideo = postLst.FirstOrDefault();
+            return View(postLst);
+        }
     }
 }

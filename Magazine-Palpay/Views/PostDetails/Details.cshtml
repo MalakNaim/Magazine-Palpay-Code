@@ -9,20 +9,8 @@
 							@Html.Partial("_Ads")
 						</div>
 					</aside>
-			    <aside>
-					<h1 class="aside-title">الفيديوهات
-						<div class="carousel-nav" id="video-list-nav">
-							<div class="prev"><i class="ion-ios-arrow-left"></i></div>
-							<div class="next"><i class="ion-ios-arrow-right"></i></div>
-						</div>
-					</h1>
-					<div class="aside-body">
-						<ul class="video-list" data-youtube='"carousel":true, "nav": "#video-list-nav"'>
-							<li><iframe width="360" height="315" src="https://www.youtube.com/embed/mp01lQ4Z1M4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
-							<li><a data-youtube-id="9cVJr3eQfXc" data-action="magnific"></a></li>
-							<li><a data-youtube-id="DnGdoEa1tPg" data-action="magnific"></a></li>
-						</ul>
-					</div>
+			    <aside> 
+					@Html.Partial("_Videos")  
 				</aside>
 				<aside>
 					<h1 class="aside-title">آخر الأخبار <a href="#" class="all">عرض الكل <i class="ion-ios-arrow-right"></i></a></h1>

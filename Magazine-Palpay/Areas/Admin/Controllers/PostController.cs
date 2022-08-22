@@ -182,20 +182,21 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     post.IsDelete = false;
                     await _context.Post.AddAsync(post);
                     await _context.SaveChangesAsync();
-                   // foreach (var photo in postPhotos)
-                   // {
-                   //     if(photo != null || photo.Length > 0) { 
-                   //         var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
-                   //         PostPhoto postPhoto = new PostPhoto();
-                   //         postPhoto.PostId = post.Id;
-                   //         postPhoto.Photo = file;
-                   //         postPhoto.CreatedAt = DateTime.Now;
-                   //         postPhoto.CreatedBy = _userManager.GetUserId(User);
-                   //         postPhoto.IsDelete = false;
-                   //         await _context.PostPhoto.AddAsync(postPhoto);
-                   //         await _context.SaveChangesAsync();
-                   //     }
-                   //}
+                    foreach (var photo in postPhotos)
+                    {
+                        if (photo != null || photo.Length > 0)
+                        {
+                            var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
+                            PostPhoto postPhoto = new PostPhoto();
+                            postPhoto.PostId = post.Id;
+                            postPhoto.Photo = file;
+                            postPhoto.CreatedAt = DateTime.Now;
+                            postPhoto.CreatedBy = _userManager.GetUserId(User);
+                            postPhoto.IsDelete = false;
+                            await _context.PostPhoto.AddAsync(postPhoto);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
 
                 }
                 else
@@ -204,21 +205,21 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     {
                         post.MainImage = fileName;
                     }
-                    //foreach (var photo in postPhotos)
-                    //{
-                    //    if (photo != null || photo.Length > 0)
-                    //    {
-                    //        var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
-                    //        PostPhoto postPhoto = new PostPhoto();
-                    //        postPhoto.PostId = post.Id;
-                    //        postPhoto.Photo = file;
-                    //        postPhoto.CreatedAt = DateTime.Now;
-                    //        postPhoto.CreatedBy = _userManager.GetUserId(User);
-                    //        postPhoto.IsDelete = false;
-                    //        await _context.PostPhoto.AddAsync(postPhoto);
-                    //        await _context.SaveChangesAsync();
-                    //    }
-                    //}
+                    foreach (var photo in postPhotos)
+                    {
+                        if (photo != null || photo.Length > 0)
+                        {
+                            var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
+                            PostPhoto postPhoto = new PostPhoto();
+                            postPhoto.PostId = post.Id;
+                            postPhoto.Photo = file;
+                            postPhoto.CreatedAt = DateTime.Now;
+                            postPhoto.CreatedBy = _userManager.GetUserId(User);
+                            postPhoto.IsDelete = false;
+                            await _context.PostPhoto.AddAsync(postPhoto);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
                     if (!string.IsNullOrEmpty(post.VideoLink))
                     {
                         post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);

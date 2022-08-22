@@ -18,8 +18,6 @@ namespace Magazine_Palpay.Controllers
         [HttpGet("Employees/Index")]
         public IActionResult Index(int page = 0)
         {
-            var employees = _context.Employee.Where(x => !x.IsDelete)
-                .Include(x=>x.Department).ToList();
             int countRow = _context.Employee.Where(x => !x.IsDelete).Count();
             double perPage = 8;
             double NumberOfPages = Math.Ceiling(countRow / perPage);
@@ -31,7 +29,7 @@ namespace Magazine_Palpay.Controllers
             ViewBag.NumberOfPages = NumberOfPages;
             var employeeLst = _context.Employee
                 .Where(x=>!x.IsDelete)
-                .Include(x => x.Department).OrderByDescending(x => x.CreatedAt)
+                .Include(x => x.Department).OrderBy(x => x.Order)
                 .Skip(skipValue).Take((int)perPage).ToList();
             ViewBag.page = page;
             return View(employeeLst);
