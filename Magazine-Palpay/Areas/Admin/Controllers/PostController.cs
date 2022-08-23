@@ -131,7 +131,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         [HttpGet("Admin/Post/GetSubPostType")]
         public IActionResult GetSubPostType(int? type)
         {
-            var subPost = _context.PostType.Where(x => x.ParentId.Equals(type)).ToList();
+            var subPost = _context.PostType.Where(x => x.ParentId.Equals(type) && !x.IsDelete).ToList();
             var result = subPost.Select(x => new
             {
                 Id = x.Id,

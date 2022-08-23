@@ -15,8 +15,8 @@
     var ListNews = _context.Post
         .Include(x => x.PostType)
         .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
-        && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).Take(3)
-        .OrderByDescending(x => x.CreatedAt).ToList(); 
+        && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).OrderByDescending(x => x.CreatedAt)
+		.Take(3).ToList(); 
 	}
 <!DOCTYPE html>
 <html lang="en" dir="rtl">

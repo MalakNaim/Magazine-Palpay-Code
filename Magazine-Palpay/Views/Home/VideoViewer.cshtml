@@ -9,7 +9,29 @@ article figure {
     overflow: hidden;
     margin-bottom: 10px;
     display: inline-block;
-}</style>
+}
+@@media only screen and (min-width: 768px) {
+	 .video-main-size {
+		width:960px;
+		height:615px;
+	  }
+	  .video-sub-size{
+		width:250px;
+		height:215px;
+	  }
+}
+@@media only screen and (max-width: 600px) {
+  .video-main-size {
+    width:380px;
+	height:280px;
+  }
+    .video-sub-size{
+		width:300px;
+		height:250px;
+		margin-right:15px;
+	  }
+}
+</style>
 
 <section class="search">
 			<div class="container">
@@ -17,7 +39,7 @@ article figure {
 					@if(lastVideo != null){
 					   <div class="col-md-9"> 
 							<div class="row">  
-									<iframe id="mainVideo" width="960" height="615" src="@lastVideo.EmbedVideoLink" 
+									<iframe id="mainVideo" class="video-main-size" src="@lastVideo.EmbedVideoLink" 
 									title="@lastVideo.Head" frameborder="0"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 									allowfullscreen></iframe>
@@ -32,7 +54,7 @@ article figure {
 									<article class="article col-md-12">
 										<div class="inner">
 											<figure>
-												 <iframe width="260" height="215" src="@item.EmbedVideoLink" 
+												 <iframe class="video-sub-size" src="@item.EmbedVideoLink" 
 												title="@item.Head" frameborder="0"
 												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 												allowfullscreen></iframe>
