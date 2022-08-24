@@ -1,0 +1,39 @@
+[
+  {
+    "outputFileName": "wwwroot/css/main.min.css",
+    "inputFiles": [
+      "wwwroot/ui/scripts/bootstrap/bootstrap.min.css",
+      "wwwroot/ui/scripts/ionicons/css/ionicons.min.css",
+      "wwwroot/ui/scripts/toast/jquery.toast.min.css",
+      "wwwroot/ui/scripts/toast/jquery.toast.min.css",
+      "wwwroot/ui/scripts/owlcarousel/dist/assets/owl.carousel.min.css",
+      "wwwroot/ui/scripts/magnific-popup/dist/magnific-popup.css",
+      "wwwroot/ui/scripts/sweetalert/dist/sweetalert.css",
+      "wwwroot/ui/css/style.css?v=1.2",
+      "wwwroot/ui/css/skins/all.css",
+      "wwwroot/ui/css/demo.css",
+      "wwwroot/ui/css/custom.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/main.min.js",
+    "inputFiles": [
+      "wwwroot/ui/js/jquery.js",
+      "wwwroot/ui/js/jquery.migrate.js",
+      "wwwroot/ui/scripts/bootstrap/bootstrap.min.js",
+      "wwwroot/ui/scripts/jquery-number/jquery.number.min.js",
+      "wwwroot/ui/scripts/owlcarousel/dist/owl.carousel.min.js",
+      "wwwroot/ui/scripts/magnific-popup/dist/jquery.magnific-popup.min.js",
+      "wwwroot/ui/scripts/easescroll/jquery.easeScroll.js",
+      "wwwroot/ui/scripts/sweetalert/dist/sweetalert.min.js",
+      "wwwroot/ui/scripts/toast/jquery.toast.min.js",
+      "wwwroot/ui/js/e-magz.js",
+      "wwwroot/ui/js/custom.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]
