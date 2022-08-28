@@ -1,0 +1,244 @@
+﻿@using Magazine_Palpay.Web.ViewModels
+@model Tuple<List<Magazine_Palpay.Data.Models.Post>, CurrencyViewModel> 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+/*
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 0 10px;
+    }*/
+
+    ::selection {
+        color: #fff;
+        background: #FB634F;
+    }
+
+    .wrapper {
+        /*width: 370px;*/
+        padding: 30px;
+        border-radius: 7px;
+        background: #fff;
+        box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .wrapper header {
+        font-size: 28px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .wrapper article {
+        margin: 40px 0 20px 0;
+    }
+
+    article :where(input, select, button) {
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+    }
+
+    article p {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    article input {
+        height: 45px;
+        font-size: 17px;
+        padding: 0 15px;
+        border: 1px solid #999;
+    }
+
+    article input:focus {
+        padding: 0 14px;
+        border: 2px solid #FB634F;
+    }
+
+    article .drop-list {
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .drop-list .select-box {
+        display: flex;
+        width: 115px;
+        height: 45px;
+        align-items: center;
+        border-radius: 5px;
+        justify-content: center;
+        border: 1px solid #999;
+    }
+
+    .select-box img {
+        max-width: 21px;
+    }
+
+    .select-box select {
+        width: auto;
+        font-size: 16px;
+        background: none;
+        margin: 0 -5px 0 5px;
+    }
+
+    .select-box select::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .select-box select::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .select-box select::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 8px;
+        border-right: 2px solid #ffffff;
+    }
+
+    .drop-list .icon {
+        cursor: pointer;
+        font-size: 22px;
+    }
+
+    article .exchange-rate {
+        font-size: 17px;
+        margin: 20px 0 30px;
+    }
+
+    article button {
+        height: 45px;
+        color: #fff;
+        font-size: 17px;
+        cursor: pointer;
+        background: #FB634F;
+        transition: 0.3s ease;
+    }
+
+    #inverter {
+        width: 60px;
+    }
+
+    article button:hover {
+        background: #FC624D;
+    }
+
+   @@media only screen and (max-width: 600px) { 
+        .drop-list .select-box {
+            display: flex;
+            width: 75px;
+            height: 45px;
+            align-items: center;
+            border-radius: 5px;
+            justify-content: center;
+            border: 1px solid #999;
+            margin-right: 0 5px !important;
+        }
+    }
+</style>
+    <article class="article-mini"> 
+         <div class="wrapper">
+            <header>تحويل العملات</header>
+            <article>
+                <div class="amount">
+                    <p>القيمة</p>
+                    <input asp-for="Item2.Amount" placeholder="0.00" value="@Model.Item2.Amount">
+                </div>
+                <div class="drop-list">
+                    <div class="from">
+                        <div class="select-box">
+                            <select asp-for="Item2.FromSelectedCode" asp-items="@Model.Item2.Currencies"> 
+                                <option></option>                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="icon"> <button id="inverter">
+                            <->
+                        </button></div>
+                    <div class="to">
+                        <div class="select-box">
+                            <select asp-for="Item2.ToSelectedCode" asp-items="@Model.Item2.Currencies"> 
+                                  <option></option>   
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="exchange-rate">
+                    <div class="currency">
+                        <div class="row">
+                            <input type="hidden" asp-for="Item2.Rate" value="@Model.Item2.Rate"/>
+                        <h5 class="text-center" id="resultRate">
+                            @(Model.Item2.Format(Decimal.Round(Model.Item2.Amount * (decimal)Model.Item2.Rate,4))) @Model.Item2.ToSelectedCode
+                        </h5>
+                        </div>
+                        <div class="row pt-3">
+                            <p class="text-black-50" id="fromCode">@Model.Item2.FromSelectedCode 1 = @Model.Item2.OneUnitFromRate @Model.Item2.ToSelectedCode  </p>
+                        </div>
+                        <div class="row">
+                            <p class="text-black-50" id="toCode">@Model.Item2.ToSelectedCode 1 = @Model.Item2.OneUnitToRate @Model.Item2.FromSelectedCode  </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button id="taxa">تحويل</button>
+            </article>
+        </div>
+     </article> 
+
+
+  <script type="text/javascript">
+     $(document).ready(function(){ 
+         $("#taxa").click(function(e){
+             e.preventDefault();
+              $.ajax({
+                type: "GET",
+                url: "/Home/Convert",
+                data: { 
+                        amount : $("#Item2_Amount").val(),
+                        from: $("#Item2_FromSelectedCode").val(),
+                        to: $("#Item2_ToSelectedCode").val()
+                      },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(result) {
+                   $("#Item2_Rate").val(result.rate);
+                   $("#resultRate").html(result.toSelectedCode+" "+(parseFloat(result.amount) * result.rate).toFixed(4));
+                }
+            });
+         });
+         
+         $("#inverter").click(function(e){
+             e.preventDefault();
+              $.ajax({
+                type: "GET",
+                url: "/Home/Swap",
+                data: { 
+                        amount : $("#Item2_Amount").val(),
+                        from: $("#Item2_FromSelectedCode").val(),
+                        to: $("#Item2_ToSelectedCode").val(),
+                        rate: $("#Item2_Rate").val()
+                      },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(result) {
+                    $("#Item2_Amount").val(result.amount);
+                    $("#Item2_Rate").val(result.rate); 
+                    $("#Item2_FromSelectedCode").val(result.fromSelectedCode);
+                    $("#Item2_ToSelectedCode").val(result.toSelectedCode);
+                    $("#resultRate").html(result.toSelectedCode+" "+ (parseFloat(result.amount) * result.rate).toFixed(4));
+                    $("#fromCode").html(result.fromSelectedCode+"  1 = "+ result.oneUnitFromRate +" "+result.toSelectedCode);
+                    $("#toCode").html(result.toSelectedCode+" 1= "+ result.oneUnitToRate +" "+result.fromSelectedCode);
+                  }
+            });
+         });
+     });
+  </script>

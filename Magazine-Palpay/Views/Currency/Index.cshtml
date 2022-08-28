@@ -1,0 +1,70 @@
+﻿@using Magazine_Palpay.Web.ViewModels
+@model CurrencyViewModel
+@{
+    ViewData["Title"] = "Currency converter";
+}
+
+<div class="text-center">
+
+    <div class="text-center text-white mb-5">
+        <h1 class="display-5">Currency Converter</h1>
+        <p>Simple way to check live foreign currency exchange rates</p>
+    </div>
+
+    <div class="shadow py-4 px-3  bg-white rounded mx-auto" style="max-width:936px">
+        <div class="container text-start">
+                <form method="post">
+                <div class="row align-items-end">
+                    <div class="col-md-3">
+                        <label class="fw-bold">Amount</label>
+                        <input class="form-control" name="Amount" placeholder="0.00" value="@Model.Amount">
+                        <input type="text" hidden name="Rate" value="@Model.Rate">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fw-bold">From</label>
+
+                        @Html.DropDownListFor(m => m.FromSelectedCode, Model.Currencies, htmlAttributes: new { @class = "form-select" })
+
+                    </div>
+
+                    <div class="col-md-1 py-3 py-md-0 ">
+                        <input type="submit" class="btn btn-outline-secondary" formaction="Swap" value="&#x21C6;">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fw-bold">To</label>
+
+                        @Html.DropDownListFor(m => m.ToSelectedCode, Model.Currencies, htmlAttributes: new { @class = "form-select" })
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 pt-3">
+                        <div class="row">
+                            <span class="text-black-50">@(Model.Format(Model.Amount)) @Model.FromSelectedCode = </span>
+                        </div>
+                        <div class="row">
+                            <span class="fs-1">
+                                @(Model.Format(Decimal.Round(Model.Amount * (decimal)Model.Rate,4))) @Model.ToSelectedCode
+                            </span>
+                        </div>
+                        <div class="row pt-3">
+                            <span class="text-black-50">1 @Model.FromSelectedCode = @Model.OneUnitFromRate @Model.ToSelectedCode </span>
+                        </div>
+                        <div class="row">
+                            <span class="text-black-50">1 @Model.ToSelectedCode = @Model.OneUnitToRate @Model.FromSelectedCode </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end text-end">
+                    <div class="col-4 pt-3 ">
+                        <button type="submit" class="btn btn-primary" formaction="OnPostModel">Convert</button>
+                    </div>
+                </div>
+                </form>
+        </div>
+    </div>
+</div>

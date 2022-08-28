@@ -13,9 +13,18 @@
 			<article class="col-md-12 article-list">
 					<div class="inner">
 						<figure>
-							<a href="/PostDetails/Details?id=@item.Id">
+							@if(item.MediaType.Equals(1)){
+									<a href="/PostDetails/Details?id=@item.Id">
 								<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
-							</a>
+									</a>
+								}else if (item.MediaType.Equals(2))
+								{
+									 <iframe width="300" height="250" src="@item.EmbedVideoLink" 
+												title="@item.Head" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+												allowfullscreen></iframe>
+								}
+
 						</figure>
 						<div class="details">
 							<div class="detail">

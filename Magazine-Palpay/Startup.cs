@@ -1,5 +1,6 @@
 using AspNetCoreHero.ToastNotification;
 using Magazine_Palpay.Data;
+using Magazine_Palpay.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Magazine_Palpay
 {
@@ -29,6 +31,10 @@ namespace Magazine_Palpay
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+            services.AddHttpClient<IExchangeRateService, ExchangeRateService>(c =>
+            {
+                c.BaseAddress = new Uri("https://api.exchangerate.host/");
+            });
             services.AddNotyf(config =>
             {
                 config.DurationInSeconds = 30;
