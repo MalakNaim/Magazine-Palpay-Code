@@ -1,18 +1,19 @@
 ﻿@model Magazine_Palpay.Data.Models.Post
-<style>
+
+<style> 
 @@media only screen and (min-width: 768px) {
 	 .video-main-size {
-		width:760px;
-		height:515px;
-	  }
-	 
+		width:660px;
+		height:415px;
+	  } 
 }
 @@media only screen and (max-width: 600px) {
   .video-main-size {
     width:380px;
 	height:280px;
-  } 
-}</style>
+  }
+}
+</style>
 <article class="article main-article">
 			<header>
 				<h2 style="color:#8D499C">@Model.Head</h2>
@@ -23,20 +24,17 @@
 			</header>
 			<div class="main">
  				<div class="featured">
-				@if(Model.MediaType.Equals(1)){
-						<figure>
+					<figure>
+						@if(Model.MediaType.Equals(1)){
  								<img src="~/assets/UploadImages/@Model.MainImage" alt="@Model.Head">
- 						</figure>
-					}
-					else if(Model.MediaType.Equals(2))
-					{
-						<figure>
-							<iframe id="mainVideo" class="video-main-size" src="@Model.EmbedVideoLink" 
-								title="@Model.Head" frameborder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-								allowfullscreen></iframe>
-						</figure>
-					} 
+ 						}else if (Model.MediaType.Equals(2))
+						{
+								<iframe class="video-main-size" src="@Model.EmbedVideoLink" 
+										title="@Model.Head" frameborder="0"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+										allowfullscreen></iframe>
+						}
+  					</figure>
 					 @if(Model.PostPhoto.Count() > 0)
 					 {
 						<div class="block"> 

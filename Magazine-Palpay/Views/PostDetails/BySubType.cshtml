@@ -1,18 +1,4 @@
 ﻿@model List<Magazine_Palpay.Data.Models.Post>
-<style>
-@@media only screen and (min-width: 768px) {
-	 .video-main-size {
-		 width:350px;
-	     height:280px;
-	  }
-	 
-}
-@@media only screen and (max-width: 600px) {
-  .video-main-size {
-    width:380px;
-	height:280px;
-  } 
-}</style>
 <section class="single" style="padding:15px !important;">
 <div class="container">
 	<div class="row">
@@ -26,22 +12,19 @@
 		{
 			<article class="col-md-12 article-list">
 					<div class="inner">
-						@if(item.MediaType.Equals(1)){
-								<figure>
+						<figure>
+							@if(item.MediaType.Equals(1)){
 									<a href="/PostDetails/Details?id=@item.Id">
-										<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+								<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
 									</a>
-								</figure>
-							}
-							else if(item.MediaType.Equals(2))
-							{
-								<figure>
-									<iframe id="mainVideo" class="video-main-size" src="@item.EmbedVideoLink" 
-										title="@item.Head" frameborder="0"
-										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-										allowfullscreen></iframe>
-								</figure>
-							}
+								}else if (item.MediaType.Equals(2))
+								{
+									 <iframe width="300" height="250" src="@item.EmbedVideoLink" 
+												title="@item.Head" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+												allowfullscreen></iframe>
+								}
+						</figure>
 						<div class="details">
 							<div class="detail">
 								@*<div class="category">

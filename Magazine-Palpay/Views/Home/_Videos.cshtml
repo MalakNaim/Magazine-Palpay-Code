@@ -1,6 +1,8 @@
-﻿@model List<Magazine_Palpay.Data.Models.Post>
+﻿@using Magazine_Palpay.Web.ViewModels
+@model Tuple<List<Magazine_Palpay.Data.Models.Post>, CurrencyViewModel>
+    
 @{
-	var lst = Model.Where(x => x.MediaType.Equals(2)).Take(3).ToList();
+	var lst = Model.Item1.Where(x => x.MediaType.Equals(2)).Take(3).ToList();
 }
     <h1 class="aside-title">الفيديوهات
 		<div class="carousel-nav" id="video-list-nav">
