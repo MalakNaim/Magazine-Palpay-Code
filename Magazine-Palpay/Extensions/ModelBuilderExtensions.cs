@@ -14,7 +14,7 @@ namespace Magazine_Palpay.Web.Extensions
 {
     public static class ModelBuilderExtensions
     {
-        public static void ApplyAttachmentsConfiguration(this ModelBuilder builder, PersistenceSettings persistenceOptions)
+        public static void ApplyMagazineConfiguration(this ModelBuilder builder, PersistenceSettings persistenceOptions)
         {
             // build model for MSSQL and Postgres
 

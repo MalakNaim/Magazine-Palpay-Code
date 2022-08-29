@@ -6,6 +6,8 @@ namespace Magazine_Palpay.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        //private readonly PersistenceSettings _persistenceOptions;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -24,5 +26,11 @@ namespace Magazine_Palpay.Data
         public DbSet<PostType> PostType { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<LastNews> LastNews { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.ApplyMagazineConfiguration(_persistenceOptions);
+        }
     }
 }
