@@ -25,8 +25,8 @@ namespace Magazine_Palpay
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            options.UseOracle(Configuration.GetConnectionString("oracle"), e => e.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName).UseOracleSQLCompatibility("11")));
+                
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
