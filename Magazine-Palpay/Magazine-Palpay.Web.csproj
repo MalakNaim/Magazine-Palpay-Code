@@ -140,10 +140,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Magazine-Palpay.Data\Magazine-Palpay.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\assets\UploadFiles\" />
     <Folder Include="wwwroot\assets\UploadImages\" />
   </ItemGroup>

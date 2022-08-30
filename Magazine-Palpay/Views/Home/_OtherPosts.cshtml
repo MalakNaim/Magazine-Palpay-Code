@@ -1,6 +1,6 @@
 ﻿@using Magazine_Palpay.Web.ViewModels
 @using Magazine_Palpay.Enums
-@model Tuple<List<Magazine_Palpay.Data.Models.Post>, CurrencyViewModel> 
+@model Tuple<List<Magazine_Palpay.Web.Models.Post>, CurrencyViewModel> 
 
 @{
 	var lst = Model.Item1.Where(x => x.PostTypeId != ((int)PostTypeEnum.OtherNews)

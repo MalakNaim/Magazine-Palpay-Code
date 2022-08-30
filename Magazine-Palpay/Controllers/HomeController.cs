@@ -1,6 +1,6 @@
 ﻿using Magazine_Palpay.Areas.Admin.Controllers;
-using Magazine_Palpay.Data;
-using Magazine_Palpay.Data.Models;
+using Magazine_Palpay.Web;
+using Magazine_Palpay.Web.Models;
 using Magazine_Palpay.Enums;
 using Magazine_Palpay.Web.Services;
 using Magazine_Palpay.Web.ViewModels;

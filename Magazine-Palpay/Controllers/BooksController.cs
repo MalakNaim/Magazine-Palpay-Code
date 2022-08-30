@@ -1,5 +1,5 @@
 ﻿using Magazine_Palpay.Areas.Admin.Controllers;
-using Magazine_Palpay.Data;
+using Magazine_Palpay.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;

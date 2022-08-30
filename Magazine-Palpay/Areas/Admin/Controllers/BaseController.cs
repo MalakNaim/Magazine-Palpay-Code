@@ -1,13 +1,9 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
-using Magazine_Palpay.Data;
-using Magazine_Palpay.Enums;
+using Magazine_Palpay.Web;
 using Magazine_Palpay.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {

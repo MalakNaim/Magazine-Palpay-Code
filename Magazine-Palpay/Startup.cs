@@ -1,5 +1,9 @@
 using AspNetCoreHero.ToastNotification;
-using Magazine_Palpay.Data;
+using Magazine_Palpay.Web;
+using Magazine_Palpay.Web;
+using Magazine_Palpay.Web.Extensions;
+using Magazine_Palpay.Web.IdentityModels;
+using Magazine_Palpay.Web.Persistence;
 using Magazine_Palpay.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Magazine_Palpay
 {
@@ -25,11 +32,34 @@ namespace Magazine_Palpay
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseOracle(Configuration.GetConnectionString("oracle"), e => e.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName).UseOracleSQLCompatibility("11")));
-                
+            options.UseOracle(Configuration.GetConnectionString("oracle"),
+            e => e.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
+            .UseOracleSQLCompatibility("11"))).AddIdentity<FluentUser, FluentRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedAccount = true;
+
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+
+            });
+            //services
+            //.AddDatabaseContext<ApplicationDbContext>(GetIPAddress());
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddHttpClient<IExchangeRateService, ExchangeRateService>(c =>
             {
@@ -41,6 +71,8 @@ namespace Magazine_Palpay
                 config.IsDismissable = true;
                 config.Position = NotyfPosition.BottomLeft;
             });
+            services.AddSingleton<GlobalExceptionHandler>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +102,7 @@ namespace Magazine_Palpay
             {
                 endpoints.MapRazorPages();
             });
+            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseEndpoints(endpoints =>
             {
@@ -81,6 +114,12 @@ namespace Magazine_Palpay
                   //pattern: "{area:Admin}/{controller=Home}/{action=Index}/{id?}"
                // );
             });
+        }
+        private string GetIPAddress()
+        {
+            return Dns.GetHostAddresses(Dns.GetHostName())
+           .FirstOrDefault(ha => ha.AddressFamily == AddressFamily.InterNetwork)
+           .ToString();
         }
     }
 }

@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magazine-Palpay.Web", "Magazine-Palpay\Magazine-Palpay.Web.csproj", "{C38504F8-9DB8-4498-B65F-564B0BB90145}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magazine-Palpay.Data", "Magazine-Palpay.Data\Magazine-Palpay.Data.csproj", "{DF0678AB-B151-43A4-99A7-E30C0D025D56}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{C38504F8-9DB8-4498-B65F-564B0BB90145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C38504F8-9DB8-4498-B65F-564B0BB90145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C38504F8-9DB8-4498-B65F-564B0BB90145}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF0678AB-B151-43A4-99A7-E30C0D025D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF0678AB-B151-43A4-99A7-E30C0D025D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF0678AB-B151-43A4-99A7-E30C0D025D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF0678AB-B151-43A4-99A7-E30C0D025D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

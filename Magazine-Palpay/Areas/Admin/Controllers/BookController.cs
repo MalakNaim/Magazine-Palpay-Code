@@ -3,13 +3,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Magazine_Palpay.Data;
-using Magazine_Palpay.Data.Models;
+using Magazine_Palpay.Web;
+using Magazine_Palpay.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Magazine_Palpay.Web.Extensions;
 using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
+using Magazine_Palpay.Web.IdentityModels;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
@@ -17,8 +18,8 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
     public class BookController : BaseController
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        public BookController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        private readonly UserManager<FluentUser> _userManager;
+        public BookController(ApplicationDbContext context, UserManager<FluentUser> userManager)
         {
             _context = context;
             _userManager = userManager;

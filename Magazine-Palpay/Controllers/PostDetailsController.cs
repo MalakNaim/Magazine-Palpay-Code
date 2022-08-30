@@ -1,4 +1,4 @@
-﻿using Magazine_Palpay.Data;
+﻿using Magazine_Palpay.Web;
 using Magazine_Palpay.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

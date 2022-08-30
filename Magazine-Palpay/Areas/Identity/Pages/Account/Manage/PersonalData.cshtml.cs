@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Magazine_Palpay.Web.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,11 +9,11 @@ namespace Magazine_Palpay.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<FluentUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<FluentUser> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

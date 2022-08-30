@@ -1,5 +1,5 @@
-﻿using Magazine_Palpay.Data;
-using Magazine_Palpay.Data.Models;
+﻿using Magazine_Palpay.Web;
+using Magazine_Palpay.Web.Models;
 using Magazine_Palpay.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Magazine_Palpay.Web.IdentityModels;
 
 namespace Magazine_Palpay.Areas.Admin.Controllers
 {
@@ -19,9 +20,9 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
     public class PostController : BaseController
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<FluentUser> _userManager;
 
-        public PostController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public PostController(ApplicationDbContext context, UserManager<FluentUser> userManager)
         {
             _context = context;
             _userManager = userManager;

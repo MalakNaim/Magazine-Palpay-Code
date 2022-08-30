@@ -1,4 +1,4 @@
-﻿using Magazine_Palpay.Data.Models;
+﻿using Magazine_Palpay.Web.Models;
 using Magazine_Palpay.Web.Services;
 using Magazine_Palpay.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;

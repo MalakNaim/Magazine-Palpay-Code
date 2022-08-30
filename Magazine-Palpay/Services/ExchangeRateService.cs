@@ -1,4 +1,4 @@
-﻿using Magazine_Palpay.Data.Models;
+﻿using Magazine_Palpay.Web.Models;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;

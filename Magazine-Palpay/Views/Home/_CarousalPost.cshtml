@@ -1,5 +1,5 @@
 ﻿@using Magazine_Palpay.Web.ViewModels
-@model Tuple<List<Magazine_Palpay.Data.Models.Post>, CurrencyViewModel>
+@model Tuple<List<Magazine_Palpay.Web.Models.Post>, CurrencyViewModel>
 @{
 	var lst = Model.Item1.Where(x => !x.PostSubTypeId.HasValue && x.MediaType.Equals(1)).Take(3).ToList();
 } 

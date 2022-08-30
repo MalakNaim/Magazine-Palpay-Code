@@ -7,7 +7,10 @@
 // --------------------------------------------------------------------------------------------------
 
 using System.Linq;
+using Magazine_Palpay.Web.IdentityModels;
+using Magazine_Palpay.Web.Models;
 using Magazine_Palpay.Web.Settings;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Magazine_Palpay.Web.Extensions
@@ -28,7 +31,7 @@ namespace Magazine_Palpay.Web.Extensions
                 }
             }
 
-            builder.Entity<Data.Models.Post>(entity =>
+            builder.Entity<Post>(entity =>
             {
                 entity.ToTable(name: "POST");
 
@@ -48,9 +51,11 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasOne(e => e.PostType)
+                .WithMany(e => e.Post);
             }); 
             
-            builder.Entity<Data.Models.PostPhoto>(entity =>
+            builder.Entity<PostPhoto>(entity =>
             {
                 entity.ToTable(name: "POST_PHOTO");
 
@@ -64,20 +69,23 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
             });
 
-            builder.Entity<Data.Models.PostType>(entity =>
+            builder.Entity<PostType>(entity =>
             {
                 entity.ToTable(name: "POST_TYPE");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
                 entity.Property(e => e.Name).HasColumnName("NAME");
+                entity.Property(e => e.ParentId).HasColumnName("PARENT_ID");
                 entity.Property(e => e.CreatedAt).HasColumnName("CREATED_AT");
                 entity.Property(e => e.CreatedBy).HasColumnName("CREATED_BY");
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasMany(e => e.Post)
+                .WithOne(e => e.PostType);
             });
             
-            builder.Entity<Data.Models.Menu>(entity =>
+            builder.Entity<Menu>(entity =>
             {
                 entity.ToTable(name: "MENU");
 
@@ -95,7 +103,7 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
             });
             
-            builder.Entity<Data.Models.MagazineSetting>(entity =>
+            builder.Entity<MagazineSetting>(entity =>
             {
                 entity.ToTable(name: "MAGAZINE_SETTING");
 
@@ -118,7 +126,7 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
             });
             
-            builder.Entity<Data.Models.LastNews>(entity =>
+            builder.Entity<LastNews>(entity =>
             {
                 entity.ToTable(name: "LAST_NEWS");
 
@@ -131,9 +139,9 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
             }); 
             
-            builder.Entity<Data.Models.GalleryPhoto>(entity =>
+            builder.Entity<GalleryPhoto>(entity =>
             {
-                entity.ToTable(name: "GALLERY_PHOTO");
+                entity.ToTable(name: "GALLERY_PHOTOS");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
                 entity.Property(e => e.GalleryId).HasColumnName("GALLERY_ID");
@@ -143,9 +151,11 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasOne(e => e.Gallery)
+                .WithMany(e => e.GalleryPhoto);
             }); 
             
-            builder.Entity<Data.Models.Gallery>(entity =>
+            builder.Entity<Gallery>(entity =>
             {
                 entity.ToTable(name: "GALLERY");
 
@@ -157,9 +167,11 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasMany(e => e.GalleryPhoto)
+               .WithOne(e => e.Gallery);
             }); 
             
-            builder.Entity<Data.Models.Employee>(entity =>
+            builder.Entity<Employee>(entity =>
             {
                 entity.ToTable(name: "EMPLOYEE");
 
@@ -178,9 +190,11 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasOne(e => e.Department)
+                .WithMany(e => e.Employee);
             }); 
             
-            builder.Entity<Data.Models.Department>(entity =>
+            builder.Entity<Department>(entity =>
             {
                 entity.ToTable(name: "DEPARTMENT");
 
@@ -191,9 +205,11 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasMany(e => e.Employee)
+               .WithOne(e => e.Department);
             });
             
-            builder.Entity<Data.Models.BookCategory>(entity =>
+            builder.Entity<BookCategory>(entity =>
             {
                 entity.ToTable(name: "BOOK_CATEGORY");
 
@@ -204,9 +220,11 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasMany(e => e.Book)
+                .WithOne(e => e.BookCategory);
             }); 
             
-            builder.Entity<Data.Models.Book>(entity =>
+            builder.Entity<Book>(entity =>
             {
                 entity.ToTable(name: "BOOK");
 
@@ -221,16 +239,18 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
+                entity.HasOne(e => e.BookCategory)
+               .WithMany(e => e.Book);
             });
             
-            builder.Entity<Data.Models.Ads>(entity =>
+            builder.Entity<Ads>(entity =>
             {
                 entity.ToTable(name: "ADS");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
                 entity.Property(e => e.Head).HasColumnName("HEAD");
                 entity.Property(e => e.Body).HasColumnName("BODY");
-                entity.Property(e => e.StatDate).HasColumnName("STATE_DATE");
+                entity.Property(e => e.StatDate).HasColumnName("STAT_DATE");
                 entity.Property(e => e.EndDate).HasColumnName("END_DATE");
                 entity.Property(e => e.Image).HasColumnName("IMAGE");
                 entity.Property(e => e.Link).HasColumnName("LINK");
@@ -241,7 +261,83 @@ namespace Magazine_Palpay.Web.Extensions
                 entity.Property(e => e.UpdatedAt).HasColumnName("UPDATED_AT");
                 entity.Property(e => e.UpdatedBy).HasColumnName("UPDATED_BY");
                 entity.Property(e => e.IsDelete).HasColumnName("IS_DELETE");
-            });  
+            });
+
+            builder.Entity<FluentUser>(entity =>
+            {
+                entity.ToTable(name: "ASP_NET_USERS");
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.UserName).HasColumnName("USER_NAME");
+                entity.Property(e => e.NormalizedUserName).HasColumnName("NORMALIZED_USER_NAME");
+                entity.Property(e => e.Email).HasColumnName("EMAIL");
+                entity.Property(e => e.NormalizedEmail).HasColumnName("NORMALIZED_EMAIL");
+                entity.Property(e => e.EmailConfirmed).HasColumnName("EMAIL_CONFIRMED");
+                entity.Property(e => e.PasswordHash).HasColumnName("PASSWORD_HASH");
+                entity.Property(e => e.SecurityStamp).HasColumnName("SECURITY_STAMP");
+                entity.Property(e => e.ConcurrencyStamp).HasColumnName("CONCURRENCY_STAMP");
+                entity.Property(e => e.PhoneNumber).HasColumnName("PHONE_NUMBER");
+                entity.Property(e => e.PhoneNumberConfirmed).HasColumnName("PHONE_NUMBER_CONFIRMED");
+                entity.Property(e => e.TwoFactorEnabled).HasColumnName("TWO_FACTOR_ENABLED");
+                entity.Property(e => e.LockoutEnd).HasColumnName("LOCKOUT_END");
+                entity.Property(e => e.LockoutEnabled).HasColumnName("LOCKOUT_ENABLED");
+                entity.Property(e => e.AccessFailedCount).HasColumnName("ACCESS_FAILED_COUNT");
+            }); 
+            
+            builder.Entity<FluentRole>(entity =>
+            {
+                entity.ToTable(name: "ASP_NET_ROLES");
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Name).HasColumnName("NAME"); 
+                entity.Property(e => e.ConcurrencyStamp).HasColumnName("CONCURRENCY_STAMP");
+                entity.Property(e => e.NormalizedName).HasColumnName("NORMALIZED_NAME");
+            });
+
+            builder.Entity<FluentRoleClaim>(entity =>
+            {
+                entity.ToTable(name: "ASP_NET_ROLE_CLAIMS");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.ClaimType).HasColumnName("CLAIM_TYPE");
+                entity.Property(e => e.ClaimValue).HasColumnName("CLAIM_VALUE");
+                entity.Property(e => e.RoleId).HasColumnName("ROLE_ID");
+            });
+
+            builder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.ToTable("ASP_NET_USER_ROLES");
+
+                entity.Property(e => e.UserId).HasColumnName("USER_ID");
+                entity.Property(e => e.RoleId).HasColumnName("ROLE_ID");
+            });
+
+            builder.Entity<IdentityUserClaim<string>>(entity =>
+            {
+                entity.ToTable("ASP_NET_USER_CLAIMS");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.UserId).HasColumnName("USER_ID");
+                entity.Property(e => e.ClaimType).HasColumnName("CLAIM_TYPE");
+                entity.Property(e => e.ClaimValue).HasColumnName("CLAIM_VALUE");
+            });
+
+            builder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.ToTable("ASP_NET_USER_LOGINS");
+
+                entity.Property(e => e.UserId).HasColumnName("USER_ID");
+                entity.Property(e => e.LoginProvider).HasColumnName("LOGIN_PROVIDER");
+                entity.Property(e => e.ProviderKey).HasColumnName("PROVIDER_KEY");
+                entity.Property(e => e.ProviderDisplayName).HasColumnName("PROVIDER_DISPLAY_NAME");
+            });
+            builder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.ToTable("ASP_NET_USER_TOKENS");
+
+                entity.Property(e => e.UserId).HasColumnName("USER_ID");
+                entity.Property(e => e.LoginProvider).HasColumnName("LOGIN_PROVIDER");
+                entity.Property(e => e.Name).HasColumnName("NAME");
+                entity.Property(e => e.Value).HasColumnName("VALUE");
+            });
         }
     }
 }
