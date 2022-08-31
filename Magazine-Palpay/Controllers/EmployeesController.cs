@@ -20,7 +20,7 @@ namespace Magazine_Palpay.Controllers
         {
             int countRow = _context.Employee
                 .Where(x => !x.IsDelete).Count();
-            double perPage = 8;
+            double perPage = 12;
             double NumberOfPages = Math.Ceiling(countRow / perPage);
             if (page < 1 || page > NumberOfPages)
             {
