@@ -50,58 +50,60 @@
     padding-bottom: 15px !important;
     padding-left: 15px !important;
    }
-   .vwrap, .vitem {
-  height: 30px;
-  line-height: 30px;
+ .hwrap {
+  overflow: hidden; 
+  background: #eee;
 }
+.hmove { display: flex; }
 
-/* (B) FIXED WRAPPER */
-.vwrap {
-     background-color: #F2F2F2;
-    overflow: auto;
+.hitem {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+}
+ 
+@@keyframes tickerh {
+  0% { transform: translate3d(100%, 0, 0); }
+  100% { transform: translate3d(-400%, 0, 0); }
+}
+.hmove { animation: tickerh linear 15s infinite; }
+.hmove:hover { animation-play-state: paused; }
+.title {
+    background-color: #FB634F;
+    color: #FFF;
+    position: absolute;
+    font-weight: bold;
+    border-right: 2px solid #FFF;
+    top: 98px;
+    display: block;
+    /* height: 55px; */
+    vertical-align: middle;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 10;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 80%);
+    right: 367px;
+}
+/*.title {
+    background-color: #FB634F;
+    color: #FFF;
+    position: absolute;
+    right: 0;
+    font-weight: bold;
+    border-right: 2px solid #FFF;
+    top: 0;
+    display: block;
     height: 30px;
     vertical-align: middle;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-}
-
-
-.vitem { text-align: center; }
-
-.vmove { position: relative; }
-@@keyframes tickerv {
-  0% { bottom: 0; } /* FIRST ITEM */
-  30% { bottom: 30px; } /* SECOND ITEM */
-  60% { bottom: 60px; } /* THIRD ITEM */
-  90% { bottom: 90px; } /* FORTH ITEM */
-  100% { bottom: 0; } /* BACK TO FIRST */
-}
-.vmove {
-  animation-name: tickerv;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(1, 0, .5, 0);
-}
-.vmove:hover { animation-play-state: paused; }
-.vwrap .title {
-    background-color: #FB634F;
-        color: #FFF;
-        position: absolute;
-        right: 0;
-        font-weight: bold;
-        border-right: 2px solid #FFF;
-        top: 0;
-        display: block;
-        height: 30px;
-        vertical-align: middle;
-        line-height: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
-        z-index: 10;
-        box-shadow: 0px 0px 20px rgba(0,0,0,.8);
-    }
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 10;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.8);
+    }*/
 </style>
 </head>
 
@@ -243,23 +245,22 @@
 			</nav>
 	<!-- End nav -->
 		@{
-			if(ViewBag.News != null)
-			{
-			<div class="container">
-				<div class="row mt-6">
-					<div class="vwrap">
-					  <div class="title">آخر الأخبار</div>
-					 <div class="vmove">
-				 		@foreach(var item in ViewBag.News){
-						  <div class="vitem">@item.Title</div>
-						 } 
+				if(ViewBag.News != null)
+				{
+					<div class="container">
+						<div class="row mt-6">
+						 <div class="hwrap">
+						 <div class="title">آخر الأخبار</div>  
+						 <div class="hmove">
+				 				 @foreach(var item in ViewBag.News){
+								  <div class="hitem">@item.Title</div>
+								 } 
+							</div>
+						   </div> 
+						</div>
 					</div>
-					</div> 
-				</div>
-			</div>
-			}
-		
-			}
+				} 
+	    }
 			
 		</header>
 
