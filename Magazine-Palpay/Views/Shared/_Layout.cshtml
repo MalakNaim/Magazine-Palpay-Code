@@ -104,6 +104,27 @@
     z-index: 10;
     box-shadow: 0px 0px 20px rgba(0,0,0,.8);
     }*/
+	.ticker {
+    &__viewport {
+        background: #0093d0;
+        color: #fff;
+        overflow: hidden;
+        padding: 10px 0;
+    }
+    
+    &__list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+    
+    &__item {
+        display: inline-block;
+        white-space: nowrap;
+        padding-right: 40px;
+    }
+}
 </style>
 </head>
 
@@ -245,6 +266,13 @@
 			</nav>
 	<!-- End nav -->
 		@{
+			<div class="ticker__viewport">
+    <ul class="ticker__list" data-ticker="list">
+        <li class="ticker__item" data-ticker="item">First First First First First First First First First First First First First First First </li>
+        <li class="ticker__item" data-ticker="item">Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second </li>
+        <li class="ticker__item" data-ticker="item">Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third </li>
+    </ul>
+</div>
 				if(ViewBag.News != null)
 				{
 					<div class="container">
@@ -326,5 +354,43 @@
 			</div>
 		</footer>  
 		    @RenderSection("scripts", required: false)
+			<script>
+			var $ticker = $('[data-ticker="list"]'),
+    tickerItem = '[data-ticker="item"]'
+    itemCount = $(tickerItem).length,
+    viewportWidth = 0;
+
+function setupViewport(){
+    $ticker.find(tickerItem).clone().prependTo('[data-ticker="list"]');
+    
+    for (i = 0; i < itemCount; i ++){
+        var itemWidth = $(tickerItem).eq(i).outerWidth();
+        viewportWidth = viewportWidth + itemWidth;
+    }
+    
+    $ticker.css('width', viewportWidth);
+}
+
+function animateTicker(){
+    $ticker.animate({
+        marginLeft: -viewportWidth
+      }, 30000, "linear", function() {
+        $ticker.css('margin-left', '0');
+        animateTicker();
+      });
+}
+
+function initializeTicker(){
+    setupViewport();
+    animateTicker();
+    
+    $ticker.on('mouseenter', function(){
+        $(this).stop(true);
+    }).on('mouseout', function(){
+        animateTicker();
+    });
+}
+
+initializeTicker();</script>
 	</body>
 </html>
