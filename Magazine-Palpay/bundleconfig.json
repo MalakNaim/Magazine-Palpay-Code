@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/ui/css/skins/bundle-skin.css",
+    "inputFiles": [
+      "wwwroot/ui/css/skins/all.css",
+      "wwwroot/ui/css/skins/blue.css",
+      "wwwroot/ui/css/skins/orange.css",
+      "wwwroot/ui/css/skins/purple.css"
+    ],
+    "sourceMap": false,
+    "sourceMapRootPath": null,
+    "MostRecentWrite": "0001-01-01T00:00:00"
+  }
+]

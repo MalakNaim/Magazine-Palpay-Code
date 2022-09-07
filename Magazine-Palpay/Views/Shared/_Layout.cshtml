@@ -26,6 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="~/assets/media/logos/favicon.png" />
+	<link rel="stylesheet" href="~/ui/css/tricker/eocjs-newsticker.css"> 
     <partial name="_Styles" />
     <partial name="_Scripts" />
     @RenderSection("css", required: false)
@@ -50,81 +51,6 @@
     padding-bottom: 15px !important;
     padding-left: 15px !important;
    }
- .hwrap {
-  overflow: hidden; 
-  background: #eee;
-}
-.hmove { display: flex; }
-
-.hitem {
-  flex-shrink: 0;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  text-align: center;
-}
- 
-@@keyframes tickerh {
-  0% { transform: translate3d(100%, 0, 0); }
-  100% { transform: translate3d(-400%, 0, 0); }
-}
-.hmove { animation: tickerh linear 15s infinite; }
-.hmove:hover { animation-play-state: paused; }
-/*.title {
-    background-color: #FB634F;
-    color: #FFF;
-    position: absolute;
-    font-weight: bold;
-    border-right: 2px solid #FFF;
-    top: 98px;
-    display: block;
-    height: 55px; 
-    vertical-align: middle;
-    line-height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    z-index: 10;
-    box-shadow: 0px 0px 20px rgb(0 0 0 / 80%);
-    right: 367px;
-}*/
-/*.title {
-    background-color: #FB634F;
-    color: #FFF;
-    position: absolute;
-    right: 0;
-    font-weight: bold;
-    border-right: 2px solid #FFF;
-    top: 0;
-    display: block;
-    height: 30px;
-    vertical-align: middle;
-    line-height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    z-index: 10;
-    box-shadow: 0px 0px 20px rgba(0,0,0,.8);
-    }*/
-	.ticker {
-    &__viewport {
-        background: #0093d0;
-        color: #fff;
-        overflow: hidden;
-        padding: 10px 0;
-    }
-    
-    &__list {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-    }
-    
-    &__item {
-        display: inline-block;
-        white-space: nowrap;
-        padding-right: 40px;
-    }
-}
 </style>
 </head>
 
@@ -265,26 +191,17 @@
 				</div>
 			</nav>
 	<!-- End nav -->
-		@{
-			<div class="ticker__viewport">
-    <ul class="ticker__list" data-ticker="list">
-        <li class="ticker__item" data-ticker="item">First First First First First First First First First First First First First First First </li>
-        <li class="ticker__item" data-ticker="item">Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second Second </li>
-        <li class="ticker__item" data-ticker="item">Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third </li>
-    </ul>
-</div>
-				if(ViewBag.News != null)
+		@{  
+			if(ViewBag.News != null)
 				{
 					<div class="container">
 						<div class="row mt-6">
-						 <div class="hwrap">
-						 <div class="title">آخر الأخبار</div>  
-						 <div class="hmove">
-				 				 @foreach(var item in ViewBag.News){
-								  <div class="hitem">@item.Title</div>
-								 } 
-							</div>
-						   </div> 
+							<div id="ticker">
+							  <div class="title">آخر الأخبار</div> 
+							   @foreach(var item in ViewBag.News){
+								   <div id="example-5">@item.Title</div> 
+						       }  
+							</div> 
 						</div>
 					</div>
 				} 
@@ -354,43 +271,13 @@
 			</div>
 		</footer>  
 		    @RenderSection("scripts", required: false)
+			<script src="~/ui/css/tricker/eocjs-newsticker.js"></script>
 			<script>
-			var $ticker = $('[data-ticker="list"]'),
-    tickerItem = '[data-ticker="item"]'
-    itemCount = $(tickerItem).length,
-    viewportWidth = 0;
-
-function setupViewport(){
-    $ticker.find(tickerItem).clone().prependTo('[data-ticker="list"]');
-    
-    for (i = 0; i < itemCount; i ++){
-        var itemWidth = $(tickerItem).eq(i).outerWidth();
-        viewportWidth = viewportWidth + itemWidth;
-    }
-    
-    $ticker.css('width', viewportWidth);
-}
-
-function animateTicker(){
-    $ticker.animate({
-        marginLeft: -viewportWidth
-      }, 30000, "linear", function() {
-        $ticker.css('margin-left', '0');
-        animateTicker();
-      });
-}
-
-function initializeTicker(){
-    setupViewport();
-    animateTicker();
-    
-    $ticker.on('mouseenter', function(){
-        $(this).stop(true);
-    }).on('mouseout', function(){
-        animateTicker();
-    });
-}
-
-initializeTicker();</script>
+				$('#example-5').eocjsNewsticker({
+				  speed:      25,
+				  divider:    '***',
+				  direction:  'rtl'
+				});
+			</script>
 	</body>
 </html>
