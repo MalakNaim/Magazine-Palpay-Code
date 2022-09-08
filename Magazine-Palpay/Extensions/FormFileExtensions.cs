@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 //using SixLabors.ImageSharp;
 //using SixLabors.ImageSharp.Processing;
 using System;
+using System.Drawing;
 using System.IO;
 
 namespace Magazine_Palpay.Web.Extensions
@@ -34,5 +35,14 @@ namespace Magazine_Palpay.Web.Extensions
 
             return string.Empty;
         }
+
+        //public string ImageResize(Image img, int MaxWidth, int MaxHeight)
+        //{
+        //    if(img.Width > MaxWidth || img.Height > MaxHeight)
+        //    {
+
+        //    }
+
+        //}
     }
 }
