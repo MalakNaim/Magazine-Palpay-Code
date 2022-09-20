@@ -11,6 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
+using System.IO;
+using Magazine_Palpay.ViewModels;
+using Microsoft.Extensions.Options;
 
 namespace Magazine_Palpay.Controllers
 {
@@ -19,10 +24,11 @@ namespace Magazine_Palpay.Controllers
         private readonly ApplicationDbContext _context;
         private IExchangeRateService exchangeService;
         private IEnumerable<SelectListItem> currencies;
- 
-        public HomeController(ApplicationDbContext context, IExchangeRateService exchangeService)
-        {
+        private readonly MailSettings _settings;
+        public HomeController(ApplicationDbContext context, IExchangeRateService exchangeService, IOptions<MailSettings> settings)
+        { 
             _context = context;
+            _settings = settings.Value;
             this.exchangeService = exchangeService;
             currencies = GetCurrenciesAsync().Result ?? new List<SelectListItem>();
         }
@@ -141,6 +147,37 @@ namespace Magazine_Palpay.Controllers
             }
 
             return new SelectList(currencies, "Value", "Text");
+        }
+
+        [HttpPost]
+        public IActionResult PostEmail(ContactViewModel model)
+        {
+            using (MailMessage mm = new MailMessage(_settings.From, "admin@aspsnippets.com"))
+            {
+                mm.Subject = model.Subject;
+                mm.Body = "Name: " + model.Name + "<br /><br />Email: " + model.Email + "<br />" + model.Body;
+                mm.IsBodyHtml = true;
+
+                if (model.Attachment.Length > 0)
+                {
+                    string fileName = Path.GetFileName(model.Attachment.FileName);
+                    mm.Attachments.Add(new Attachment(model.Attachment.OpenReadStream(), fileName));
+                }
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Host = _settings.Host;
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential(_settings.UserName, _settings.Password);
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = _settings.Port;
+                    smtp.Send(mm);
+                    ViewBag.Message = "Email sent sucessfully.";
+                }
+            }
+
+            return View();
         }
     }
 }

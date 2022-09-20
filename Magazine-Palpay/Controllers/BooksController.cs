@@ -16,6 +16,7 @@ namespace Magazine_Palpay.Controllers
         {
             _context = context;
         }
+
         [HttpGet("Books/Index")]
         public IActionResult Index(int? category, string searchKey, int page = 0)
         {

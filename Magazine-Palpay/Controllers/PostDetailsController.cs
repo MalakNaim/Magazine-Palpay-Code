@@ -70,7 +70,6 @@ namespace Magazine_Palpay.Controllers
 			ViewBag.Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
 			var model = postDetails.Where(x => x.PostSubTypeId.Equals(subType)).ToList();
 			return View(model);
-
 		}
 	}
 }
