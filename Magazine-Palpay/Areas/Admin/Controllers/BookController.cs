@@ -105,7 +105,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 var imgName = string.Empty;
                 if (linkFile != null && linkFile.Length > 0)
                 {
-                    var file = await FormFileExtensions.SaveAsync(linkFile, "UploadFiles");
+                    var file = await FormFileExtensions.SaveFile(linkFile, "UploadFiles");
                     fileName = file;
                 }
                 
@@ -160,7 +160,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     var imgName = string.Empty;
                     if (linkFile != null && linkFile.Length > 0)
                     {
-                        var file = await FormFileExtensions.SaveAsync(linkFile, "UploadFiles");
+                        var file = await FormFileExtensions.SaveFile(linkFile, "UploadFiles");
                         fileName = file;
                     }
 

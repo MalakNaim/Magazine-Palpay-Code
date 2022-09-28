@@ -14,8 +14,8 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
-using Magazine_Palpay.ViewModels;
 using Microsoft.Extensions.Options;
+using Magazine_Palpay.MailModels;
 
 namespace Magazine_Palpay.Controllers
 {

@@ -13,27 +13,35 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Magazine_Palpay.Web.Extensions
 {
     public static class FormFileExtensions
     {
-        public static async System.Threading.Tasks.Task<string> SaveAsync(this IFormFile file, string folder)
+        public static async Task<string> SaveFile(this IFormFile file, string folder)
+        {
+            if (file.Length > 0)
+            {
+                string fileName = Path.GetFileName(file.FileName);
+                string fileExtension = Path.GetExtension(fileName);
+                string newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/assets/" + folder + "/", newFileName);
+
+                using (var stream = File.Create(path))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return newFileName;
+            }
+            return string.Empty;
+        }
+
+        public static async Task<string> SaveAsync(this IFormFile file, string folder)
         {
             if(file.Length > 0)
             {
-                //string fileName = Path.GetFileName(file.FileName);
-                //string fileExtension = Path.GetExtension(fileName);
-                //string newFileName = string.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
-                //string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/assets/"+folder+"/", newFileName);
-
-                //using (var stream = File.Create(path))
-                //{
-                //    await file.CopyToAsync(stream);
-                //}
-
-                //return newFileName;
-
                 using (var mStream = new MemoryStream())
                 {
                     string fileName = Path.GetFileName(file.FileName);
