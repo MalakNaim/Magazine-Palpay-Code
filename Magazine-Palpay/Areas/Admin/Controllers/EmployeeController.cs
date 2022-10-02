@@ -92,7 +92,18 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 if (empPhoto != null && empPhoto.Length > 0)
                 {
                     var file = await FormFileExtensions.SaveAsync(empPhoto, "UploadImages");
-                    fileName = file;
+                    if (!string.IsNullOrEmpty(file))
+                    {
+                        fileName = file;
+                    }
+                    else
+                    {
+                        Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                        return new JsonResult(new
+                        {
+                            isValid = false
+                        });
+                    }
                 }
                 employee.Photo = fileName;
                 employee.CreatedBy = _userManager.GetUserId(User);
@@ -100,7 +111,11 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 employee.IsDelete = false;
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return new JsonResult(new
+                {
+                    isValid = true,
+                    redirectUrl = "/Admin/Employee/Index"
+                });
             }
             return View(employee);
         }
@@ -140,7 +155,18 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     if (empPhoto != null && empPhoto.Length > 0)
                     {
                         var file = await FormFileExtensions.SaveAsync(empPhoto, "UploadImages");
-                        fileName = file;
+                        if (!string.IsNullOrEmpty(file))
+                        {
+                            fileName = file;
+                        }
+                        else
+                        {
+                            Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                            return new JsonResult(new
+                            {
+                                isValid = false
+                            });
+                        }
                     }
                     if (!string.IsNullOrEmpty(fileName))
                     {
@@ -160,12 +186,23 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     }
                     else
                     {
-                        throw;
+                        return new JsonResult(new
+                        {
+                            isValid = false
+                        });
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return new JsonResult(new
+                {
+                    isValid = true,
+                    redirectUrl = "/Admin/Employee/Index"
+                });
             }
-            return View(employee);
+            return new JsonResult(new
+            {
+                isValid = true,
+                redirectUrl = "/Admin/Employee/Index"
+            });
         }
 
         [HttpPost("Admin/Employee/Delete")]

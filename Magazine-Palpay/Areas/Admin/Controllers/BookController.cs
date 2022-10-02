@@ -97,7 +97,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         }
 
         [HttpPost("Admin/Book/Create")]
-        public async Task<IActionResult> Create(Book book, IFormFile image, IFormFile linkFile)
+        public async Task<IActionResult> Create(Book book, IFormFile imageBook, IFormFile linkFile)
         {
             if (ModelState.IsValid)
             {
@@ -109,10 +109,21 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     fileName = file;
                 }
                 
-                if (image != null && image.Length > 0)
+                if (imageBook != null && imageBook.Length > 0)
                 {
-                    var img = await FormFileExtensions.SaveAsync(image, "UploadImages");
-                    imgName = img;
+                    var img = await FormFileExtensions.SaveAsync(imageBook, "UploadImages");
+                    if (!string.IsNullOrEmpty(img))
+                    {
+                        imgName = img;
+                    }
+                    else
+                    {
+                        Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                        return new JsonResult(new
+                        {
+                            isValid = false
+                        });
+                    }
                 }
                 book.Image = imgName;
                 book.Link = fileName;
@@ -167,7 +178,18 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     if (imageBook != null && imageBook.Length > 0)
                     {
                         var img = await FormFileExtensions.SaveAsync(imageBook, "UploadImages");
-                        imgName = img;
+                        if (!string.IsNullOrEmpty(img))
+                        {
+                            imgName = img;
+                        }
+                        else
+                        {
+                            Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                            return new JsonResult(new
+                            {
+                                isValid = false
+                            });
+                        }
                     }
                     if (!string.IsNullOrEmpty(fileName))
                     {

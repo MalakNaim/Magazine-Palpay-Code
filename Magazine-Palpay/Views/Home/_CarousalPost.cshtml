@@ -1,7 +1,7 @@
 ﻿@using Magazine_Palpay.Web.ViewModels
 @model Tuple<List<Magazine_Palpay.Web.Models.Post>, CurrencyViewModel>
 @{
-	var lst = Model.Item1.Where(x => !x.PostSubTypeId.HasValue && x.MediaType.Equals(1)).Take(3).ToList();
+	var lst = Model.Item1.Where(x => x.OrderPlace.Equals(3) && x.MediaType.Equals(1)).Take(8).ToList();
 } 
 <style>
 .skin-orange .featured .details h1 a {
@@ -18,12 +18,22 @@
     opacity: 0.7;
     padding: 0 10px;
 } 
+
+.carousel-control.left, .carousel-control.right {
+   background-image:none !important;
+   filter:none !important;
+}
 </style>
     <div id="carousel-fixed-height" class="carousel slide" data-ride="carousel">  
      <ol class="carousel-indicators">
         <li data-target="#carousel-fixed-height" data-slide-to="0" class=""></li>
         <li data-target="#carousel-fixed-height" data-slide-to="1" class=""></li>
-        <li data-target="#carousel-fixed-height" data-slide-to="2" class="active"></li>
+        <li data-target="#carousel-fixed-height" data-slide-to="2" class=""></li>
+        <li data-target="#carousel-fixed-height" data-slide-to="3" class=""></li>
+        <li data-target="#carousel-fixed-height" data-slide-to="4" class=""></li>
+        <li data-target="#carousel-fixed-height" data-slide-to="5" class=""></li>
+        <li data-target="#carousel-fixed-height" data-slide-to="6" class=""></li>
+        <li data-target="#carousel-fixed-height" data-slide-to="7" class="active"></li>
       </ol>
 	  <div class="carousel-inner" role="listbox">
       @foreach(var item in lst)
@@ -57,60 +67,4 @@
 			<span class="ion-ios-arrow-right" aria-hidden="true" style="color:white;"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-@*
-
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			 	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="1"></li> 
-				<li data-target="#carousel-example-generic" data-slide-to="2"></li> 
-		</ol>
-
-		<div class="carousel-inner" role="listbox">  
-		@foreach(var item in lst)
-		{
-			var active = "";
-			if(lst.First() == item){
-				 active = "active";
-			}
-				<div class="item @active">
-					<article class="featured">
-						<div class="overlay"></div>
-						<figure>
-							<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
-						</figure>
-						<div class="details">
-							<div class="category"> 
-									<a href="/PostDetails/Details?id=@item.Id">@item.PostType.Name</a> 
-								</div>
-							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
-							<div class="time">@item.CreatedAt</div>
-						</div>
-					</article>
-				</div>
-			
-		}
-	 
-		</div>
-		<!-- Controls -->
-		<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			<span class="ion-ios-arrow-left" aria-hidden="true" style="color:white;"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			<span class="ion-ios-arrow-right" aria-hidden="true" style="color:white;"></span>
-			<span class="sr-only">Next</span>
-		</a>
- </div>*@
+    </div> 

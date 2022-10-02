@@ -117,7 +117,18 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 if (image != null && image.Length > 0)
                 {
                     var file = await FormFileExtensions.SaveAsync(image, "UploadImages");
-                    fileName = file;
+                    if (!string.IsNullOrEmpty(file))
+                    {
+                        fileName = file;
+                    }
+                    else
+                    {
+                        Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                        return new JsonResult(new
+                        {
+                            isValid = false
+                        });
+                    }
                 }
                 ads.Image = fileName;
                 ads.CreatedAt = DateTime.Now;
@@ -125,9 +136,16 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 ads.IsDelete = false;
                 _context.Add(ads);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return new JsonResult(new
+                {
+                    isValid = true,
+                    redirectUrl = "/Admin/Ads/Index"
+                });
             }
-            return View(ads);
+            return new JsonResult(new
+            {
+                isValid = false
+            });
         }
 
         [HttpGet("Admin/Ads/Edit")]
@@ -163,7 +181,18 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     if (image != null && image.Length > 0)
                     {
                         var file = await FormFileExtensions.SaveAsync(image, "UploadImages");
-                        fileName = file;
+                        if (!string.IsNullOrEmpty(file))
+                        {
+                            fileName = file;
+                        }
+                        else
+                        {
+                            Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                            return new JsonResult(new
+                            {
+                                isValid = false
+                            });
+                        }
                     }
                     if(!string.IsNullOrEmpty(fileName))
                     ads.Image = fileName; 
@@ -185,7 +214,11 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ads);
+            return new JsonResult(new
+            {
+                isValid = true,
+                redirectUrl = "/Admin/Ads/Index"
+            });
         }
        
         [HttpPost("Admin/Ads/Delete")]

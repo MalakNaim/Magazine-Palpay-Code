@@ -93,17 +93,32 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     if (photo != null || photo.Length > 0)
                     {
                         var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
-                        GalleryPhoto galleryPhoto = new GalleryPhoto();
-                        galleryPhoto.Photo = file;
-                        galleryPhoto.CreatedAt = DateTime.Now;
-                        galleryPhoto.CreatedBy = _userManager.GetUserId(User);
-                        galleryPhoto.IsDelete = false;
-                        galleryPhoto.GalleryId = gallery.Id;
-                        await _context.GalleryPhotos.AddAsync(galleryPhoto);
-                        await _context.SaveChangesAsync();
+                        if (!string.IsNullOrEmpty(file))
+                        {
+                            GalleryPhoto galleryPhoto = new GalleryPhoto();
+                            galleryPhoto.Photo = file;
+                            galleryPhoto.CreatedAt = DateTime.Now;
+                            galleryPhoto.CreatedBy = _userManager.GetUserId(User);
+                            galleryPhoto.IsDelete = false;
+                            galleryPhoto.GalleryId = gallery.Id;
+                            await _context.GalleryPhotos.AddAsync(galleryPhoto);
+                            await _context.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                            return new JsonResult(new
+                            {
+                                isValid = false
+                            });
+                        } 
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return new JsonResult(new
+                {
+                    isValid = true,
+                    redirectUrl = "/Admin/Gallery/Index"
+                });
             }
             return View(gallery);
         }
@@ -116,7 +131,8 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var gallery = await _context.Gallery.FindAsync(id);
+            var gallery = await _context.Gallery.Include(x => x.GalleryPhoto)
+                .Where(x=>x.Id.Equals(id)).FirstOrDefaultAsync();
             if (gallery == null)
             {
                 return NotFound();
@@ -142,14 +158,25 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                         if (photo != null || photo.Length > 0)
                         {
                             var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
-                            GalleryPhoto galleryPhoto = new GalleryPhoto();
-                            galleryPhoto.Photo = file;
-                            galleryPhoto.GalleryId = id;
-                            galleryPhoto.CreatedAt = DateTime.Now;
-                            galleryPhoto.CreatedBy = _userManager.GetUserId(User);
-                            galleryPhoto.IsDelete = false;
-                            await _context.GalleryPhotos.AddAsync(galleryPhoto);
-                            await _context.SaveChangesAsync();
+                            if (!string.IsNullOrEmpty(file))
+                            {
+                                GalleryPhoto galleryPhoto = new GalleryPhoto();
+                                galleryPhoto.Photo = file;
+                                galleryPhoto.CreatedAt = DateTime.Now;
+                                galleryPhoto.CreatedBy = _userManager.GetUserId(User);
+                                galleryPhoto.IsDelete = false;
+                                galleryPhoto.GalleryId = gallery.Id;
+                                await _context.GalleryPhotos.AddAsync(galleryPhoto);
+                                await _context.SaveChangesAsync();
+                            }
+                            else
+                            {
+                                Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                                return new JsonResult(new
+                                {
+                                    isValid = false
+                                });
+                            }
                         }
                     }
                     gallery.UpdatedAt = DateTime.Now;
@@ -166,10 +193,17 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     }
                     else
                     {
-                        throw;
+                        return new JsonResult(new
+                        {
+                            isValid = false
+                        });
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return new JsonResult(new
+                {
+                    isValid = true,
+                    redirectUrl = "/Admin/Gallery/Index"
+                });
             }
             return View(gallery);
         }

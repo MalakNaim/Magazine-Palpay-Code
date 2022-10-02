@@ -163,75 +163,122 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
         [HttpPost("Admin/Post/OnPostCreateOrEdit")]
         public async Task<IActionResult> OnPostCreateOrEditAsync(int id, Post post, IFormFile imgPost, List<IFormFile> postPhotos)
         {
-            if (ModelState.IsValid)
-            {
-                string fileName = "";
-                if (imgPost != null && imgPost.Length > 0)
+            try {
+                if (ModelState.IsValid)
                 {
-                    var file = await FormFileExtensions.SaveAsync(imgPost, "UploadImages");
-                   fileName = file;
-                } 
-                if (id == 0)
-                {
-                    if (!string.IsNullOrEmpty(post.VideoLink))
+                    string fileName = "";
+                    if (imgPost != null && imgPost.Length > 0)
                     {
-                        post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);
-                    }
-                    post.MainImage = fileName;
-                    post.CreatedAt = DateTime.Now; 
-                    post.CreatedBy = _userManager.GetUserId(User);
-                    post.IsDelete = false;
-                    await _context.Post.AddAsync(post);
-                    await _context.SaveChangesAsync();
-                    foreach (var photo in postPhotos)
-                    {
-                        if (photo != null || photo.Length > 0)
+                        var file = await FormFileExtensions.SaveAsync(imgPost, "UploadImages");
+                        if (!string.IsNullOrEmpty(file))
                         {
-                            var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
-                            PostPhoto postPhoto = new PostPhoto();
-                            postPhoto.PostId = post.Id;
-                            postPhoto.Photo = file;
-                            postPhoto.CreatedAt = DateTime.Now;
-                            postPhoto.CreatedBy = _userManager.GetUserId(User);
-                            postPhoto.IsDelete = false;
-                            await _context.PostPhoto.AddAsync(postPhoto);
-                            await _context.SaveChangesAsync();
+                            fileName = file;
+                        }
+                        else
+                        {
+                            Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                            return new JsonResult(new
+                            {
+                                isValid = false
+                            });
                         }
                     }
-
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(fileName))
+                    if (id == 0)
                     {
+                        if (!string.IsNullOrEmpty(post.VideoLink))
+                        {
+                            post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);
+                        }
                         post.MainImage = fileName;
-                    }
-                    foreach (var photo in postPhotos)
-                    {
-                        if (photo != null || photo.Length > 0)
+                        post.CreatedAt = DateTime.Now;
+                        post.CreatedBy = _userManager.GetUserId(User);
+                        post.IsDelete = false;
+                        await _context.Post.AddAsync(post);
+                        await _context.SaveChangesAsync();
+                        foreach (var photo in postPhotos)
                         {
-                            var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
-                            PostPhoto postPhoto = new PostPhoto();
-                            postPhoto.PostId = post.Id;
-                            postPhoto.Photo = file;
-                            postPhoto.CreatedAt = DateTime.Now;
-                            postPhoto.CreatedBy = _userManager.GetUserId(User);
-                            postPhoto.IsDelete = false;
-                            await _context.PostPhoto.AddAsync(postPhoto);
-                            await _context.SaveChangesAsync();
+                            if (photo != null || photo.Length > 0)
+                            {
+                                var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
+                                if (!string.IsNullOrEmpty(file))
+                                {
+                                    PostPhoto postPhoto = new PostPhoto();
+                                    postPhoto.PostId = post.Id;
+                                    postPhoto.Photo = file;
+                                    postPhoto.CreatedAt = DateTime.Now;
+                                    postPhoto.CreatedBy = _userManager.GetUserId(User);
+                                    postPhoto.IsDelete = false;
+                                    await _context.PostPhoto.AddAsync(postPhoto);
+                                    await _context.SaveChangesAsync();
+                                }
+                                else
+                                {
+                                    Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                                    return new JsonResult(new
+                                    {
+                                        isValid = false
+                                    });
+                                }
+                            }
                         }
+
                     }
-                    if (!string.IsNullOrEmpty(post.VideoLink))
+                    else
                     {
-                        post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);
+                        if (!string.IsNullOrEmpty(fileName))
+                        {
+                            post.MainImage = fileName;
+                        }
+                        foreach (var photo in postPhotos)
+                        {
+                            if (photo != null || photo.Length > 0)
+                            {
+                                var file = await FormFileExtensions.SaveAsync(photo, "UploadImages");
+                                if (!string.IsNullOrEmpty(file))
+                                {
+                                    PostPhoto postPhoto = new PostPhoto();
+                                    postPhoto.PostId = post.Id;
+                                    postPhoto.Photo = file;
+                                    postPhoto.CreatedAt = DateTime.Now;
+                                    postPhoto.CreatedBy = _userManager.GetUserId(User);
+                                    postPhoto.IsDelete = false;
+                                    await _context.PostPhoto.AddAsync(postPhoto);
+                                    await _context.SaveChangesAsync();
+                                }
+                                else
+                                {
+                                    Notify.Error("يجب أن يكون نوع الصورة .png, .jpg, .jpeg, .gif");
+                                    return new JsonResult(new
+                                    {
+                                        isValid = false
+                                    });
+                                }
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(post.VideoLink))
+                        {
+                            post.EmbedVideoLink = GetEmbedVideoLink(post.VideoLink);
+                        }
+                        post.UpdatedAt = DateTime.Now;
+                        post.UpdatedBy = _userManager.GetUserId(User);
+                        _context.Post.Update(post);
+                        await _context.SaveChangesAsync();
                     }
-                    post.UpdatedAt = DateTime.Now;
-                    post.UpdatedBy = _userManager.GetUserId(User);
-                    _context.Post.Update(post);
-                    await _context.SaveChangesAsync();
                 }
+                return new JsonResult(new
+                {
+                    isValid = true,
+                    redirectUrl = "/Admin/Post/Index"
+                });
             }
-            return RedirectToAction("Index");
+            catch(Exception ex)
+            {
+                Notify.Error(" فشلت عملية الإضافة، يرجى التأكد من حجم نص الخبر بأن لا يزيد عن 4000  حرف");
+                return new JsonResult(new
+                {
+                    isValid = false
+                });
+            }
         }
  
         [HttpPost("Admin/Post/Delete")]

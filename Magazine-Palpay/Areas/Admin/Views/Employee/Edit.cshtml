@@ -8,7 +8,7 @@
 <h4 class="mb-6 mt-3">تعديل موظف</h4>
 <hr />
 <div class="row">
-         <form asp-action="Edit" enctype="multipart/form-data">
+         <form asp-action="Edit" enctype="multipart/form-data" onsubmit="return jQueryModalPost(this)">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="row mb-6">

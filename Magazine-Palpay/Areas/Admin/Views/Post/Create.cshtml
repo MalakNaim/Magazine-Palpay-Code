@@ -8,7 +8,7 @@
  <link rel="stylesheet" href="~/assets/summernote-0.8.18-dist/summernote-lite.min.css" />
 <h2 class="py-3">@ViewData["Caption"]</h2>
 <hr />
-<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=0" method="post" enctype="multipart/form-data">
+<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=0" method="post" enctype="multipart/form-data" onsubmit="return jQueryModalPost(this)">
     <partial name="_CreateOrEdit" model="Model" /> 
 </form>
  

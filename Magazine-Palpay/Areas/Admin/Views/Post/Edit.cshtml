@@ -9,7 +9,7 @@
 
 <h2 class="py-3">@ViewData["Caption"]</h2>
 <hr />
-<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=@Model.Id" method="post" enctype="multipart/form-data">
+<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=@Model.Id" method="post" onsubmit="return jQueryModalPost(this)" enctype="multipart/form-data">
     <partial name="_CreateOrEdit" model="Model" />
 </form>
  
@@ -34,7 +34,6 @@
                 getSubPostType();
              });
           });
-        
 
         function getSubPostType() {
             $("#PostSubTypeId").select2({

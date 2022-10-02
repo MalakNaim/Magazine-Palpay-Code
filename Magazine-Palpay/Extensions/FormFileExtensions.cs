@@ -53,7 +53,16 @@ namespace Magazine_Palpay.Web.Extensions
                     var fileBytes = mStream.ToArray();
                     string s = Convert.ToBase64String(fileBytes);
                     file.OpenReadStream();
-                    Compressimage(path, "", fileBytes);
+                    string extension = Path.GetExtension(path);
+                    if (extension.ToLower() != ".png" && extension.ToLower() != ".gif" &&
+                        extension.ToLower() != ".jpeg" && extension.ToLower() != ".jpg")
+                    {
+                        return string.Empty;
+                    }
+                    else
+                    {
+                        Compressimage(path, "", fileBytes);
+                    }
                     return newFileName;
                 }
             }
@@ -131,8 +140,6 @@ namespace Magazine_Palpay.Web.Extensions
             catch (Exception ex)
             {
                 string exc = ex.Message;
-                throw;
-
             }
         }
 

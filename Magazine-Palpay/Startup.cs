@@ -1,4 +1,5 @@
 using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Magazine_Palpay.Web;
 using Magazine_Palpay.Web;
 using Magazine_Palpay.Web.Extensions;
@@ -72,12 +73,18 @@ namespace Magazine_Palpay
                 config.Position = NotyfPosition.BottomLeft;
             });
             services.AddSingleton<GlobalExceptionHandler>();
-
+            services.AddNotyf(config =>
+            {
+                config.DurationInSeconds = 30;
+                config.IsDismissable = true;
+                config.Position = NotyfPosition.BottomLeft;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseNotyf();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -33,7 +33,8 @@ namespace Magazine_Palpay.Controllers
                 .Where(x =>!string.IsNullOrEmpty(searchKey) ? x.Name.Contains(searchKey) : true)
                 .Where(x => !x.IsDelete && x.BookCategoryId == category
             || category == null || category == 0)
-                .Include(x => x.BookCategory).OrderByDescending(x => x.CreatedAt)
+                .Include(x => x.BookCategory)
+            .OrderByDescending(x => x.CreatedAt)
             .Skip(skipValue).Take((int)perPage).ToList();
             ViewBag.page = page;
             ViewBag.CategoryId = _context.BookCategory.Where(x=>!x.IsDelete).ToList(); 
