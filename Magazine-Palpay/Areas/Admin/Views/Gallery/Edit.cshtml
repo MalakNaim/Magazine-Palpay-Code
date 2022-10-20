@@ -30,7 +30,7 @@
             {
                <div class="col-md-2 mb-6">
                    <img src="~/assets/UploadImages/@item.Photo" class="img-thumbnail" style="width:200px; height:150px;"/>
-                   <a href="" imgId="@item.Id"><i class="las la-trash text-danger"></i></a>
+                   <a href="#" imgId="@item.Id" class="delBtn"><i class="las la-trash text-danger"></i></a>
                </div>
             }
         </div> 
@@ -41,7 +41,36 @@
         </form>
 </div>
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+      $(".delBtn").click(function(){ 
+          Swal.fire({
+          title: 'هل تريد حذف هذه الصورة',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'نعم، بالتأكيد',
+          cancelButtonText:"إلغاء"
+        }).then((result) => { 
+          if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url:'/Admin/Gallery/DeletePhoto?id=' +  $(this).attr("imgId") ,
+                 contentType: false,
+                processData: false,
+                success: function (res) { 
+                     Swal.fire('تمت عملية الحذف بنجاح');
+                     location.reload();
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+             });
+          }
+        });
+
+       });
+    </script>
 }

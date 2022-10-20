@@ -131,7 +131,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var gallery = await _context.Gallery.Include(x => x.GalleryPhoto)
+            var gallery = await _context.Gallery.Include(x => x.GalleryPhoto.Where(m=>!m.IsDelete))
                 .Where(x=>x.Id.Equals(id)).FirstOrDefaultAsync();
             if (gallery == null)
             {
@@ -214,6 +214,22 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             var gallery = await _context.Gallery.FindAsync(id);
             gallery.IsDelete = true;
             _context.Gallery.Update(gallery);
+            await _context.SaveChangesAsync();
+            Notify.Success("تمت عملية الحذف بنجاح");
+            return new JsonResult(new
+            {
+                isValid = true,
+                actionType = "redirect",
+                redirectUrl = "/Admin/Gallery/Index"
+            });
+        }
+
+        [HttpPost("Admin/Gallery/DeletePhoto")]
+        public async Task<JsonResult> DeletePhoto(int? id)
+        {
+            var galleryPhoto = await _context.GalleryPhotos.FindAsync(id);
+            galleryPhoto.IsDelete = true;
+            _context.GalleryPhotos.Update(galleryPhoto);
             await _context.SaveChangesAsync();
             Notify.Success("تمت عملية الحذف بنجاح");
             return new JsonResult(new
