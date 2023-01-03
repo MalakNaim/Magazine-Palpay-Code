@@ -12,11 +12,22 @@
 		<div class="row">
 			<div class="col-xs-6 col-md-4 sidebar" id="sidebar">
 				<div class="sidebar-title for-tablet">Sidebar</div>
-			    <aside>
+				<aside>
 					<div class="aside-body">
-						@Html.Partial("_Ads")
-					</div>
-				</aside>
+					 <a title="سجل الآن في تحدي القراءة" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSf1GmipQh_myvmHgbgXGATezlUw965hMEUpbvybrD8mGZ-94w/viewform?usp=pp_url">
+					  <img src="~/assets/images/read.jpeg" height="350" width="350" class="img-fulid img-thumbnail"/>
+					 </a>
+				  </div>
+				</aside> 
+				@{
+					if(!(ViewBag.Ads.Count == 0)){
+						<aside>
+							<div class="aside-body">
+								@Html.Partial("_Ads")
+							</div>
+						</aside>
+					}
+				} 
 				<aside>
 					<div class="aside-body">
 						@Html.Partial("_Currency")

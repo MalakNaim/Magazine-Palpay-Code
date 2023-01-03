@@ -46,6 +46,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             string sortColumnDirection = Request.Form["form[0][dir]"].FirstOrDefault();
             string head = form["Head"].ToString();
             string createdAt = form["CreatedAt"].ToString();
+            int.TryParse(form["OrderPlace"], out int orderPlace);
             int.TryParse(form["PostTypeId"], out int postTypeId);
             int.TryParse(form["PostSubType"], out int postSubType);
             int page_start = int.Parse(start);
@@ -78,6 +79,11 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 queryable = queryable.Where(x => x.PostSubTypeId.Equals(postSubType));
             }
 
+            if(orderPlace > 0)
+            {
+                queryable = queryable.Where(x => x.OrderPlace.Equals(orderPlace));
+            } 
+
             if (dateFrom != (DateTime)default)
             {
                 queryable = queryable.Where(pc => pc.CreatedAt.Date >= dateFrom.Date);
@@ -97,7 +103,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                     Published = x.PublishedPost == false ? "غير منشور" : "تم النشر",
                     PostType = GetPostType(x.PostTypeId),
                     PostSubType = x.PostSubTypeId == 0 || x.PostSubTypeId == null?"رئيسي" :GetPostType((int)x.PostSubTypeId),
-                    Order = x.OrderPlace == 1 ? "في القائمة" : "في الصفحة"
+                    Order = OrderPlaceName(x.OrderPlace)
                 }).ToList();
                
           
@@ -105,6 +111,23 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             var jsonData = new { data = data, recordsFiltered = productList.TotalCount, recordsTotal = productList.TotalCount };
                 return new JsonResult(jsonData);
             
+        }
+
+        public string OrderPlaceName(int oid)
+        {
+            if(oid == 1)
+            {
+                return "في القائمة";
+            }
+            else if(oid == 2)
+            {
+                return "في الصفحة";
+            } 
+            else if(oid == 3)
+            {
+                return "في السلايدر";
+            }
+            return string.Empty;
         }
 
         public string GetPostType(int id)

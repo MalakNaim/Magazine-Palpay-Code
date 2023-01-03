@@ -136,6 +136,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                 ads.IsDelete = false;
                 _context.Add(ads);
                 await _context.SaveChangesAsync();
+                Notify.Success("تمت عملية الإضافة بنجاح"); 
                 return new JsonResult(new
                 {
                     isValid = true,
@@ -177,6 +178,7 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 try
                 {
+                    var editAds = _context.Ads.Find(id);
                     string fileName = "";
                     if (image != null && image.Length > 0)
                     {
@@ -194,12 +196,27 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                             });
                         }
                     }
-                    if(!string.IsNullOrEmpty(fileName))
-                    ads.Image = fileName; 
-                    ads.UpdatedAt = DateTime.Now;
-                    ads.UpdatedBy = _userManager.GetUserId(User);
-                    _context.Update(ads);
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        editAds.Image = fileName;
+                    }
+                    editAds.Order = ads.Order;
+                    editAds.Body = ads.Body;
+                    editAds.EndDate = ads.EndDate;
+                    editAds.StatDate = ads.StatDate;
+                    editAds.Head = ads.Head;
+                    editAds.Owner = ads.Owner;
+                    editAds.Link = ads.Link;
+                    editAds.UpdatedAt = DateTime.Now;
+                    editAds.UpdatedBy = _userManager.GetUserId(User);
+                    _context.Ads.Update(editAds);
                     await _context.SaveChangesAsync();
+                    Notify.Success("تمت عملية التعديل بنجاح");
+                    return new JsonResult(new
+                    {
+                        isValid = true,
+                        redirectUrl = "/Admin/Ads/Index"
+                    });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -212,7 +229,6 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return new JsonResult(new
             {

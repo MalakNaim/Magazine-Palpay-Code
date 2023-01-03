@@ -1,7 +1,6 @@
 ﻿using Magazine_Palpay.Areas.Admin.Controllers;
 using Magazine_Palpay.Web;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -20,12 +19,13 @@ namespace Magazine_Palpay.Controllers
         [HttpGet("Books/Index")]
         public IActionResult Index(int? category, string searchKey, int page = 0)
         {
+            ViewBag.catID = category;
             int countRow = _context.Book.Where(x => !x.IsDelete).Count();
             double perPage = 6;
             double NumberOfPages = Math.Ceiling(countRow / perPage);
             if (page < 1 || page > NumberOfPages)
             {
-                page = 1;
+                page = 1;       
             }
             int skipValue = (page - 1) * (int)perPage;
             ViewBag.NumberOfPages = NumberOfPages;

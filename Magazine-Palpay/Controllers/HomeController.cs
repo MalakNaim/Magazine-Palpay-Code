@@ -42,7 +42,7 @@ namespace Magazine_Palpay.Controllers
                  .Include(x=>x.PostType).OrderByDescending(x=>x.CreatedAt)
                  .ToList();
             var Ads = _context.Ads.Where(x => !x.IsDelete
-            && x.EndDate >= today).ToList(); 
+            && x.EndDate >= today && !x.Order.Equals(1)).ToList(); 
             ViewBag.Ads = Ads; 
             ViewBag.Deals = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Deals) && x.MediaType.Equals(1)).FirstOrDefault();
             ViewBag.Campain = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.Campaines) && x.MediaType.Equals(1)).FirstOrDefault();

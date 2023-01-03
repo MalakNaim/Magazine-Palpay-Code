@@ -1,9 +1,8 @@
-﻿ 
- @{
+﻿ @{
     ViewData["Title"] = "المنشورات";
     ViewData["Caption"] = "إدارة المنشوارت";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
-}
+ }
 <link href="~/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css">
  
 <div class="row mb-5 justify-content-between">
@@ -29,12 +28,23 @@
             <select id="PostSubType" name="PostSubType" data-control="select2" data-placeholder="اختر متفرع النوع  ..." class="form-select form-select-solid">
                 <option value="0">اختر متفرع النوع </option>
             </select>
-        </div> 
-        <div class="col-md-3 fv-row">
-            <label class="fs-5 fw-bold mb-2">تاريخ الإضافة</label>
-            <input id="CreatedAt" class="form-control form-control-solid" />
+         </div> 
+         <div class="col-md-3 fv-row">
+            <label class="fs-5 fw-bold mb-2">ترتيب ظهور المنشور</label>
+            <select id="OrderPlace" name="OrderPlace" data-control="select2" data-placeholder="اختر  الترتيب ..." class="form-select form-select-solid">
+                <option value="0">اختر الترتيب </option>
+                <option value="3">في السلايدر</option> 
+                <option value="2">في الصفحة</option> 
+                <option value="1">في القائمة</option>
+            </select> 
+         </div>
         </div>
-    </div> 
+        <div class="row mb-5">
+            <div class="col-md-3 fv-row">
+                <label class="fs-5 fw-bold mb-2">تاريخ الإضافة</label>
+                <input id="CreatedAt" class="form-control form-control-solid" />
+            </div>
+        </div> 
     <div class="row mb-5 justify-content-between">
         <div class="col-md-9">
           
@@ -120,6 +130,7 @@
                     data.Head = $('#Head').val();
                     data.PostTypeId = $('#PostTypeId').val();
                     data.PostSubType = $('#PostSubType').val();
+                    data.OrderPlace = $('#OrderPlace').val();
                     data.CreatedAt = $('#CreatedAt').val();
                 }
             },

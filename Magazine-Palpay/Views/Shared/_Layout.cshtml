@@ -1,11 +1,12 @@
 ﻿@using Magazine_Palpay.Enums
 @using Microsoft.EntityFrameworkCore
- @inject ApplicationDbContext _context; 
+@inject ApplicationDbContext _context; 
 @{
 	var deals = (int)PostTypeEnum.Deals;
 	var campaines = (int)PostTypeEnum.Campaines;
 	var it = (int)PostTypeEnum.IT;
 	var fintech = (int)PostTypeEnum.Fintech; 
+	var cyper = (int)PostTypeEnum.Cyper; 
 	var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();
     var MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
     var Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
@@ -16,7 +17,8 @@
         .Include(x => x.PostType)
         .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
         && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).OrderByDescending(x => x.CreatedAt)
-		.Take(3).ToList(); 
+		.Take(6).ToList();  
+		var quiz = _context.Ads.Where(x => !x.IsDelete && x.Order.Equals(1)).ToList();
 	}
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -51,29 +53,62 @@
     padding-bottom: 15px !important;
     padding-left: 15px !important;
    }
+
+    @@media (max-width: 992px) {
+     .img-size{
+		 height:60px;
+		 width:390px;
+	 }
+    }
+
+    @@media (min-width: 992px) {
+        .img-size{
+		 height:80px;
+		 width:550px;
+	 }
+    }
+
 </style>
 </head>
 
 <body class="skin-orange">
 	@*<img src="~/ui/images/3.png"/>*@
-		<header class="primary">
+		<header class="primary mb-5">
 			<div class="firstbar">
 				<div class="container">
 					<div class="row"> 
+					@{
+						if(quiz.Count() > 0)
+						{ 
+							var lang = @quiz.FirstOrDefault().Owner;
+							if (lang.Contains("Arabic"))
+							{
+								<div class="col-md-6 m-2"></div>
+								foreach(var test in quiz)
+								{
+									<div class="col-md-6 m-2">
+										<a href="@test.Link" target="_blank">
+											<img src="~/assets/UploadImages/@test.Image" class="img-fluid img-size"/>
+										</a>
+									</div>
+								}
+							}
+							else
+							{
+								foreach(var test in quiz)
+								{
+									<div class="col-md-6 m-2">
+										<a href="@test.Link" target="_blank">
+											<img src="~/assets/UploadImages/@test.Image" class="img-fluid img-size"/>
+										</a>
+									</div>
+								}
+							}
+					    }
+				    }
 					</div>
 				</div>
-			</div>
-			<div class="container mb-5">
-				<div class="row">
-					<div class="col-md-6 m-2">
-						<img src="~/assets/images/ban1.png" height="80" width="550" />
-					</div>
-					<div class="col-md-6 m-2">
-						<img src="~/assets/images/ban1.png" height="80" width="550" />
-					</div>
-				</div>
-			</div>
-
+			</div> 
 			<!-- Start nav -->
 			<nav class="menu">
 				<div class="container">
@@ -94,6 +129,7 @@
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="/">الرئيسية</a></li>
+							<li><a href="/PostDetails/ByType?type=@cyper">الأمن السيبراني</a></li>
 							<li><a href="/PostDetails/ByType?type=@deals">الاتفاقيات</a></li>
 							<li><a href="/PostDetails/ByType?type=@campaines">الحملات </a></li> 
 							<li><a href="/PostDetails/ByType?type=@it">التحول الرقمي</a></li>
@@ -127,7 +163,7 @@
 												@if(ListNews != null){
 													@foreach(var item in ListNews)
 													{
-														<article class="article col-md-4 mini">
+														<article class="article col-md-4 mini my-15">
 															<div class="inner">
 																<figure>
 																	<a href="/PostDetails/Details?id=@item.Id">

@@ -9,6 +9,7 @@
         IT = 5,
         Fintech = 7,
         BankOfPalestine = 9, 
-        Employees = 21
+        Employees = 21,
+        Cyper = 76
     }
 }
