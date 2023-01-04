@@ -6,7 +6,6 @@
 	var campaines = (int)PostTypeEnum.Campaines;
 	var it = (int)PostTypeEnum.IT;
 	var fintech = (int)PostTypeEnum.Fintech; 
-	var cyper = (int)PostTypeEnum.Cyper; 
 	var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();
     var MultiNews = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.OtherNews)).ToList();
     var Social = postTypes.Where(x => x.ParentId.Equals((int)PostTypeEnum.Social)).ToList();
@@ -129,8 +128,7 @@
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="/">الرئيسية</a></li>
-							<li><a href="/PostDetails/ByType?type=@cyper">الأمن السيبراني</a></li>
-							<li><a href="/PostDetails/ByType?type=@deals">الاتفاقيات</a></li>
+ 							<li><a href="/PostDetails/ByType?type=@deals">الاتفاقيات</a></li>
 							<li><a href="/PostDetails/ByType?type=@campaines">الحملات </a></li> 
 							<li><a href="/PostDetails/ByType?type=@it">التحول الرقمي</a></li>
 							<li><a href="/PostDetails/ByType?type=@fintech">التكنولوجيا المالية</a></li>

@@ -2,13 +2,46 @@
 	<section class="search">
 			<div class="container">
 				<div class="row">
-					<form action="~/Books/Index?page=@ViewBag.page" method="get">
-				<div class="col-md-9"> 
+				<form action="~/Books/LoadAll" method="post" class="form-submit">
+					<div class="row" style="padding:5px 15px 0 15px;">
+						<div class="col-md-4"></div> 
+						<div class="col-md-4">
+							<aside>
+								<h2 class="aside-title">تصنيفات الكتب</h2>  
+								<div class="aside-body">
+									<select asp-items="@ViewBag.CategoryId" class ="form-control" id="category" name="category">
+									   <option value="0">اختر التصنيف</option>
+									</select> 
+								</div> 
+							</aside>
+						</div>
+						<div class="col-md-4">
+							<aside>
+								<h2 class="aside-title">البحث بالاسم</h2>
+								<div class="aside-body">
+ 									<div>
+										<div class="form-group">
+											<div class="input-group">
+												<input type="text" name="searchKey" class="form-control" placeholder="بحث بالاسم ...">
+												<div class="input-group-btn">
+													<button class="btn btn-primary" type="submit">
+														<i class="ion-search"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</aside>
+						</div> 
+					</div>
+				    <hr />
+				   <div class="col-md-12"> 
 						<div class="row">
 					@foreach(var book in Model.Where(x=>!x.IsDelete))
 					{
 
-						<article class="article col-md-4 pull-right">
+						<article class="article col-md-3 pull-right">
 							<div class="inner">
 								<figure>
 									<a href="~/assets/UploadFiles/@book.Link">
@@ -39,78 +72,48 @@
 								</div>
 							</div>
 						</article>   
-					}
-					
+					} 
 
-		          <div class="col-md-12 text-center">
-		            <ul class="pagination">
-						  @{
-								int prev = ViewBag.page;
-								prev--;
-							}
-		              <li class="prev"><a href="~/Books/Index?page=@prev"><i class="ion-ios-arrow-left"></i></a></li>
-					   @for (int i = 1; i <= ViewBag.NumberOfPages; i++)
-						{ 
+					  <div class="col-md-12 text-center">
+						<ul class="pagination">
+							  <input id="page" name="page" type="hidden"/>
+							  @{
+									int prev = ViewBag.page;
+									prev--;
+							   }
+						  <li class="prev"><a href="#" onclick="return pageNo(@prev)"><i class="ion-ios-arrow-left"></i></a></li>
+						   @for (int i = 1; i <= ViewBag.NumberOfPages; i++)
+							{ 
 								if(ViewBag.page == i)
 								{
-									<li class="active"><a href="~/Books/Index?page=@i">@i</a></li> 
+									<li class="active"><a href="#" onclick="return pageNo(@i)">@i</a></li> 
 								}
 								else
 								{
-									<li><a href="~/Books/Index?page=@i">@i</a></li> 
+									<li><a href="#" onclick="return pageNo(@i)">@i</a></li> 
 								} 
- 						}
-						@{
-							int next = ViewBag.page;
-							next++;
-						} 
-		              <li class="next"><a href="~/Books/Index?page=@next"><i class="ion-ios-arrow-right"></i></a></li>
-		            </ul> 
-		          </div>
+ 							}
+							@{
+								int next = ViewBag.page;
+								next++;
+							} 
+						  <li class="next"><a href="#" onclick="return pageNo(@next)"><i class="ion-ios-arrow-right"></i></a></li>
+						</ul> 
+					  </div>
 						</div>
-					</div>
-					<div class="col-md-3">
-						<aside>
-							<h2 class="aside-title">البحث</h2>
-							<div class="aside-body">
- 								<div>
-									<div class="form-group">
-										<div class="input-group">
-											<input type="text" name="searchKey" class="form-control" placeholder="بحث بالاسم ...">
-											<div class="input-group-btn">
-												<button class="btn btn-primary" type="submit">
-													<i class="ion-search"></i>
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</aside>
-						<aside>
-							<h2 class="aside-title">البحث</h2>
-							<div class="aside-body">
-								<div class="checkbox-group"> 
-									<div class="group-title">بحث حسب النوع</div>
-									<div class="form-group">
-										<label><input type="checkbox" name="category" value=""> الكل</label>
-									</div>
-									@foreach(var item in ViewBag.CategoryId)
-									{
-										<div class="form-group">
-										    <label><input type="checkbox" name="category" value="@item.Id"> @item.Name</label>
-						    			</div>
-									} 
-									 
-								</div>
-							</div>
-							<hr />
-							<button class="btn btn-primary" type="submit">
-								<i class="ion-search"></i>بحث
-							</button>
-						</aside>
 					</div> 
 					</form>
 				</div>
 			</div>
-	</section>                
+	</section>  
+	@section scripts{
+		<script type="text/javascript">
+		 function pageNo(page){
+		   $("input[name=page]").val(page);  
+		   $(".form-submit").submit();
+		 }
+		 $("#category").change(function(){
+			 $(".form-submit").submit();
+		 });
+		</script>
+	}
