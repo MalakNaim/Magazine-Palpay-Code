@@ -5,13 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
 }
 
-  <link rel="stylesheet" href="~/assets/summernote-0.8.18-dist/summernote-lite.min.css" />
-
-<h2 class="py-3">@ViewData["Caption"]</h2>
-<hr />
-<form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=@Model.Id" method="post" onsubmit="return jQueryModalPost(this)" enctype="multipart/form-data">
+ <link rel="stylesheet" href="~/assets/summernote-0.8.18-dist/summernote-lite.min.css" />
+ <h2 class="py-3">@ViewData["Caption"]</h2>
+ <hr />
+ <form role="form" class="form py-5 " action="/Admin/Post/OnPostCreateOrEdit?id=@Model.Id" method="post" onsubmit="return jQueryModalPost(this)" enctype="multipart/form-data">
     <partial name="_CreateOrEdit" model="Model" />
-</form>
+ </form>
  
 @section Scripts{
       <script src="~/assets/summernote-0.8.18-dist/summernote-lite.min.js"></script>
@@ -59,6 +58,5 @@
         }
     </script>
     <partial name="_ValidationScriptsPartial" />
-  
 }
 

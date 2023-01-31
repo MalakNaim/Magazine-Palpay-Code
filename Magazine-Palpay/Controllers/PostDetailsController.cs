@@ -36,7 +36,7 @@ namespace Magazine_Palpay.Controllers
 				ViewBag.PostSubType = string.Empty;
 			}
 			var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost)
-				 .Include(x => x.PostType).OrderByDescending(x => x.CreatedAt)
+				 .Include(x => x.PostType).OrderByDescending(x => x.Id)
 				 .ToList();
 			ViewBag.Posts = post.Where(x=>x.PostType.Equals((int)PostTypeEnum.OtherNews)).Take(6).ToList();
 			ViewBag.MainPosts = post.Where(x=> !x.PostSubTypeId.HasValue && x.MediaType.Equals(1)).Take(6).ToList();
@@ -51,7 +51,7 @@ namespace Magazine_Palpay.Controllers
 			var postDetails = _context.Post
 				.Include(x=>x.PostType)
 				.Where(x => !x.IsDelete && x.PostTypeId.Equals(type))
-				.OrderByDescending(x=>x.CreatedAt).ToList();
+				.OrderByDescending(x=>x.Id).ToList();
 			return View(postDetails); 
 		}
 
@@ -62,7 +62,7 @@ namespace Magazine_Palpay.Controllers
 			var postDetails = _context.Post
 				.Include(x => x.PostType)
 				.Where(x => !x.IsDelete && x.PublishedPost)
-				.OrderByDescending(x => x.CreatedAt).ToList();
+				.OrderByDescending(x => x.Id).ToList();
 			ViewBag.ListNews = postDetails.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) &&
 			x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).OrderByDescending(x => x.Id).ToList();
 			var postTypes = _context.PostType.Where(x => !x.IsDelete).ToList();

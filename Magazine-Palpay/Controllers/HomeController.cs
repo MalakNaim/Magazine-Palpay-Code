@@ -36,10 +36,10 @@ namespace Magazine_Palpay.Controllers
         public IActionResult Index()
         {
             var today = DateTime.Now.Date;
-            var news = _context.LastNews.Where(x => !x.IsDelete).OrderByDescending(x=>x.CreatedAt).ToList();
+            var news = _context.LastNews.Where(x => !x.IsDelete).OrderByDescending(x=>x.Id).ToList();
             ViewBag.News = news;
             var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost)
-                 .Include(x=>x.PostType).OrderByDescending(x=>x.CreatedAt)
+                 .Include(x=>x.PostType).OrderByDescending(x=>x.Id)
                  .ToList();
             var Ads = _context.Ads.Where(x => !x.IsDelete
             && x.EndDate >= today && !x.Order.Equals(1)).ToList(); 
@@ -104,7 +104,7 @@ namespace Magazine_Palpay.Controllers
             ViewBag.NumberOfPages = NumberOfPages;
             var postLst = _context.Post
                 .Where(x => !x.IsDelete && x.MediaType.Equals(2))
-                .Include(x => x.PostType).OrderByDescending(x => x.CreatedAt)
+                .Include(x => x.PostType).OrderByDescending(x => x.Id)
                 .Skip(skipValue).Take((int)perPage).ToList();
             ViewBag.page = page; 
             ViewBag.LastVideo = postLst.FirstOrDefault();
@@ -126,7 +126,7 @@ namespace Magazine_Palpay.Controllers
             ViewBag.NumberOfPages = NumberOfPages;
             var news = _context.Post
                 .Where(x => !x.IsDelete && x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) && x.MediaType.Equals(1))
-                .Include(x => x.PostType).OrderByDescending(x => x.CreatedAt)
+                .Include(x => x.PostType).OrderByDescending(x => x.Id)
                 .Skip(skipValue).Take((int)perPage).ToList();
             ViewBag.page = page;
             return View(news);

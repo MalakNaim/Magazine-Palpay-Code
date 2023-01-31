@@ -96,7 +96,7 @@
     <div class="tz-gallery"> 
         <div class="row">
             <ul class="item-list-round" data-magnific="gallery">
-            @foreach(var item in Model.GalleryPhoto.Where(x=>!x.IsDelete).OrderByDescending(x=>x.CreatedAt)){
+            @foreach(var item in Model.GalleryPhoto.Where(x=>!x.IsDelete).OrderByDescending(x=>x.Id)){
               	  <li class="col-sm-12 col-md-4">
                         <a href="~/assets/UploadImages/@item.Photo" class="lightbox" style="background-image: url('/assets/UploadImages/@item.Photo');"></a>
                   </li>
