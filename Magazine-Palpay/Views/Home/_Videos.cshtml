@@ -2,15 +2,25 @@
 @model Tuple<List<Magazine_Palpay.Web.Models.Post>, CurrencyViewModel>
     
 @{
-	var lst = Model.Item1.Where(x => x.MediaType.Equals(2)).Take(3).ToList();
+	var lst = Model.Item1.Where(x => x.MediaType.Equals(2)).Take(6).ToList();
 }
+<style>
+.videos{
+	background: rgb(0, 0, 0,0.9); 
+    padding: 15px;
+    border-radius: 5px;
+}
+b{
+	padding:10px;
+}
+</style>
     <h1 class="aside-title">الفيديوهات
 		<div class="carousel-nav" id="video-list-nav">
 			<div class="prev"><i class="ion-ios-arrow-left"></i></div>
 			<div class="next"><i class="ion-ios-arrow-right"></i></div>
 		</div>
 	</h1>
-	<div class="aside-body">
+	<div class="aside-body videos">
 		<ul class="video-list" data-youtube='"carousel":true, "nav": "#video-list-nav"'>
 			@foreach(var item in lst){
 				<li><iframe width="360" height="315" src="@item.EmbedVideoLink" 
@@ -19,5 +29,5 @@
 				allowfullscreen></iframe></li>
 			}
 		</ul>
-		<a href="/Home/VideoViewer">عرض المزيد من الفيديوهات</a> 
+		<a href="/Home/VideoViewer"><b>  عرض المزيد من الفيديوهات >></b></a> 
 	</div>

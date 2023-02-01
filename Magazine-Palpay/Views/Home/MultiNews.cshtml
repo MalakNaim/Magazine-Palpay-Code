@@ -1,4 +1,5 @@
 ﻿@model List<Magazine_Palpay.Web.Models.Post> 
+
 <section class="single" style="padding:15px !important;">
 <div class="container">
 	<div class="row">
@@ -7,7 +8,8 @@
 		<div class="col-md-8">
 			<header>
 				<h4 style="padding:40px;"> أخبار متنوعة و معلومات عامة</h4> 
-			</header>
+			</header> 
+	    </div> 
 		@foreach(var item in Model)
 		{
 			<article class="col-md-12 article-list">
@@ -37,7 +39,6 @@
 				
 			</article>
 	     }
-	  </div>
   </div>
     <div class="col-md-12 text-center">
 		<ul class="pagination">

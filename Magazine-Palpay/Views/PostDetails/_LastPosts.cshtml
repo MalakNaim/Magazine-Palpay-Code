@@ -1,4 +1,7 @@
-﻿    <div class="aside-body">
+﻿@using Magazine_Palpay.Web.ViewModels
+@using Magazine_Palpay.Enums
+ 
+   <div class="aside-body">
 	@foreach(var item in ViewBag.Posts)
 	{
 		    <article class="article-mini">
@@ -10,7 +13,6 @@
 						</figure>
 						<div class="padding">
 							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
-								<p>انقر هنا لمعرفة مزيد تفاصيل الخبر</p>
 						</div>
 					</div>
 				</article> 

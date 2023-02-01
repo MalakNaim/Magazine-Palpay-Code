@@ -6,19 +6,33 @@
 
 <section class="home" style="padding:15px !important;">
 	<div class="container">
-		<div class="row">
-
+		@*<div class="row">
+			<div class="col-md-3">
+				<img src="~/assets/UploadImages/c8d61f19-2417-4f5d-90b6-882396651ddf.jpeg" width="275" height="400" class="img-fluid" alt=""/>
+			</div>
+			<div class="col-md-3">
+				<img src="~/assets/UploadImages/c8d61f19-2417-4f5d-90b6-882396651ddf.jpeg" width="275" height="400" class="img-fluid" alt=""/>
+            </div>
+			<div class="col-md-6">
+			  @Html.Partial("_CarousalPost")
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6 col-md-4 sidebar" id="sidebar">
+			<div class="col-md-3"></div> 
+			<div class="col-md-3"></div> 
+			<div class="col-md-3"></div> 
+			<div class="col-md-3"></div> 
+		</div>*@
+		<div class="row">
+			<div class="col-xs-6 col-md-3 sidebar" id="sidebar">
 				<div class="sidebar-title for-tablet">Sidebar</div>
-				@*<aside>
+				<aside>
 					<div class="aside-body">
 					 <a title="سجل الآن في تحدي القراءة" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSf1GmipQh_myvmHgbgXGATezlUw965hMEUpbvybrD8mGZ-94w/viewform?usp=pp_url">
 					  <img src="~/assets/images/read.jpeg" height="350" width="350" class="img-fulid img-thumbnail"/>
 					 </a>
 				  </div>
-				</aside> *@
+				</aside> 
 				@{
 					if(!(ViewBag.Ads.Count == 0)){
 						<aside>
@@ -39,6 +53,33 @@
 				<aside>
 					<h1 class="aside-title">آخر الأخبار <a href="/Home/MultiNews" class="all">عرض الكل <i class="ion-ios-arrow-right"></i></a></h1>
 					@Html.Partial("_LastPosts")
+				</aside> 
+				<aside id="sponsored">
+					<h1 class="aside-title">موظفو العام 2022</h1>
+					<div class="aside-body">
+						<ul class="sponsored">
+							<li>
+								<a href="~/assets/images/yearEmp/mahmoud.png" target="_blank" title="موظف الابتكار: محمود البطراوي">
+									<img src="~/assets/images/yearEmp/mahmoud.png" class="img-fulid img-thumbnail" alt="محمود البطراوي">
+								</a>
+							</li> 
+							<li>
+								<a href="~/assets/images/yearEmp/sanaa.png" target="_blank" title="الموظف المتميز: سناء يحيى">
+									<img src="~/assets/images/yearEmp/sanaa.png" class="img-fulid img-thumbnail" alt="سناء يحيى">
+								</a>
+							</li> 
+							<li>
+								<a href="~/assets/images/yearEmp/ihsan.png" target="_blank" title="الموظف المثابر: إحسان عواد">
+									<img src="~/assets/images/yearEmp/ihsan.png" class="img-fulid img-thumbnail" alt="إحسان عواد">
+								</a>
+							</li> 
+							<li>
+								<a href="~/assets/images/yearEmp/rashad.png" target="_blank" title="الموظف المثابر:رشاد أبو رحمة">
+									<img src="~/assets/images/yearEmp/rashad.png" class="img-fulid img-thumbnail" alt="رشاد أبو رحمة">
+								</a>
+							</li> 
+						</ul>
+					</div>
 				</aside>
 				<aside>
 					<div class="aside-body">
@@ -58,35 +99,8 @@
 					</div>
 				</aside>
 			
-				<aside id="sponsored" style="display:none;">
-					<h1 class="aside-title">Sponsored</h1>
-					<div class="aside-body">
-						<ul class="sponsored">
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-							<li>
-								<a href="#">
-									<img src="~/ui/images/sponsored.png" alt="Sponsored">
-								</a>
-							</li> 
-						</ul>
-					</div>
-				</aside>
 			</div>
-			<div class="col-md-8 col-sm-12 col-xs-12"> 
+			<div class="col-md-9 col-sm-12 col-xs-12">
 				@Html.Partial("_CarousalPost")
 				<div class="line">
 					<div>الأخبار الرئيسية</div>
@@ -96,7 +110,7 @@
 				</div>
 				<div class="line top">
 					<div>تصفح أخبار أخرى</div>
-				</div>
+				</div> 
 				<div class="row">
 					@Html.Partial("_OtherPosts")
 				</div>

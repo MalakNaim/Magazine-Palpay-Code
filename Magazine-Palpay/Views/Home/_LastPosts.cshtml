@@ -3,7 +3,7 @@
 @model Tuple<List<Magazine_Palpay.Web.Models.Post>, CurrencyViewModel>  
 
 @{
-	var lst = Model.Item1.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) && x.MediaType.Equals(1)).Take(6).ToList();
+	var lst = Model.Item1.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) && x.MediaType.Equals(1) && x.OrderPlace.Equals(2)).Take(6).ToList();
 }
    <div class="aside-body">
 	@foreach(var item in lst)
@@ -17,7 +17,6 @@
 						</figure>
 						<div class="padding">
 							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
-								<p>انقر هنا لمعرفة مزيد تفاصيل الخبر</p>
 						</div>
 					</div>
 				</article> 

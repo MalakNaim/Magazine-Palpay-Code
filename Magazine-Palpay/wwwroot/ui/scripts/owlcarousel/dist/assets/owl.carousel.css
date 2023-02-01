@@ -28,6 +28,7 @@ body { direction: rtl ; }
     line-height: 0;
     height: 0; }
   .owl-carousel .owl-stage-outer {
+    height:200px !important;
     position: relative;
     overflow: hidden;
     /* fix for flashing background */

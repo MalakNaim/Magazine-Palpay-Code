@@ -19,12 +19,15 @@
         color: #fff;
         background: #FB634F;
     }
-
+    .color-white{
+        color:white;
+    }
     .wrapper {
-        /*width: 370px;*/
+       /* width: 370px;*/
+        background: rgb(0, 0, 0,0.65);
         padding: 30px;
         border-radius: 7px;
-        background: #fff;
+       /* background: #fff;*/
         box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.05);
     }
 
@@ -32,6 +35,7 @@
         font-size: 28px;
         font-weight: 500;
         text-align: center;
+        color:white;
     }
 
     .wrapper article {
@@ -55,6 +59,7 @@
         font-size: 17px;
         padding: 0 15px;
         border: 1px solid #999;
+        color:#000;
     }
 
     article input:focus {
@@ -71,12 +76,13 @@
 
     .drop-list .select-box {
         display: flex;
-        width: 115px;
+        width: 66px; /*115px;*/
         height: 45px;
         align-items: center;
         border-radius: 5px;
         justify-content: center;
         border: 1px solid #999;
+        color:#fff;
     }
 
     .select-box img {
@@ -119,7 +125,7 @@
         color: #fff;
         font-size: 17px;
         cursor: pointer;
-        background: #FB634F;
+        background: #fb634f;
         transition: 0.3s ease;
     }
 
@@ -128,7 +134,7 @@
     }
 
     article button:hover {
-        background: #FC624D;
+        background: #000;
     }
 
    @@media only screen and (max-width: 600px) { 
@@ -146,10 +152,10 @@
 </style>
     <article class="article-mini"> 
          <div class="wrapper">
-            <header>تحويل العملات</header>
+            <header class="color-white">تحويل العملات</header>
             <article>
                 <div class="amount">
-                    <p>القيمة</p>
+                    <p class="color-white">القيمة</p>
                     <input asp-for="Item2.Amount" placeholder="0.00" value="@Model.Item2.Amount">
                 </div>
                 <div class="drop-list">
@@ -175,15 +181,15 @@
                     <div class="currency">
                         <div class="row">
                             <input type="hidden" asp-for="Item2.Rate" value="@Model.Item2.Rate"/>
-                        <h5 class="text-center" id="resultRate">
+                        <h5 class="text-center color-white" id="resultRate">
                             @(Model.Item2.Format(Decimal.Round(Model.Item2.Amount * (decimal)Model.Item2.Rate,4))) @Model.Item2.ToSelectedCode
                         </h5>
                         </div>
-                        <div class="row pt-3">
-                            <p class="text-black-50" id="fromCode">@Model.Item2.FromSelectedCode 1 = @Model.Item2.OneUnitFromRate @Model.Item2.ToSelectedCode  </p>
+                        <div class="row pt-3 text-center">
+                            <b class="color-white" id="fromCode">@Model.Item2.FromSelectedCode 1 = @Model.Item2.OneUnitFromRate @Model.Item2.ToSelectedCode  </b>
                         </div>
-                        <div class="row">
-                            <p class="text-black-50" id="toCode">@Model.Item2.ToSelectedCode 1 = @Model.Item2.OneUnitToRate @Model.Item2.FromSelectedCode  </p>
+                        <div class="row text-center">
+                            <b class="color-white" id="toCode">@Model.Item2.ToSelectedCode 1 = @Model.Item2.OneUnitToRate @Model.Item2.FromSelectedCode  </b>
                         </div>
                     </div>
 

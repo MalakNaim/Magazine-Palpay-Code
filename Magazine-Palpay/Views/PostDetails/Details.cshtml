@@ -3,11 +3,13 @@
 		<section class="single" style="padding:15px !important;">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 sidebar" id="sidebar">
+					<div class="col-md-3 sidebar" id="sidebar">
 					<aside>
+						@if(!(ViewBag.Ads.Count == 0)){  
 						<div class="aside-body">
 							@Html.Partial("_Ads")
 						</div>
+						}
 					</aside>
 			    <aside> 
 					@Html.Partial("_Videos")  
@@ -15,6 +17,33 @@
 				<aside>
 					<h1 class="aside-title">آخر الأخبار <a href="/Home/MultiNews" class="all">عرض الكل <i class="ion-ios-arrow-right"></i></a></h1>
 					@Html.Partial("_LastPosts")
+				</aside>
+				<aside id="sponsored">
+					<h1 class="aside-title">موظفو العام 2022</h1>
+					<div class="aside-body">
+						<ul class="sponsored">
+							<li>
+								<a href="~/assets/images/yearEmp/mahmoud.png" target="_blank" title="موظف الابتكار: محمود البطراوي">
+									<img src="~/assets/images/yearEmp/mahmoud.png" class="img-fulid img-thumbnail" alt="محمود البطراوي">
+								</a>
+							</li> 
+							<li>
+								<a href="~/assets/images/yearEmp/sanaa.png" target="_blank" title="الموظف المتميز: سناء يحيى">
+									<img src="~/assets/images/yearEmp/sanaa.png" class="img-fulid img-thumbnail" alt="سناء يحيى">
+								</a>
+							</li> 
+							<li>
+								<a href="~/assets/images/yearEmp/ihsan.png" target="_blank" title="الموظف المثابر: إحسان عواد">
+									<img src="~/assets/images/yearEmp/ihsan.png" class="img-fulid img-thumbnail" alt="إحسان عواد">
+								</a>
+							</li> 
+							<li>
+								<a href="~/assets/images/yearEmp/rashad.png" target="_blank" title="الموظف المثابر:رشاد أبو رحمة">
+									<img src="~/assets/images/yearEmp/rashad.png" class="img-fulid img-thumbnail" alt="رشاد أبو رحمة">
+								</a>
+							</li> 
+						</ul>
+					</div>
 				</aside>
 				<aside>
 					<div class="aside-body">
@@ -34,7 +63,7 @@
 					</div>
 				</aside>
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-9">
 					@Html.Partial("_PostDetails")
 						<div class="line"><div>تصفح أيضاً</div></div>
 						<div class="row">
