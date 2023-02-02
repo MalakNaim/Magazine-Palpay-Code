@@ -7,29 +7,21 @@
 
 @foreach(var item in ViewBag.MainPosts)
 	{
-		<div class="col-md-6 col-sm-6 col-xs-12">
-		<article class="article related box-size">
-			<div class="inner">
-				<figure>
-					<a href="/PostDetails/Details?id=@item.Id">
-						<img src="~/assets/UploadImages/@item.MainImage">
-					</a>
-				</figure>
-				<div class="padding">
-					@if(@item.Head.Length <= 31)
-					{
-						<h2><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h2>
-					}
-					else
-					{
-						<h2><a href="/PostDetails/Details?id=@item.Id">@item.Head</a><p style="color:white;">test test</p></h2>
-					}
-					<div class="detail">
-						<div class="category"><a href="#">@item.PostType.Name</a></div>
-						@*<div class="time">@item.CreatedAt</div>*@
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class='normal' style="margin:10px 0;">
+					<div class='module'>
+					<div class='thumbnail'>
+						<a href="/PostDetails/Details?id=@item.Id">
+							<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head"> 
+ 						</a>
+						<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
 					</div>
-				</div>
-			</div>
-		</article>
+					<div class='content'>
+						<a href="/PostDetails/Details?id=@item.Id" class="color-white"><div class="category">التفاصيل</div></a>
+						<span class="color-orange">@item.PostType.Name</span>
+						<h1 class='m-title'>@item.Head</h1>
+					</div>
+					</div>
+				</div> 
 		</div>
 	}

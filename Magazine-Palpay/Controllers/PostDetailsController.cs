@@ -38,8 +38,8 @@ namespace Magazine_Palpay.Controllers
 			var post = _context.Post.Where(x => !x.IsDelete && x.PublishedPost)
 				 .Include(x => x.PostType).OrderByDescending(x => x.Id)
 				 .ToList();
-			ViewBag.Posts = post.Where(x=>x.PostType.Equals((int)PostTypeEnum.OtherNews)).Take(6).ToList();
-			ViewBag.MainPosts = post.Where(x=> !x.PostSubTypeId.HasValue && x.MediaType.Equals(1)).Take(6).ToList();
+			ViewBag.Posts = post.Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews) && x.MediaType.Equals(1) && x.OrderPlace.Equals(2)).Take(6).ToList();
+			ViewBag.MainPosts = post.Where(x=> !x.PostSubTypeId.HasValue && x.MediaType.Equals(1)).Take(12).ToList();
 			ViewBag.Videos = post.Where(x=> x.MediaType.Equals(2)).Take(6).ToList();
 			return View(details);
 		}

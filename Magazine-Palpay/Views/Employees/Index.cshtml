@@ -15,35 +15,22 @@
 			     </header>
 			@foreach(var employee in Model.OrderBy(x=>x.Order))
 					{
-						<article class="article col-md-3 pull-right">
-							<div class="inner">
-								<figure>
-									<a href="#">
-										<img src="~/assets/UploadImages/@employee.Photo" style="width:250px; height:250px;">
-									</a>
-								</figure>
-								<div class="padding"> 
-									<h2>@employee.Name</h2> 
-									@if(@employee.JobTitle.Length < 34){
-								        <P>@employee.JobTitle 
-										</P>
-								        <p style="color:white;">
-											test
-										</p>
-									}
-									else
-									{
-										<P>@employee.JobTitle</P>  
-									}
-							       <div class="detail"> 
- 										<div class="category" >
-												<a href="#">@employee.Department.Name</a>
-									    </div>
-									</div>
-									
+					 <div class="col-md-3 pull-right">
+							<div class='normal' style="margin:10px 0;">
+								<div class='module'>
+								<div class='thumbnail'>
+									<a href="~/assets/UploadImages/@employee.Photo" target="_blank">
+										<img src="~/assets/UploadImages/@employee.Photo" alt="@employee.Name"> 
+ 									</a>
+ 								</div>
+								<div class='content'>
+ 									<span class="color-orange">@employee.Department.Name</span>
+									<h1 class='m-title'>@employee.Name</h1>
+									<P>@employee.JobTitle</P>  
 								</div>
-							</div>
-						</article>   
+								</div>
+						   </div>
+						</div>
 					}
 		          
 			   <div class="col-md-12 text-center">

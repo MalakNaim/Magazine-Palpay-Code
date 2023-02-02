@@ -3,26 +3,32 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+.span-category{
+    background-color: #FB634F;
+    border-radius: 5px;
+    padding: 0 5px;
+    color: white;
+}
+.span-title{
+	background-color: rgb(0,0,0,0.6);
+    line-height: initial;
+    border-radius: 5px;
+}
+</style>
 <section class="home" style="padding:15px !important;">
 	<div class="container">
-		@*<div class="row">
-			<div class="col-md-3">
-				<img src="~/assets/UploadImages/c8d61f19-2417-4f5d-90b6-882396651ddf.jpeg" width="275" height="400" class="img-fluid" alt=""/>
-			</div>
-			<div class="col-md-3">
-				<img src="~/assets/UploadImages/c8d61f19-2417-4f5d-90b6-882396651ddf.jpeg" width="275" height="400" class="img-fluid" alt=""/>
-            </div>
-			<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-12">
 			  @Html.Partial("_CarousalPost")
 			</div>
 		</div>
+		<div class="row" style="margin-top:30px;">
+			  @Html.Partial("_MainCol-3")
+		</div>
 		<div class="row">
-			<div class="col-md-3"></div> 
-			<div class="col-md-3"></div> 
-			<div class="col-md-3"></div> 
-			<div class="col-md-3"></div> 
-		</div>*@
+			  @Html.Partial("_MainCol-6")
+		</div>
 		<div class="row">
 			<div class="col-xs-6 col-md-3 sidebar" id="sidebar">
 				<div class="sidebar-title for-tablet">Sidebar</div>
@@ -81,27 +87,9 @@
 						</ul>
 					</div>
 				</aside>
-				<aside>
-					<div class="aside-body">
-						<form class="newsletter">
-							<div class="icon">
-								<i class="ion-ios-email-outline"></i>
-								<h1>تابعنا</h1>
-							</div>
-							<div class="input-group">
-								<input type="email" class="form-control email" placeholder="بريدك الالكتروني">
-								<div class="input-group-btn">
-									<button class="btn btn-primary"><i class="ion-paper-airplane"></i></button>
-								</div>
-							</div>
-							<p>أرسل بريدك الالكتروني ليصلك كل جديد</p>
-						</form>
-					</div>
-				</aside>
-			
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
-				@Html.Partial("_CarousalPost")
+				@*@Html.Partial("_CarousalPost")*@
 				<div class="line">
 					<div>الأخبار الرئيسية</div>
 				</div>

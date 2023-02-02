@@ -1,0 +1,16 @@
+﻿@using Magazine_Palpay.Web.ViewModels
+@model Tuple<List<Magazine_Palpay.Web.Models.Post>, CurrencyViewModel>
+@{
+	var lst = Model.Item1.Where(x => x.OrderPlace.Equals(4) && x.MediaType.Equals(1)).Take(4).ToList();
+} 
+ 
+@foreach(var item in lst){
+	<div class="col-md-3">
+		<div style="background-image:url('/assets/UploadImages/@item.MainImage'); background-size:cover; background-repeat:no-repeat;margin-bottom:30px;">
+   		  <div class="news-body" style="padding:10px;">
+			<span class="span-category">@item.PostType.Name</span> 
+   			<h6 style="padding-top:150px; color:white"><span class="span-title">@item.Head</span></h6>
+		  </div>
+		</div>
+	</div> 
+}

@@ -12,32 +12,22 @@
 	    </div> 
 		@foreach(var item in Model)
 		{
-			<article class="col-md-12 article-list">
-					<div class="inner">
-						<figure>
-							<a href="/PostDetails/Details?id=@item.Id">
-								<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
-							</a>
-						</figure>
-						<div class="details">
-							<div class="detail">
-								<div class="category">
-									<a href="#">@item.PostType.Name</a>
-								</div>
-								@*<div class="time">@item.CreatedAt</div>*@
-							</div>
-							<h1><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h1>
-								<p>انقر هنا لمعرفة مزيد تفاصيل الخبر</p> 
-								<footer>
- 								<a class="btn btn-primary more" href="/PostDetails/Details?id=@item.Id">
-									<div>التفاصيل</div>
-									<div><i class="ion-ios-arrow-thin-right"></i></div>
-								</a>
-							</footer>
-						</div>
+			<div class="col-md-3 pull-right">
+				<div class='normal' style="margin:10px 0;">
+					<div class='module'>
+					<div class='thumbnail'>
+						<a href="/PostDetails/Details?id=@item.Id">
+							<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head"> 
+ 						</a>
+ 					</div>
+					<div class='content'>
+						<a href="/PostDetails/Details?id=@item.Id" class="color-white"><div class="category">التفاصيل</div></a>
+						<span class="color-orange">@item.PostType.Name</span>
+						<h1 class='m-title'>@item.Head</h1>
 					</div>
-				
-			</article>
+					</div>
+		       </div>
+			</div>
 	     }
   </div>
     <div class="col-md-12 text-center">

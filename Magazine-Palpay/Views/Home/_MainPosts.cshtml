@@ -4,114 +4,81 @@
 	var it = ViewBag.IT;
 	var fintech = ViewBag.Fintech;
 }
-<div class="col-md-6 col-sm-6 col-xs-12">
-		<div class="row">
+ 
+<div class="col-md-6 col-sm-6 col-xs-12"> 
 			@if(campain != null){
-					<article class="article col-md-12">
-				<div class="inner">
-					<figure>
+				<div class='normal' style="margin:10px 0;">
+					<div class='module'>
+					<div class='thumbnail'>
 						<a href="/PostDetails/Details?id=@campain.Id">
-							<img src="~/assets/UploadImages/@campain.MainImage" alt="@campain.Head">
-						</a>
-					</figure>
-					<div class="padding">
-						<div class="detail">
-							@*<div class="time">@campain.CreatedAt</div>*@
-							<div class="category"><a href="#">@campain.PostType.Name</a></div>
-						</div>
-						<h2><a href="/PostDetails/ByType?type=@campain.PostTypeId">@campain.Head</a></h2> 
-						<footer>
- 							<a class="btn btn-primary more" href="/PostDetails/ByType?type=@campain.PostTypeId">
-								<div>عرض المزيد</div>
-								<div><i class="ion-ios-arrow-thin-right"></i></div>
-							</a>
-						</footer>
+							<img src="~/assets/UploadImages/@campain.MainImage" alt="@campain.Head"> 
+ 						</a>
+						<img src="~/assets/UploadImages/@campain.MainImage" alt="@campain.Head">
+					</div>
+					<div class='content'>
+						<a href="/PostDetails/Details?id=@campain.Id" class="color-white"><div class="category">التفاصيل</div></a>
+						<span class="color-orange">@campain.PostType.Name</span>
+						<h1 class='m-title'>@campain.Head</h1>
+					</div>
 					</div>
 				</div>
-			</article>  
 			}
 		@if (it != null)
 		{
-				<article class="article col-md-12">
-				<div class="inner">
-					<figure>
-						<a href="/PostDetails/Details?id=@it.Id">
-							<img src="~/assets/UploadImages/@it.MainImage" alt="@it.Head">
-						</a>
-					</figure>
-					<div class="padding">
-						<div class="detail">
-							@*<div class="time">@it.CreatedAt</div>*@
-							<div class="category"><a href="#">@it.PostType.Name</a></div>
-						</div>
-						<h2><a href="/PostDetails/ByType?type=@it.PostTypeId">@it.Head</a></h2> 
-						<footer>
- 							<a class="btn btn-primary more" href="/PostDetails/ByType?type=@it.PostTypeId">
-								<div>عرض المزيد</div>
-								<div><i class="ion-ios-arrow-thin-right"></i></div>
-							</a>
-						</footer>
-					</div>
+		    <div class='normal' style="margin:10px 0;">
+			   <div class='module'>
+				<div class='thumbnail'>
+					<a href="/PostDetails/Details?id=@it.Id">
+					  <img src="~/assets/UploadImages/@it.MainImage" alt="@it.Head"> 
+ 					</a>
+				  <img src="~/assets/UploadImages/@it.MainImage" alt="@it.Head">
 				</div>
-			</article> 
+				<div class='content'>
+				  <a href="/PostDetails/Details?id=@it.Id" class="color-white"><div class="category">التفاصيل</div></a>
+				  <span class="color-orange">@it.PostType.Name</span>
+				  <h1 class='m-title'>@it.Head</h1>
+				</div>
+			  </div>
+			</div>
 		
-		}
-	
-		</div>
+		} 
 </div> 
 		
-<div class="col-md-6 col-sm-6 col-xs-12">
-	<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12"> 
 		@if(deals != null)
 		{
-       	   <article class="article col-md-12">
-				<div class="inner">
-					<figure>
-						<a href="/PostDetails/Details?id=@deals.Id">
-							<img src="~/assets/UploadImages/@deals.MainImage" alt="@deals.Head">
-						</a>
-					</figure>
-					<div class="padding">
-						<div class="detail">
-							@*<div class="time">@deals.CreatedAt</div>*@
-							<div class="category"><a href="#">@deals.PostType.Name</a></div>
-						</div>
-						<h2><a href="/PostDetails/ByType?type=@deals.PostTypeId">@deals.Head</a></h2> 
-						<footer>
- 							<a class="btn btn-primary more" href="/PostDetails/ByType?type=@deals.PostTypeId">
-								<div>عرض المزيد</div>
-								<div><i class="ion-ios-arrow-thin-right"></i></div>
-							</a>
-						</footer>
-					</div>
+       	   <div class='normal' style="margin:10px 0;">
+			   <div class='module'>
+				<div class='thumbnail'>
+					<a href="/PostDetails/Details?id=@deals.Id">
+					  <img src="~/assets/UploadImages/@deals.MainImage" alt="@deals.Head"> 
+ 					</a>
+				  <img src="~/assets/UploadImages/@deals.MainImage" alt="@deals.Head">
 				</div>
-			</article>  
+				<div class='content'>
+				  <a href="/PostDetails/Details?id=@deals.Id" class="color-white"><div class="category">التفاصيل</div></a>
+				  <span class="color-orange">@deals.PostType.Name</span>
+				  <h1 class='m-title'>@deals.Head</h1>
+				</div>
+			  </div>
+		  </div>
 		}
 		@if(fintech != null)
 		{
-			<article class="article col-md-12">
-				<div class="inner">
-					<figure>
-						<a href="/PostDetails/Details?id=@fintech.Id">
-							<img src="~/assets/UploadImages/@fintech.MainImage" alt="@fintech.Head">
-						</a>
-					</figure>
-					<div class="padding">
-						<div class="detail">
-							@*<div class="time">@fintech.CreatedAt</div>*@
-							<div class="category"><a href="#">@fintech.PostType.Name</a></div>
-						</div>
-						<h2><a href="/PostDetails/ByType?type=@fintech.PostTypeId">@fintech.Head</a></h2>  
-						<footer>
- 							<a class="btn btn-primary more" href="/PostDetails/ByType?type=@fintech.PostTypeId">
-								<div>عرض المزيد</div>
-								<div><i class="ion-ios-arrow-thin-right"></i></div>
-							</a>
-						</footer>
-					</div>
+			<div class='normal' style="margin:10px 0;">
+			   <div class='module'>
+				<div class='thumbnail'>
+					<a href="/PostDetails/Details?id=@fintech.Id">
+					  <img src="~/assets/UploadImages/@fintech.MainImage" alt="@fintech.Head"> 
+ 					</a>
+				  <img src="~/assets/UploadImages/@fintech.MainImage" alt="@fintech.Head">
 				</div>
-			</article>  
-		}
-		
-    </div>
+				<div class='content'>
+				  <a href="/PostDetails/Details?id=@fintech.Id" class="color-white"><div class="category">التفاصيل</div></a>
+				  <span class="color-orange">@fintech.PostType.Name</span>
+				  <h1 class='m-title'>@fintech.Head</h1>
+				</div>
+			  </div>
+		   </div> 
+		} 
 </div> 		

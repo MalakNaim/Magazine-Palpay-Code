@@ -16,7 +16,7 @@
         .Include(x => x.PostType)
         .Where(x => x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)
         && !x.IsDelete && x.PublishedPost && x.OrderPlace.Equals(1) && x.MediaType.Equals(1)).OrderByDescending(x => x.Id)
-		.Take(6).ToList();  
+		.Take(9).ToList();  
 		var quiz = _context.Ads.Where(x => !x.IsDelete && x.Order.Equals(1)).ToList();
 	}
 <!DOCTYPE html>
@@ -161,21 +161,30 @@
 												@if(ListNews != null){
 													@foreach(var item in ListNews)
 													{
-														<article class="article col-md-4 mini my-15">
-															<div class="inner">
-																<figure>
-																	<a href="/PostDetails/Details?id=@item.Id">
-																		<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
-																	</a>
-																</figure>
-																<div class="padding">
-																	<div class="detail">
- 																		<div class="category"><a href="#">@item.PostType.Name</a></div>
-																	</div>
-																	<h2><a href="/PostDetails/Details?id=@item.Id">@item.Head</a></h2>
+														<div class="col-md-4 pull-right">
+															<div class='normal' style="margin:10px 0;">
+																<div class='module'>
+																<div class='thumbnail'>
+																	@if(item.MediaType.Equals(1)){
+																				<a href="/PostDetails/Details?id=@item.Id">
+																			<img src="~/assets/UploadImages/@item.MainImage" alt="@item.Head">
+																				</a>
+																			}else if (item.MediaType.Equals(2))
+																			{
+																				 <iframe width="300" height="250" src="@item.EmbedVideoLink" 
+																							title="@item.Head" frameborder="0"
+																							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+																							allowfullscreen></iframe>
+																			}
+ 																</div>
+																<div class='content'>
+																	<a href="/PostDetails/Details?id=@item.Id" class="color-white"><div class="category">التفاصيل</div></a>
+																	<span class="color-orange">@item.PostType.Name</span>
+																	<h1 class='m-title'>@item.Head</h1>
 																</div>
-															</div>
-														</article>
+																</div>
+														   </div>
+			                                            </div>
 													} 
 												}
 												</div>

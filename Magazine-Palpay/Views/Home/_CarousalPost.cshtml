@@ -23,8 +23,7 @@
    background-image:none !important;
    filter:none !important;
 }
-</style>
-<div class="row">
+</style> 
      <div id="carousel-fixed-height" class="carousel slide" data-ride="carousel">  
      <ol class="carousel-indicators">
         <li data-target="#carousel-fixed-height" data-slide-to="0" class=""></li>
@@ -35,8 +34,8 @@
         <li data-target="#carousel-fixed-height" data-slide-to="5" class=""></li>
         <li data-target="#carousel-fixed-height" data-slide-to="6" class=""></li>
         <li data-target="#carousel-fixed-height" data-slide-to="7" class="active"></li>
-      </ol>
-	  <div class="carousel-inner" role="listbox">
+     </ol>
+	 <div class="carousel-inner" role="listbox">
       @foreach(var item in lst)
 		{
 			var active = "";
@@ -45,9 +44,8 @@
 			}
         <div class="item @active">
 		
-          @*<div style="background:url('/assets/UploadImages/@item.MainImage') center center; background-size:cover; min-height:500px;">*@
-          <div style="background:url('/assets/UploadImages/5b94682f-d2ca-45b2-b3f5-e4e1dcf1837e.jpg') center center; background-size:cover; height:400px;">
- 			  <div class="featured">
+          <div style="background:url('/assets/UploadImages/@item.MainImage') center center; background-size:cover; min-height:500px;">
+  			  <div class="featured">
 			  <div class="details">
 					<div class="category"> 
 						<a href="/PostDetails/Details?id=@item.Id">@item.PostType.Name</a> 
@@ -69,6 +67,5 @@
 			<span class="ion-ios-arrow-right" aria-hidden="true" style="color:white;"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div> 
-</div>
+    </div>
    

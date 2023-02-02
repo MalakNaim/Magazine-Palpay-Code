@@ -116,7 +116,7 @@ namespace Magazine_Palpay.Controllers
         {
             int countRow = _context.Post.Where(x => !x.IsDelete && x.MediaType.Equals(1) && 
             x.PostTypeId.Equals((int)PostTypeEnum.OtherNews)).Count();
-            double perPage = 6;
+            double perPage = 12;
             double NumberOfPages = Math.Ceiling(countRow / perPage);
             if (page < 1 || page > NumberOfPages)
             {

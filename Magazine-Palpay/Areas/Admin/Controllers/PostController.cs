@@ -127,6 +127,14 @@ namespace Magazine_Palpay.Areas.Admin.Controllers
             {
                 return "في السلايدر";
             }
+            else if(oid == 4)
+            {
+                return "في الرئيسية col-3";
+            } 
+            else if(oid == 5)
+            {
+                return "في الرئيسية col-6";
+            }
             return string.Empty;
         }
 

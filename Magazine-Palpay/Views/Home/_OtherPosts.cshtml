@@ -10,63 +10,8 @@
 	&& x.PostTypeId != (int)PostTypeEnum.Campaines
 	&& x.PostTypeId != (int)PostTypeEnum.Fintech)
    .Take(12).ToList();
-}  
-<style>
-.module {
-  min-width: 270px;
-  height: 350px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
-  transition: all 0.3s linear 0s;
-  overflow: hidden;
-  position: relative;
-}
-.module:hover {
-  box-shadow: 0 1px 35px 0 rgba(0, 0, 0, 0.3);
-}
-.thumbnail {
-  position: relative;
-  overflow: hidden;
- }
-.thumbnail img {
-  width: 120%;
-  transition: all 0.3s;
-}
-.module:hover .thumbnail img {
-  transform: scale(1.1);
-  opacity: 0.7;
-}  
-.content {
-  position: absolute;
-  width: 100%;
-  height: 178px;
-  bottom: 0;
-  background: #fff;
-  padding: 30px;
-  transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
 } 
 
-.content .category {
-  position: absolute;
-  top: -34px;
-  left: 0;
-  color: #fff;
-  text-transform: uppercase;
-  background: #FB634F;
-  padding: 10px 15px;
-  font-weight: bold;
-}
-.m-title {
-  margin: 10px 0;
-  padding: 0 0 10px;
-  color: #333333;
-  font-size: 15px;
-  font-weight: 700;
-  line-height:inherit;
-} 
-.color-orange{
-    color:#FB634F;
-}
-</style>
 <div class="row"> 
 	@foreach(var item in lst)
 		{
